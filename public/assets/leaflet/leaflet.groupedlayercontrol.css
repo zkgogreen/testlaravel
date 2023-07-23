@@ -1,0 +1,23 @@
+.leaflet-control-layers-group-name {
+      font-weight: bold;
+      margin-bottom: .2em;
+      display: block;
+    /*  background-color:#a3a3a3;
+      text-align:center;*/
+    }
+
+    .leaflet-control-layers-group {
+      margin-bottom: .5em;
+     /* font-weight: italic;
+      max-height:120px;*/
+     /* overflow: scroll;
+      overflow-x:hidden;*/
+    }
+
+    .leaflet-control-layers-group label {
+      padding-left: .5em;
+    }
+ .leaflet-control-layers {
+      margin-bottom: .2em;
+      display: block;
+  } 

@@ -1,0 +1,38 @@
+@media (min-width: 969px) {
+    .logo-login-lg {
+        display: block;
+    }
+    .logo-login-sm {
+        display:none;
+    }
+    .login-bg-banner {
+        height: 340px;
+    }
+    .logo-login {
+        height: 45px;
+    }
+}
+
+@media (max-width: 968px) {
+    .logo-login-lg {
+        display: none;
+    }
+    .logo-login-sm {
+        display:block;
+    }
+    .login-bg-banner {
+        height: unset;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-title {
+        font-size: 20px;
+    }
+    .login-sub-title {
+        font-size: 14px;
+    }
+    .logo-login {
+     height: 40px;
+    }
+}
