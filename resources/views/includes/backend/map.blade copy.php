@@ -168,7 +168,9 @@ success: function(data) {
         layer_density.eachLayer(function (layer) {
         map.removeLayer(layer);
         });
-        // legend.remove(map);
+                if (legend) {
+                    legend.remove(map);
+                }
         // Tambahkan data GeoJSON sebagai layer vektor
         densitymap = L.geoJSON(data, {
             style: function(feature) {
@@ -247,8 +249,10 @@ success: function(data) {
         // densitymap.remove(map);
         layer_density.eachLayer(function (layer) {
 map.removeLayer(layer);
-legend.remove(map);
         });
+            if (legend) {
+                    legend.remove(map);
+                }
     }
 }
 });
@@ -258,6 +262,9 @@ legend.remove(map);
     layer_density.eachLayer(function (layer) {
     map.removeLayer(layer);
 });
+if (legend) {
+        legend.remove(map);
+    }
     }
 
     // Fungsi untuk menentukan warna fill berdasarkan nilai density dan skala warna pengguna
