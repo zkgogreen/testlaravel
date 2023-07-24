@@ -73,7 +73,7 @@ var densitymap; // Tambahkan deklarasi variabel densitymap di luar fungsi showMa
 function showMapDensity() {
     var tabel = document.getElementById("density").value;
     $.ajax({
-        url: base_url + '/getGeoJSONData/' + tabel,
+        url: base_url + '/getGeoJSONData2/' + tabel,
         type: "get",
         data: {
             layer: tabel,
