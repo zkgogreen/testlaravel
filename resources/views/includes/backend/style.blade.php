@@ -678,4 +678,27 @@
           display: block;
         } */
 
+
+        .overlay{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        background: rgba(255,255,255,0.8) url("{{ url('assets/images/animation/loading-2.gif') }}") center no-repeat;
+        text-align: center;
+    }
+    /* body{
+        text-align: center;
+    } */
+    /* Turn off scrollbar when body element has the loading class */
+    body.loading{
+        overflow: hidden;   
+    }
+    /* Make spinner image visible when body element has the loading class */
+    body.loading .overlay{
+        display: block;
+    }
 </style>
