@@ -21,6 +21,11 @@
   {{-- <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script> --}}
 
   <script>
+        // var base_url = window.location.origin + "/project/sigap-fbb/public";
+    // var base_url = "http://10.0.0.227";
+    // var base_url = "http://103.146.202.47/gis-demand";
+    var base_url = "https://sigap-fbb.kominfo.go.id";
+    
     function bannerSwitcher() {
       next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
       if (next.length) next.prop('checked', true);
