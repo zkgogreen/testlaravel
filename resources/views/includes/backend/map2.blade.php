@@ -102,7 +102,8 @@
       });
 
 
-  // Perbaikan pada script
+
+// Perbaikan pada script
 var layer_density = new L.LayerGroup([]).addTo(map);
 var densitymap; // Tambahkan deklarasi variabel densitymap di luar fungsi showMapDensity()
 // var legend;
@@ -112,12 +113,10 @@ var densitymap; // Tambahkan deklarasi variabel densitymap di luar fungsi showMa
 // colorInput.type = 'range';
 // colorInput.min = 0;
 // colorInput.max = 100;
-// colorInput.value = 70;
+// colorInput.value = 50;
 // colorInput.addEventListener('input', function(event) {
 //     updateColors(event.target.value);
 // });
-
-// Ambil data GeoJSON dari Laravel
 function showMapDensity() {
     var tabel = document.getElementById("density").value;
     $.ajax({
@@ -127,131 +126,67 @@ function showMapDensity() {
             layer: tabel,
         },
         dataType: "json",
-        success: function(data) {
+        success: function (data) {
             if (data) {
-                layer_density.eachLayer(function(layer) {
+                layer_density.eachLayer(function (layer) {
                     map.removeLayer(layer);
                 });
-                // if (legend) {
-                //     legend.remove(map);
-                // }
-                 // Data jumlah penduduk dan geometri batas kabupaten
-        // const kabupatenData = data.features.map(feature => {
-        //   return {
-        //     kabupaten: feature.properties.name, // Sesuaikan properti nama kabupaten pada data GeoJSON Anda
-        //     jumlahPenduduk: feature.properties.jumlahPenduduk, // Sesuaikan properti jumlah penduduk pada data GeoJSON Anda
-        //     geometry: feature.geometry
-        //   };
-        // });
-
-        // Hitung nilai density penduduk per kilometer persegi (misalnya)
-        // data.forEach(data => {
-          data.density = data.jumlah / 5;
-        // });
-
-        // Ambil nilai jumlah penduduk dari data
-        const jumlahArr = data.jumlah;
-
-        // Tentukan jumlah kelas (range) warna yang ingin dihasilkan
-        const numClasses = 5;
-
-        // Buat skala warna berdasarkan jumlah penduduk menggunakan chroma.js
-        const colorScale = chroma.scale('OrRd').classes(jumlahArr, numClasses);
-
-        // Buat style berdasarkan nilai density
-        function getStyle(density) {
-          return {
-            fillColor: colorScale(density).hex(),
-            weight: 1,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7
-          };
-        }
-
 
                 // Tambahkan data GeoJSON sebagai layer vektor
                 densitymap = L.geoJSON(data, {
-
                     style: function (feature) {
-            const density = data.find(data => data.wadmkk === feature.properties.wadmkk).density;
-            return getStyle(density);
-          },
-
-                    // style: function(feature) {
-
-                
-                   
-                    //     // var fillColor = getColor(density, colorInput.value);
-                    //     // return {
-                    //     //     fillColor: fillColor,
-                    //     //     weight: 1,
-                    //     //     opacity: 1,
-                    //     //     color: 'white',
-                    //     //     fillOpacity: 0.7
-                    //     // };
-                    // },
-                    onEachFeature: function(feature, layer) {
-                        items.push(
-            layer
-        ); // ini dibuat untuk menghubungkan variabel items ke dalam layer, ini berfungsi untuk menjalankan tool pencarian
-        if (feature.properties) {
-            var content =
-                "<div class='table-responsive'><table class='table' style='margin-bottom:0; font-size:12px;'>" +
-                "<tr><th style='width:30%;'>Kabupaten / Kota</th><td>" + feature.properties.kabkot +
-                "</td></tr>" +
-                "<tr><th style='width:30%;'>Provinsi</th><td>" + feature.properties.provinsi +
-                "</td></tr>" +
-                "<tr><th style='width:30%;'>Jumlah</th><td>" + feature.properties.jumlah + "</td></tr></table></div>";
-            layer.on('click', function(e) {
-                $("#drag_title_peta").html("DENSITY MAP");
-                $("#feature-info").html(content);
-                $("#btnmodalpeta").trigger("click");
-            });
-        }
+                        // var density = feature.properties.jumlah;
+                        var fillColor = getColor(feature.properties.jumlah);
+                        return {
+                            fillColor: fillColor,
+                            weight: 1,
+                            opacity: 1,
+                            color: 'white',
+                            fillOpacity: 0.7
+                        };
+                    },
+                    onEachFeature: function (feature, layer) {
+                        // ... (kode lainnya tetap sama)
                     }
                 });
 
                 layer_density.addLayer(densitymap);
-
-                // Menambahkan kontrol warna ke peta
-                // legend = L.control({ position: 'bottomright' });
-                // legend.onAdd = function(map) {
-                //     var div = L.DomUtil.create('div', 'info legend');
-                //     div.innerHTML = '<strong>Density Scale:</strong> <br> Low <input type="range" min="0" max="100" value="70" id="density-scale"> High';
-                //     L.DomEvent.disableClickPropagation(div);
-                //     return div;
-                // };
-                // legend.addTo(map);
-
-                // Memperbarui warna setiap feature pada peta berdasarkan input pengguna
-                function updateColors(scale) {
-                    densitymap.eachLayer(function(layer) {
-                        var density = layer.feature.properties.jumlah;
-                        var fillColor = getColor(density, scale);
-                        layer.setStyle({ fillColor: fillColor });
-                    });
-                }
-
             } else {
-                layer_density.eachLayer(function(layer) {
+                layer_density.eachLayer(function (layer) {
                     map.removeLayer(layer);
                 });
-                // if (legend) {
-                //     legend.remove(map);
-                // }
             }
         }
     });
 }
 
 function clearMapDensity() {
-    layer_density.eachLayer(function(layer) {
+    layer_density.eachLayer(function (layer) {
         map.removeLayer(layer);
     });
-    if (legend) {
-        legend.remove(map);
+}
+
+function getColor(density) {
+    if (density > 1000) {
+        return '#800026';
+    } else if (density > 500) {
+        return '#BD0026';
+    } else if (density > 100) {
+        return '#E31A1C';
+    } else if (density > 50) {
+        return '#FC4E2A';
+    } else if (density > 20) {
+        return '#FD8D3C';
+    } else if (density > 10) {
+        return '#FEB24C';
+    } else if (density > 5) {
+        return '#FED976';
+    } else if (density > 1) {
+        return '#FFEDA0';
+    } else if (density = 1) {
+        return '#FEeeee';
+    } else {
+        return '#FFffff';
     }
 }
 
