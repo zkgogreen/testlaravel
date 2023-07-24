@@ -297,6 +297,7 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
                 ['column_name', '!=', 'created_at'],
                 ['column_name', '!=', 'deleted_at'],
                 ['column_name', '!=', 'updated_at'],
+                ['column_name', '!=', 'color_palette'],
                 ])
             ->orderBy('ordinal_position', 'asc')
             ->get();
