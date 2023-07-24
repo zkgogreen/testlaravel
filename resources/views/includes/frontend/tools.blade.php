@@ -61,10 +61,10 @@
                                 </label>
                             </div>
                             <div class="option mb-2">
-                                <input type="radio" name="card" id="ocean" value="baseStadia1" checked>
+                                <input type="radio" name="card" id="ocean" value="baseCarto1" checked>
                                 <label for="ocean" aria-label="Silver">
                                     <span></span>
-                                    Stadia Gray
+                                    Carto Gray
                                     <div class="card card--white card--sm p-1">
                                         <img src="{{ url('assets/images/basemap-icon/ocean-base.png') }}"
                                             alt="ocean-base">
@@ -94,10 +94,10 @@
                                 </label>
                             </div>
                             <div class="option mb-2">
-                                <input type="radio" name="card" id="carto" value="baseStadia2">
+                                <input type="radio" name="card" id="carto" value="baseCarto2">
                                 <label for="carto" aria-label="Silver">
                                     <span></span>
-                                    Stadia Dark
+                                    Carto Dark
                                     <div class="card card--blue card--sm p-1">
                                         <img src="{{ url('assets/images/basemap-icon/dark-base.png') }}"
                                             alt="dark-base">

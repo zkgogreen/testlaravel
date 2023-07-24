@@ -54,7 +54,7 @@
    }
 });
 
-// var baseStadia1 = L.tileLayer.provider('Stadia.AlidadeSmooth').addTo(map);
+// var baseCarto1 = L.tileLayer.provider('Stadia.AlidadeSmooth').addTo(map);
 var baseGoogle1 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             maxZoom: 20,
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
@@ -67,8 +67,8 @@ var baseGoogle1 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z
         });
         var baseEsri = L.tileLayer.provider('Esri.WorldImagery');
         var baseOsm = L.tileLayer.provider('OpenStreetMap');
-        var baseStadia1 = L.tileLayer.provider('Stadia.AlidadeSmooth');
-        var baseStadia2 = L.tileLayer.provider('Stadia.AlidadeSmoothDark').addTo(map);
+        var baseCarto1 = L.tileLayer.provider('CartoDB.Positron');
+        var baseCarto2 = L.tileLayer.provider('CartoDB.DarkMatter').addTo(map);
         document.getElementById("pilihbasemap").addEventListener("change", function() {
             selected_value = $("input[name='card']:checked").val();
             if (selected_value == 'baseEsri') {
@@ -76,43 +76,43 @@ var baseGoogle1 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z
                 baseOsm.remove();
                 baseGoogle1.remove();
                 baseGoogle2.remove();
-                baseStadia1.remove();
-                baseStadia2.remove();
-            } else if (selected_value == 'baseStadia1') {
-                baseStadia1.addTo(map);
+                baseCarto1.remove();
+                baseCarto2.remove();
+            } else if (selected_value == 'baseCarto1') {
+                baseCarto1.addTo(map);
                 baseEsri.remove();
                 baseOsm.remove();
                 baseGoogle1.remove();
                 baseGoogle2.remove();
-                baseStadia2.remove();
+                baseCarto2.remove();
             } else if (selected_value == 'baseOsm') {
                 baseOsm.addTo(map);
                 baseEsri.remove();
                 baseGoogle1.remove();
                 baseGoogle2.remove();
-                baseStadia1.remove();
-                baseStadia2.remove();
-            } else if (selected_value == 'baseStadia2') {
-                baseStadia2.addTo(map);
+                baseCarto1.remove();
+                baseCarto2.remove();
+            } else if (selected_value == 'baseCarto2') {
+                baseCarto2.addTo(map);
                 baseEsri.remove();
                 baseOsm.remove();
                 baseGoogle1.remove();
                 baseGoogle2.remove();
-                baseStadia1.remove();
+                baseCarto1.remove();
             } else if (selected_value == 'baseGoogle1') {
                 baseGoogle1.addTo(map);
                 baseEsri.remove();
                 baseOsm.remove();
                 baseGoogle2.remove();
-                baseStadia1.remove();
-                baseStadia2.remove();
+                baseCarto1.remove();
+                baseCarto2.remove();
             } else if (selected_value == 'baseGoogle2') {
                 baseGoogle2.addTo(map);
                 baseEsri.remove();
                 baseOsm.remove();
                 baseGoogle1.remove();
-                baseStadia1.remove();
-                baseStadia2.remove();
+                baseCarto1.remove();
+                baseCarto2.remove();
             }
         });
 
