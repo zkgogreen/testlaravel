@@ -62,7 +62,6 @@
 <script src="{{ url('assets/vendor/dx/dx.aspnet.data.js') }}"></script>
 
 {{-- Uncomment this line if needed --}}
-<script src="{{ 'assets/layer/jakarta.js' }}"></script>
 
 <script>
     // var base_url = window.location.origin + "/project/sigap-fbb/public";

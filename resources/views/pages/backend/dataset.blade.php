@@ -1486,15 +1486,15 @@ function getKabkotList(provinsi){
 
         var baseEsri = L.tileLayer.provider('Esri.WorldImagery');
             var baseOsm = L.tileLayer.provider('OpenStreetMap');
-            var baseStadia1 = L.tileLayer.provider('Stadia.AlidadeSmooth');
-            var baseStadia2 = L.tileLayer.provider('Stadia.AlidadeSmoothDark').addTo(map);
+            var baseCarto1 = L.tileLayer.provider('CartoDB.Positron');
+        var baseCarto2 = L.tileLayer.provider('CartoDB.DarkMatter').addTo(map);
 
         var baseLayers = {
             //"Grayscale": grayscale,
             "Esri World Imagery": baseEsri,
             "Open Street Map": baseOsm,
-            "Stadia Grey": baseStadia1,
-            "Stadia Dark": baseStadia2
+            "Stadia Grey": baseCarto1,
+            "Stadia Dark": baseCarto2
 
         };
 
