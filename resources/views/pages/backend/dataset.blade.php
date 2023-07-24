@@ -633,7 +633,7 @@
                     <td>Status Tabel</td>
                     <td>Terdapat 3 active, active in admin, inactive</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th>Color Palette</th>
                     <td>Pilihan warna map density</td>
                     <td>
@@ -651,7 +651,7 @@
                         </table> 
 
                     </td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <th>Column Name</th>
                     <td>Nama kolom tabel</td>

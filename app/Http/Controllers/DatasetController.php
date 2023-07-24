@@ -248,7 +248,7 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
         $data->title  = $table_name;
         $data->name  = $request->name_table;
         $data->status  = $request->status_table;
-        $data->color_palette = $request->color_palette;
+        // $data->color_palette = $request->color_palette;
         // $data->owners_id   = Auth::user()->owners_id;
         $data->type = $request->type_table;
         $data->roles = $request->roles_table;
