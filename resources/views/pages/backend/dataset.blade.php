@@ -81,28 +81,28 @@
                                       <input type="hidden" name="type_table" class="form-control" value="Spatial" required>
                                       <tr class="table-secondary">
                                         <th class="text-center" colspan="2">Table Name</th>
-                                        <th class="text-center">Roles Access</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center" colspan="2">Color Palette</th>
+                                        <th class="text-center" colspan="2">Roles Access</th>
+                                        <th class="text-center" colspan="2">Status</th>
+                                        {{-- <th class="text-center" colspan="2">Color Palette</th> --}}
                                     </tr>
                                       <tr class="table-secondary">
                                     <td colspan="2">
                                         <input type="text" name="name_table" class="form-control" placeholder="Enter Table Name" required>
                                       </td>
-                                    <td colspan="1">
+                                    <td colspan="2">
                                         <select class="select2 form-select" name="roles_table" required>
                                             <option value="Private" selected>Private</option>
                                             <option value="Public">Public</option>
                                           </select>
                                     </td>
-                                    <td colspan="1">
+                                    <td colspan="2">
                                         <select class="select2 form-select" name="status_table" required>
                                             <option value="ActiveAdmin">Active Admin Only</option>
                                             <option value="Active" selected>Active</option>
                                             <option value="Inactive">Inactive</option>
                                           </select>
                                     </td>
-                                    <td colspan="2">
+                                    {{-- <td colspan="2">
                                         <select class="select2 form-select" name="color_palette" required>
                                             <option value="#" selected>Select Color Palette</option>
                                             @foreach ($color_palette as $item)
@@ -110,7 +110,7 @@
                                             @endforeach
                                           </select>
                                           
-                                    </td>
+                                    </td> --}}
                                 </tr>
                         <tr>
                             <th class="text-center">Column Name</th>
@@ -276,35 +276,35 @@
                                     <input type="hidden" name="type_table" class="form-control" value="Non Spatial" required>
                                     <tr class="table-secondary">
                                         <th class="text-center" colspan="2">Table Name</th>
-                                        <th class="text-center">Roles Access</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center" colspan="2">Color Palette</th>
+                                        <th class="text-center" colspan="2">Roles Access</th>
+                                        <th class="text-center" colspan="2">Status</th>
+                                        {{-- <th class="text-center" colspan="2">Color Palette</th> --}}
                                     </tr>
                                       <tr class="table-secondary">
                                     <td colspan="2">
                                         <input type="text" name="name_table" class="form-control" placeholder="Enter Table Name" required>
                                       </td>
-                                    <td colspan="1">
+                                    <td colspan="2">
                                         <select class="select2 form-select" name="roles_table" required>
                                             <option value="Private" selected>Private</option>
                                             <option value="Public">Public</option>
                                           </select>
                                     </td>
-                                    <td colspan="1">
+                                    <td colspan="2">
                                         <select class="select2 form-select" name="status_table" required>
                                             <option value="ActiveAdmin">Active Admin Only</option>
                                             <option value="Active" selected>Active</option>
                                             <option value="Inactive">Inactive</option>
                                           </select>
                                     </td>
-                                    <td colspan="2">
+                                    {{-- <td colspan="2">
                                         <select class="select2 form-select" name="color_palette" required>
                                             <option value="#" selected>Select Color Palette</option>
                                             @foreach ($color_palette as $item)
                                             <option value="{{$item->title}}">{{$item->title}}</option>
                                             @endforeach
                                           </select>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             <tr>
                                 <th class="text-center">Column Name</th>
@@ -590,11 +590,7 @@
                             <option value="tb_kp">Kawasan prioritas</option>
                             <option value="tb_penerima_bantuan">Penerima Bantuan</option>
                         </select> 
-                        @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'USER')
                         <div id="tblayer"></div>
-                            @else
-                            <div id="tblayer2"></div>
-                        @endif
                      </div>
                     </div>
                     @else
@@ -817,7 +813,6 @@
 
         function generateData(event) {
             ShowTabelAll(menu_tdata.value, 'tblayer');
-            ShowTabelAll2(menu_tdata.value, 'tblayer2');
             ShowFormTabel(menu_jdata.value, 'tabelForm');
             ShowFormImport(menu_import.value);
             showKolomList(menu_jdata.value);
@@ -1563,168 +1558,6 @@ function getKabkotList(provinsi){
                 }
             });
         };
-
-
-        function ShowTabelAll2(nmTabel, idhtml) {
-            $.ajax({
-                type: "get",
-                data: {
-                tabel: nmTabel,
-            },
-                url: base_url + "/ShowTabel/" + nmTabel,
-                success: function(msg) {
-                    $("#tblayer").dxDataGrid({
-                        dataSource: msg["data"],
-                        showRowLines: true,
-                        rowAlternationEnabled: true,
-                        filterRow: {
-                            visible: true,
-                        },
-                        allowColumnResizing: true,
-                        columnResizingMode: "widget",
-                        columnMinWidth: 50,
-                        columnAutoWidth: true,
-                        showBorders: true,
-                        //         selection: {
-                        //     mode: "multiple"
-                        // },
-                        scrolling: {
-                            columnRenderingMode: 'virtual',
-                            rowRenderingMode: 'virtual',
-                        },
-                        paging: {
-                            pageSize: 10
-                        },
-                        pager: {
-                            showInfo: true,
-                            showPageSizeSelector: true,
-                            infoText: "Page #{0}. Total: {1} ({2})",
-                            allowedPageSizes: [5, 10, 20]
-                        },
-                        export: {
-                    enabled: true,
-                    allowExportSelectedData: true,
-                    fileName: "Master Excel " + nmTabel,
-                },
-                        remoteOperations: false,
-                        searchPanel: {
-                            visible: true,
-                            highlightCaseSensitive: true
-                        },
-                        groupPanel: {
-                            visible: true
-                        },
-                        grouping: {
-                            autoExpandAll: false
-                        },
-                        allowColumnReordering: true,
-                        rowAlternationEnabled: true,
-                        editing: {
-                            mode: "form",
-                            // mode: 'batch',
-                            allowUpdating: false,
-                            allowAdding: false,
-                            allowDeleting: false,
-                            selectTextOnEditStart: false,
-                            // startEditAction: 'click',
-                        },
-                        columns: msg["]nmfield"],
-
-                        onRowRemoving: function(info) {
-                            $.ajax({
-                                    type: "POST",
-                                    url: base_url + "/deleteDataDataset",
-                                    data: {
-                                        id: info.data.id,
-                                        title: info.data.title,
-                                        tabel: 'user_tables'
-                                    },
-                                    headers: {
-                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                            "content"
-                                        ),
-                                    },
-                                    success: function(msg) {
-                                        ShowTabel(jenis);
-                                    },
-                                },
-                                "json"
-                            );
-                        },
-
-                        onRowUpdating: function(e) {
-                            const deferred = $.Deferred();
-                            const promptPromise = DevExpress.ui.dialog.confirm(
-                                "Apa anda yakin?",
-                                "Konfirmasi"
-                            );
-                            promptPromise.done((dialogResult) => {
-                                console.log(e);
-                                if (dialogResult) {
-                                    $.ajax({
-                                        url: base_url + "/updateTabel",
-                                        dataType: "json",
-                                        method: "POST",
-                                        data: {
-                                            newData: e.newData,
-                                            id: e.oldData.id,
-                                            tabel: "user_tables",
-                                        },
-                                        headers: {
-                                            "X-CSRF-TOKEN": $(
-                                                'meta[name="csrf-token"]').attr(
-                                                "content"
-                                            ),
-                                        },
-                                        success: function(validationResult) {
-                                            if (validationResult.errorText) {
-                                                deferred.reject(
-                                                    validationResult
-                                                    .errorText
-                                                );
-                                            } else {
-                                                ShowTabel(jenis);
-                                                deferred.resolve(false);
-                                            }
-                                        },
-                                        error: function() {
-                                            deferred.reject(
-                                                "Data Loading Error");
-                                        },
-                                        timeout: 5000,
-                                    });
-                                } else {
-                                    deferred.resolve(true);
-                                }
-                            });
-                            e.cancel = deferred.promise();
-                        },
-
-                        // onContentReady: function(e) {
-                        //     if (!collapsed) {
-                        //         collapsed = true;
-                        //         e.component.expandRow(["EnviroCare"]);
-                        //     }
-                        // },
-
-                    });
-                }
-            });
-        };
-
-        var collapsed = false;
-
-        var resizingModes = ["nextColumn", "widget"];
-
-        $("#select-resizing").dxSelectBox({
-            items: resizingModes,
-            value: resizingModes[0],
-            width: 250,
-            onValueChanged: function(data) {
-                dataGrid.option("columnResizingMode", data.value);
-            }
-        });
-
 </script>
     <script>
 

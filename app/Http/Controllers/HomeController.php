@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Models\Content;
 
 class HomeController extends Controller
 {
@@ -22,17 +24,32 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('pages.frontend.home');
+    {   
+        $content = DB::table('content')->get();
+        return view('pages.frontend.home',[
+            'content' => $content,
+        ]);
     }
 
     public function about()
     {
-        return view('pages.frontend.about');
+        $content = DB::table('content')->get();
+        return view('pages.frontend.about',[
+            'content' => $content,
+        ]);
     }
 
     public function maps()
     {
-        return view('pages.frontend.maps');
+        $density_layer = DB::table('user_tables')
+        ->where([
+            ['status', '=' , 'Active'],
+            ['roles', '=', 'Public'],
+            ])
+        ->get();
+
+        return view('pages.frontend.maps',[
+            'density_layer' => $density_layer,
+        ]);
     }
 }

@@ -107,7 +107,7 @@
             <div class="card">
                 {{-- <div class="card-body"> --}}
                 <div id="map" class="map"></div>
-                <div id="legend" class="leaflet-control"></div>
+                {{-- <div id="legend" class="leaflet-control"></div> --}}
                 @if (Auth::user()->roles == 'ADMIN')
                     @include('includes.backend.map')
                 @else

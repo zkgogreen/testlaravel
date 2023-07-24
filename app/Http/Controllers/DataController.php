@@ -220,7 +220,7 @@ class DataController extends Controller
                     ->distinct()->get(['wadmpr']);
                     return response()->json($provinces);
                 }
-
+                
                 public function regency($id){
                     $cities = DB::table('tb_desa_big2021_podes2020')
                     ->where('wadmpr',$id)

@@ -29,6 +29,7 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/maps', [HomeController::class, 'maps'])->name('maps');
+Route::get('/content', [ContentController::class, 'content'])->name('content');
 
 // Auth::routes();
 

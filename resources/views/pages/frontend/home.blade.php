@@ -44,10 +44,22 @@
         <div id="top-banner-1" class="banner">
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
-              <h1>Kawasan Prioritas</h1>
+              <h1>
+                @foreach ($content as $item)
+                @if($item->section === 'Home Slide 1')
+            {{$item->title}}
+                @endif
+                @endforeach
+              </h1>
               <div class="row">
                 <div class="col-12">
-                  <h2 class="m-3">Kawasan yang mendapat prioritas paling utama di dalam pengembangan dan penanganannya dengan memperhatikan kawasan strategis dalam wilayah provinsi dan aspek lain yang bersifat kabupaten atau kecamatan atau desa untuk mewujudkan sasaran pembangunan sesuai dengan potensi dan kondisi geografis.</h2>
+                  <h2 class="m-3">
+                    @foreach ($content as $item)
+                    @if($item->section === 'Home Slide 1')
+                {{$item->description}}
+                    @endif
+                    @endforeach
+                  </h2>
                 </div>
               </div>
             </div>
@@ -58,15 +70,33 @@
                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-1"></i>
-                        <h4><span>Province:</span><br>38</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 1')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                        </span><br>38</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
-                        <h4><span>Regency:</span><br>514</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 2')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>514</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
-                        <h4><span>Village:</span><br>83,467</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 3')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>83,467</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
@@ -83,10 +113,22 @@
         <div id="top-banner-2" class="banner">
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
-              <h1>Potensi Desa</h1>
+              <h1>
+                @foreach ($content as $item)
+                @if($item->section === 'Home Slide 2')
+            {{$item->title}}
+                @endif
+                @endforeach
+              </h1>
               <div class="row">
                 <div class="col-12">
-                  <h2 class="mx-3">Segala sumber daya alam maupun sumber daya manusia yang terdapat di desa. Dimana semua sumber daya tersebut dapat dimanfaatkan bagi keberlangsungan dan perkembangan desa.</h2>
+                  <h2 class="mx-3">
+                    @foreach ($content as $item)
+                    @if($item->section === 'Home Slide 2')
+                {{$item->description}}
+                    @endif
+                    @endforeach
+                    </h2>
                 </div>
               </div>
             </div>
@@ -97,15 +139,33 @@
                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-1"></i>
-                        <h4><span>Province:</span><br>38</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 1')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                        </span><br>38</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
-                        <h4><span>Regency:</span><br>514</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 2')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>514</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
-                        <h4><span>Village:</span><br>83,467</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 3')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>83,467</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
@@ -122,10 +182,22 @@
         <div id="top-banner-3" class="banner">
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
-              <h1>Point of Interest</h1>
+              <h1>
+                @foreach ($content as $item)
+                @if($item->section === 'Home Slide 3')
+            {{$item->title}}
+                @endif
+                @endforeach
+              </h1>
               <div class="row">
                 <div class="col-12">
-              <h2 class="mx-3">Sebuah titik spesifik dari suatu lokasi dimana seseorang dapat menemukan suatu manfaat atau suatu hal yang menarik didalamnya. Dapat berupa bangunan atau suatu area tertentu.</h2>
+              <h2 class="mx-3">
+                @foreach ($content as $item)
+                @if($item->section === 'Home Slide 3')
+            {{$item->description}}
+                @endif
+                @endforeach
+              </h2>
                 </div>
               </div>
             </div>
@@ -136,15 +208,33 @@
                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-1"></i>
-                        <h4><span>Province:</span><br>38</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 1')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                        </span><br>38</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
-                        <h4><span>Regency:</span><br>514</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 2')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>514</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
-                        <h4><span>Village:</span><br>83,467</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 3')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>83,467</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
@@ -161,10 +251,22 @@
         <div id="top-banner-4" class="banner">
           <div class="banner-inner-wrapper header-text">
             <div class="main-caption">
-              <h1>Penerima Bantuan</h1>
+              <h1>
+                @foreach ($content as $item)
+                @if($item->section === 'Home Slide 4')
+            {{$item->title}}
+                @endif
+                @endforeach
+              </h1>
               <div class="row">
                 <div class="col-12">
-              <h2 class="mx-3">Seseorang, keluarga, kelompok atau masyarakat, organisasi dan/atau suatu wilayah tertentu yang menerima sebuah bantuan. Bantuan bisa dalam berbagai bentuk seperti uang, alat, pelatihan dan sebagainya.</h2>
+              <h2 class="mx-3">
+                @foreach ($content as $item)
+                @if($item->section === 'Home Slide 3')
+            {{$item->description}}
+                @endif
+                @endforeach
+              </h2>
                 </div>
               </div>
             </div>
@@ -175,15 +277,33 @@
                     <div class="row">
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-1"></i>
-                        <h4><span>Province:</span><br>38</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 1')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                        </span><br>38</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
-                        <h4><span>Regency:</span><br>514</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 2')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>514</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
-                        <h4><span>Village:</span><br>83,467</h4>
+                        <h4><span>
+                          @foreach ($content as $item)
+                          @if($item->section === 'Home Counter 3')
+                      {{$item->title}}
+                          @endif
+                          @endforeach
+                          </span><br>83,467</h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">

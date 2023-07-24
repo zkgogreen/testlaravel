@@ -31,18 +31,15 @@
                 <div class="tab-pane fade show active" id="layertab" role="tabpanel"
                 aria-labelledby="layer-tab">
                 <div class="container-layer">
-                    <select id="province" name="wadmpr" class="select2 form-select" required>
-                        <option selected>Pilih kategori</option>
+                    <select id="density" name="density" class="select2 form-select" required>
+                        <option value="#" selected>Select Density</option>
+                        @foreach ($density_layer as $item)
+                        <option value="{{$item->title}}">{{$item->name}}</option>
+                        @endforeach
                     </select>
-                    {{-- <select id="regency" name="wadmkk" class="select2 form-select mt-1" required>
-                        <option selected>Pilih Sub-Kategori</option>
-                    </select>
-                    <select id="district" name="wadmkc" class="select2 form-select mt-1">
-                        <option disabled selected>Pilih Klasterisasi</option>
-                        <option value="#">Provinsi</option>
-                        <option value="#">Kab / Kota</option>
-                    </select> --}}
-                    <button class="btn btn-outline-dark btn-sm float-end mt-2" onclick="SearchLocation()">Tampilkan Parameter</button>
+                    <button class="btn btn-outline-dark btn-sm float-end mt-2" onclick="clearMapDensity();">Clear</button>
+                    <button class="btn btn-primary float-end btn-sm mt-2 mx-2" onclick="showMapDensity();">Show Map</button>
+                    <div id="legend" class="leaflet-control"></div>
                 </div>
                 </div>
                 <div class="tab-pane fade" id="basemaptab" role="tabpanel"

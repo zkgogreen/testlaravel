@@ -40,6 +40,7 @@
                     </select>
                     <button class="btn btn-outline-dark btn-sm float-end mt-2" onclick="clearMapDensity();">Clear</button>
                     <button class="btn btn-primary float-end btn-sm mt-2 mx-2" onclick="showMapDensity();">Show Map</button>
+                    <div id="legend" class="leaflet-control"></div>
                     <div class="row mt-3">
                         <div class="col-md-4 p-0">
                             <p class="font-weight-bold text-dark mx-2 mb-0">Select Layer</p>

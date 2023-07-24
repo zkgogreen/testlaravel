@@ -54,6 +54,117 @@
    }
 });
 
+
+
+
+// Perbaikan pada script
+var layer_density = new L.LayerGroup([]).addTo(map);
+var densitymap; // Tambahkan deklarasi variabel densitymap di luar fungsi showMapDensity()
+var legend;
+
+// Menambahkan kontrol warna menggunakan input range
+var colorInput = document.createElement('input');
+colorInput.type = 'range';
+colorInput.min = 0;
+colorInput.max = 100;
+colorInput.value = 50;
+colorInput.addEventListener('input', function(event) {
+    updateColors(event.target.value);
+});
+
+// Ambil data GeoJSON dari Laravel
+function showMapDensity() {
+    var tabel = document.getElementById("density").value;
+    $.ajax({
+        url: base_url + '/getGeoJSONData/' + tabel,
+        type: "get",
+        data: {
+            layer: tabel,
+        },
+        dataType: "json",
+        success: function(data) {
+            if (data) {
+                layer_density.eachLayer(function(layer) {
+                    map.removeLayer(layer);
+                });
+                if (legend) {
+                    legend.remove(map);
+                }
+                // Tambahkan data GeoJSON sebagai layer vektor
+                densitymap = L.geoJSON(data, {
+                    style: function(feature) {
+                        var density = feature.properties.jumlah;
+                        var fillColor = getColor(density, colorInput.value);
+                        return {
+                            fillColor: fillColor,
+                            weight: 1,
+                            opacity: 1,
+                            color: 'white',
+                            fillOpacity: 0.7
+                        };
+                    },
+                    onEachFeature: function(feature, layer) {
+                        // ... (kode lainnya tetap sama)
+                    }
+                });
+
+                layer_density.addLayer(densitymap);
+
+                // Menambahkan kontrol warna ke peta
+                legend = L.control({ position: 'bottomright' });
+                legend.onAdd = function(map) {
+                    var div = L.DomUtil.create('div', 'info legend');
+                    div.innerHTML = '<strong>Density Scale:</strong> <br> Low <input type="range" min="0" max="100" value="70" id="density-scale"> High';
+                    L.DomEvent.disableClickPropagation(div);
+                    return div;
+                };
+                legend.addTo(map);
+
+                // Memperbarui warna setiap feature pada peta berdasarkan input pengguna
+                function updateColors(scale) {
+                    layer_density.eachLayer(function(layer) {
+                        var density = layer.feature.properties.jumlah;
+                        var fillColor = getColor(density, scale);
+                        layer.setStyle({ fillColor: fillColor });
+                    });
+                }
+
+            } else {
+                layer_density.eachLayer(function(layer) {
+                    map.removeLayer(layer);
+                });
+                if (legend) {
+                    legend.remove(map);
+                }
+            }
+        }
+    });
+}
+
+function clearMapDensity() {
+    layer_density.eachLayer(function(layer) {
+        map.removeLayer(layer);
+    });
+    if (legend) {
+        legend.remove(map);
+    }
+}
+
+// Fungsi untuk menentukan warna fill berdasarkan nilai density dan skala warna pengguna
+function getColor(density, scale) {
+    // Menghitung persentase berdasarkan range jumlah penduduk tertinggi
+    var maxDensity = 5; // Ganti dengan jumlah penduduk tertinggi dalam data Anda
+    var percentage = (density / maxDensity) * 100;
+
+    // Mendapatkan nilai opacity berdasarkan skala pengguna
+    var opacity = scale / 100;
+
+    // Mendapatkan nilai warna fill berdasarkan persentase dan skala opacity
+    var color = 'rgba(255, 0, 0, ' + opacity + ')'; // Ganti dengan warna yang Anda inginkan
+
+    return percentage > scale ? color : 'transparent';
+}
+
 // var baseCarto1 = L.tileLayer.provider('Stadia.AlidadeSmooth').addTo(map);
 var baseGoogle1 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             maxZoom: 20,
@@ -123,7 +234,7 @@ var datasettools = L.easyButton(
                 var y = document.getElementById("datasettools");
                 if (x.style.display === "none") {
                     x.style.display = "block";
-                    y.style.background = "#538f91";
+                    y.style.background = "#3a86d4";
                     y.style.color = "#ffffff";
                 } else {
                     x.style.display = "none";
@@ -146,21 +257,21 @@ var datasettools = L.easyButton(
         var coordinate = L.control.coordProjection().addTo(map);
 
          // legend tools
-         var legendtool = L.easyButton(
-            '<span class="iconify" data-icon="material-symbols:list-alt-outline-rounded" data-width="18" data-height="18"></span>',
-            function OpenLegend() {
-                var x = document.getElementById("menu-legend");
-                var y = document.getElementById("legendtools");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                    y.style.background = "#538f91";
-                    y.style.color = "#ffffff";
-                } else {
-                    x.style.display = "none";
-                    y.style.background = "#ffffff";
-                    y.style.color = "#000000";
-                }
-            }, "Map Legend", 'bottomleft', 'legendtools').addTo(map);
+        //  var legendtool = L.easyButton(
+        //     '<span class="iconify" data-icon="material-symbols:list-alt-outline-rounded" data-width="18" data-height="18"></span>',
+        //     function OpenLegend() {
+        //         var x = document.getElementById("menu-legend");
+        //         var y = document.getElementById("legendtools");
+        //         if (x.style.display === "none") {
+        //             x.style.display = "block";
+        //             y.style.background = "#3a86d4";
+        //             y.style.color = "#ffffff";
+        //         } else {
+        //             x.style.display = "none";
+        //             y.style.background = "#ffffff";
+        //             y.style.color = "#000000";
+        //         }
+        //     }, "Map Legend", 'bottomleft', 'legendtools').addTo(map);
 
 
 </script>
