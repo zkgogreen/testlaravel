@@ -131,7 +131,6 @@
                     <ul class="mcd-menu">
                         <li>
                             <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'active' : '' }}">
-                                {{-- <i class="fa fa-home"></i> --}}
                                 <span class="iconify icon-menu" data-icon="material-symbols:dashboard" data-width="20" data-height="20"></span>
                                 <strong>Dashboard</strong>
                                 <small>Map & resume</small>
@@ -139,31 +138,31 @@
                         </li>
                         <li>
                             <a href="{{ route('dataset')}}" class="{{ request()->is('dataset*') ? 'active' : '' }}">
-                                {{-- <i class="fa fa-edit"></i> --}}
                                 <span class="iconify icon-menu" data-icon="carbon:data-volume" data-width="20" data-height="20"></span>
                                 <strong>Dataset</strong>
                                 <small>Create Data & Table</small>
                             </a>
                         </li>
+                        @if (Auth::user()->roles == 'ADMIN')
                         <li>
-                            <a href="{{ route('basisdata') }}" class="{{ request()->is('basisdata') ? 'active' : '' }}">
-                                {{-- <i class="fa fa-gift"></i> --}}
+                            <a href="#" class="{{ request()->is('content*') ? 'active' : '' }}">
                                 <span class="iconify icon-menu" data-icon="fluent:content-settings-24-regular" data-width="20" data-height="20"></span>
                                 <strong>Content Management</strong>
                                 <small>Configuration 6extual content</small>
                             </a>
                         </li>
+                        @elseif (Auth::user()->roles == 'SUPER USER')
                         <li>
-                            <a href="{{ route('pengguna') }}" class="{{ request()->is('pengguna') ? 'active' : '' }}">
-                                {{-- <i class="fa fa-globe"></i> --}}
+                            <a href="{{ route('user-management') }}" class="{{ request()->is('user*') ? 'active' : '' }}">
                                 <span class="iconify icon-menu" data-icon="fa-solid:user-cog" data-width="20" data-height="20"></span>
                                 <strong>User Management</strong>
                                 <small>configuration all user</small>
                             </a>
-                        </li>
+                        </li>                 
+                        @else
+                        @endif
                         <li>
                             <a href="">
-                                {{-- <i class="fa fa-picture-o"></i> --}}
                                 <span class="iconify icon-menu" data-icon="bx:file" data-width="20" data-height="20"></span>
                                 <strong>User Guide</strong>
                                 <small>How to use sigap-fbb</small>
@@ -171,7 +170,6 @@
                         </li>
                         <li>
                             <a href="{{ route('privacy') }}" class="{{ request()->is('privacy') ? 'active' : '' }}">
-                                {{-- <i class="fa fa-envelope-o"></i> --}}
                                 <span class="iconify icon-menu" data-icon="ic:baseline-privacy-tip" data-width="20" data-height="20"></span>
                                 <strong>Privacy Policy</strong>
                                 <small>-</small>
@@ -179,7 +177,6 @@
                         </li>
                         <li>
                             <a href="{{ route('toc') }}" class="{{ request()->is('toc') ? 'active' : '' }}">
-                                {{-- <i class="fa fa-envelope-o"></i> --}}
                                 <span class="iconify icon-menu" data-icon="carbon:rule-filled" data-width="20" data-height="20"></span>
                                 <strong>Term & Condition</strong>
                                 <small>-</small>

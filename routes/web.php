@@ -47,12 +47,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('basisdata', [BasisdataController::class, 'index'])->name(
         'basisdata'
     );
-    Route::get('pengguna', [PenggunaController::class, 'index'])->name(
-        'pengguna'
+    Route::get('user-management', [PenggunaController::class, 'index'])->name(
+        'user-management'
     );
-    Route::post('/add-pengguna', [PenggunaController::class, 'create'])->name(
-        'add-pengguna'
-    );
+    Route::post('/add-user', [PenggunaController::class, 'create'])->name('add-user');
     Route::get('pengguna/{id}', [PenggunaController::class, 'edit'])->name(
         'edit-pengguna'
     );

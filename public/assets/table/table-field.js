@@ -99,10 +99,27 @@ var level_user = [
     {
       dataField: 'name',
       dataType: 'string',
+      // validationRules: [{
+      //   type: 'required',
+      //   message: 'Name is required',
+      // }],
     },
     {
       dataField: 'email',
       dataType: 'string',
+      // validationRules: [{
+      //   type: 'required',
+      //   message: 'Email is required',
+      // }, {
+      //   type: 'email',
+      //   message: 'Email is invalid',
+      // }, {
+      //   type: 'async',
+      //   message: 'Email is already registered',
+      //   validationCallback(params) {
+      //     return sendRequest(params.value);
+      //   },
+      // }],
     },
     {
       dataField: 'roles',

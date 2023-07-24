@@ -88,50 +88,29 @@ class PenggunaController extends Controller
     //     ]);
     // }
 
-    public function create(Request $request)
-    {
-        // $details = [
-        //     'title' => 'Tes Coba Email simasi',
-        //     'body' => 'This is for testing email using smtp',
-        // ];
 
-        try {
-            $validator = $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required|unique:users,email',
-                'password' => 'required',
-                'roles' => 'required',
-            ]);
+    public function create(Request $request){
+        $data=$request->all()['data'];
+        unset($data["__KEY__"]);
+        $user_pass = 'login1243_abc';
+        // $this->SendEmail($data,$password);
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'roles' => $data['roles'],
+            'password' => Hash::make($user_pass),
+        ]);
 
-            // if($validator->fails()){
-            //     return $this->sendError('Validation Error.', $validator->errors());
-            // }
-
-            $password = $request->password;
-            $email = $request->email;
-
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($password);
-            $user->roles = $request->roles;
-            $user->save();
-
-            // \Mail::to($email)->send(
-            //     new \App\Mail\MailAccounting($details)
-            // );
-
-            return redirect()
-                ->route('pengguna')
-                ->with([
-                    'success' =>
-                        'BERHASIL! Pengguna Baru telah ditambahkan ke database.',
-                ]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            return back()->with('error', $e->getMessage());
-        }
+//         {
+//     $tabel = $request->get('tabel');
+//     $newData = $request->get('newData');
+//     $hasil = DB::table($tabel)
+//         ->create($newData);
+//     return $hasil;
+// }
     }
+
+
 
     /**
      * Store a newly created resource in storage.

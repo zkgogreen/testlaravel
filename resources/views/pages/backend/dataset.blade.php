@@ -3,8 +3,8 @@
 @section('content')
     <div class="card col-md-12">
         <div class="card-block" style="padding: 1%; padding-top: 1.5%;">
-            <!-- <h4 class="card-title">Simple Basic Map</h4> -->
             <ul class="nav nav-tabs float-end" id="myTab" role="tablist">
+                @if (Auth::user()->roles == 'ADMIN')
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="masterdata-tab" data-bs-toggle="tab" data-bs-target="#masterdatatab"
                         type="button" role="tab" aria-controls="masterdata" aria-selected="true">Master Data
@@ -28,9 +28,38 @@
                         aria-selected="true">Table
                     </button>
                 </li>
+                @elseif (Auth::user()->roles == 'USER')
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="inputdata-tab" data-bs-toggle="tab"
+                        data-bs-target="#inputdatatab" type="button" role="tab" aria-controls="inputdata"
+                        aria-selected="false">Input Data
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="importdata-tab" data-bs-toggle="tab"
+                        data-bs-target="#importdatatab" type="button" role="tab" aria-controls="importdata"
+                        aria-selected="false">Import Excel
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="layerdata-tab" data-bs-toggle="tab"
+                        data-bs-target="#layerdatatab" type="button" role="tab" aria-controls="layerdata"
+                        aria-selected="true">Table
+                    </button>
+                </li>
+                @elseif (Auth::user()->roles == 'SUPER USER')
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="layerdata-tab" data-bs-toggle="tab"
+                        data-bs-target="#layerdatatab" type="button" role="tab" aria-controls="layerdata"
+                        aria-selected="true">Table
+                    </button>
+                </li>
+                @else
+                @endif
             </ul>
 
             <div class="tab-content mt-4" id="myTabContent">
+                @if (Auth::user()->roles == 'ADMIN')
                 <div class="tab-pane fade show active" id="masterdatatab" role="tabpanel"
                 aria-labelledby="masterdata-tab">
                 <h4>Master Data</h4>
@@ -418,6 +447,83 @@
                         <div id="peta"></div>
                      </div>
                 </div>
+                <div class="tab-pane fade" id="importdatatab" role="tabpanel" aria-labelledby="importdata-tab">
+                    <div class="row p-3">
+                        <h4>Import Excel</h4>
+                        <p>Fitur tambah data dalam jumlah banyak dengan menggunakan file excel :</p>
+                        <ol type='1'>
+                            <li>Pastikan format data yang akan di Import sudah sesuai dengan aturan import data :</li>
+                            <ul>
+                                <li style="list-style-type: circle;">Gunakan format kolom excel yang bisa di unduh di dalam menu Table, dengan cara tampilkan tabel kemudia klik tombol Export pada tabel yang muncul</li>
+                                <li style="list-style-type: circle;">Kolom dasar seperti <i>ID Desa, Desa/Kelurahan, Kecamatan,
+                                        Kabupaten/kota, Provinsi, Longitude, Latitude</i> <strong>harus diisi</strong>.</li>
+                                        <li style="list-style-type: circle;">Khusus Kolom <i>koordinat Longitude & Latitude</i>
+                                            harus di isi dengan derajat desimal, gunakan tanda strip '-' pada nilai derajat minus /
+                                            berada pada posisi lintang selatan,</li>
+                                        <li style="list-style-type: circle;">Gunakan tanah titik '.' di antara pemisah nilai derajat
+                                            ke desimal (contoh : <strong>-6.951807, 107.657874</strong>).</li>
+                            </ul>
+                            <li>File Excel harus berektensi <strong>.xlsx</strong> (excel 2007), jika ektensi <strong>.xls</strong> lakukan save as menjadi format <strong>.xlsx</strong></li>
+                        </ol>
+                        <select class="form-control form-control-sm w-100 mt-2" name="table_import" id="table_import">
+                            <option value="noselect" selected>Select Table Import</option>
+                            @foreach ($spatial_layer as $item)
+                            <option value="{{$item->title}}">{{$item->name}}</option>  
+                            @endforeach
+                            <option value="tb_poi">Point Of Interest</option>  
+                            <option value="tb_spd">Survey Potensi Desa</option>
+                            <option value="tb_kp">Kawasan prioritas</option>
+                            <option value="tb_penerima_bantuan">Penerima Bantuan</option>
+                        </select> 
+                        <div id="FormImportExcel"></div>
+    
+                     </div>
+                    </div>
+                    <div class="tab-pane fade" id="layerdatatab" role="tabpanel" aria-labelledby="layerdata-tab">
+                        <div class="row p-3">
+                            <h4>Table</h4>
+                            <p>Pilih layer untuk menampilkan tabel :</p>
+                            <select class="form-control form-control-sm w-100 mt-2" name="table_data" id="table_data">
+                                <option value="noselect" selected>Select Table</option>
+                                @foreach ($spatial_layer as $item)
+                                <option value="{{$item->title}}">{{$item->name}}</option>  
+                                @endforeach
+                                <option value="tb_poi">Point Of Interest</option>  
+                                <option value="tb_spd">Survey Potensi Desa</option>
+                                <option value="tb_kp">Kawasan prioritas</option>
+                                <option value="tb_penerima_bantuan">Penerima Bantuan</option>
+                            </select> 
+                            <div id="tblayer"></div>
+                         </div>
+                        </div>
+                @elseif (Auth::user()->roles == 'USER')
+                <div class="tab-pane fade show active" id="inputdatatab" role="tabpanel" aria-labelledby="inputdata-tab">
+                    <h4>Layer</h4>
+                    <p>Pilih layer untuk memunculkan form tambah data :</p>
+                    <select class="form-control form-control-sm w-100 mt-2" name="jenis_data" id="jenis_data">
+                        <option value="#" selected>Select Master Data</option>
+                        @foreach ($spatial_layer as $item)
+                        <option value="{{$item->title}}">{{$item->name}}</option>  
+                        @endforeach
+                        <option value="tb_poi">Point Of Interest</option>  
+                        <option value="tb_spd">Survey Potensi Desa</option>
+                        <option value="tb_kp">Kawasan prioritas</option>
+                        <option value="tb_penerima_bantuan">Penerima Bantuan</option>
+                    </select> 
+
+                    <div class="row mb-2 mt-2">
+                        <div id="kolomList">
+                            <div id="kList"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-2 mt-2">
+                        <div id="tabelForm">
+                        </div>
+                     </div>  
+                     <div class="row mb-2">
+                        <div id="peta"></div>
+                     </div>
+                </div>
 
                 <div class="tab-pane fade" id="importdatatab" role="tabpanel" aria-labelledby="importdata-tab">
                     <div class="row p-3">
@@ -451,8 +557,7 @@
     
                      </div>
                     </div>
-
-                <div class="tab-pane fade" id="layerdatatab" role="tabpanel" aria-labelledby="layerdata-tab">
+                    <div class="tab-pane fade" id="layerdatatab" role="tabpanel" aria-labelledby="layerdata-tab">
                 <div class="row p-3">
                     <h4>Table</h4>
                     <p>Pilih layer untuk menampilkan tabel :</p>
@@ -469,6 +574,31 @@
                     <div id="tblayer"></div>
                  </div>
                 </div>
+
+                @elseif (Auth::user()->roles == 'SUPER USER')
+                <div class="tab-pane fade show active" id="layerdatatab" role="tabpanel" aria-labelledby="layerdata-tab">
+                    <div class="row p-3">
+                        <h4>Table</h4>
+                        <p>Pilih layer untuk menampilkan tabel :</p>
+                        <select class="form-control form-control-sm w-100 mt-2" name="table_data" id="table_data">
+                            <option value="noselect" selected>Select Table</option>
+                            @foreach ($spatial_layer as $item)
+                            <option value="{{$item->title}}">{{$item->name}}</option>  
+                            @endforeach
+                            <option value="tb_poi">Point Of Interest</option>  
+                            <option value="tb_spd">Survey Potensi Desa</option>
+                            <option value="tb_kp">Kawasan prioritas</option>
+                            <option value="tb_penerima_bantuan">Penerima Bantuan</option>
+                        </select> 
+                        @if (Auth::user()->roles == 'ADMIN' || Auth::user()->roles == 'USER')
+                        <div id="tblayer"></div>
+                            @else
+                            <div id="tblayer2"></div>
+                        @endif
+                     </div>
+                    </div>
+                    @else
+                    @endif
                 </div>
             </div>
         </div>
@@ -662,20 +792,7 @@
                 });
             }).change();
         });
-    // $('.up1').change(function() {
-    //     if ($('.up1').val() == '') {
-    //         $('.imp1').attr('disabled', true)
-    //     } else {
-    //         $('.imp1').attr('disabled', false);
-    //     }
-    // })
-    // $('.up2').change(function() {
-    //     if ($('.up2').val() == '') {
-    //         $('.imp2').attr('disabled', true)
-    //     } else {
-    //         $('.imp2').attr('disabled', false);
-    //     }
-    // })
+
     $('.up3').change(function() {
         if ($('.up3').val() == '') {
             $('.imp3').attr('disabled', true)
@@ -700,16 +817,13 @@
 
         function generateData(event) {
             ShowTabelAll(menu_tdata.value, 'tblayer');
+            ShowTabelAll2(menu_tdata.value, 'tblayer2');
             ShowFormTabel(menu_jdata.value, 'tabelForm');
             ShowFormImport(menu_import.value);
             showKolomList(menu_jdata.value);
             showMap(menu_jdata.value);
             // getKabkotList(menu_ListProv.value);
         }
-
-    
-
-
 
         menu_kList.addEventListener("change", generateKolomlist);
 
@@ -1363,6 +1477,154 @@ function getKabkotList(provinsi){
                             allowUpdating: true,
                             allowAdding: false,
                             allowDeleting: true,
+                            selectTextOnEditStart: false,
+                            // startEditAction: 'click',
+                        },
+                        columns: msg["]nmfield"],
+
+                        onRowRemoving: function(info) {
+                            $.ajax({
+                                    type: "POST",
+                                    url: base_url + "/deleteDataDataset",
+                                    data: {
+                                        id: info.data.id,
+                                        title: info.data.title,
+                                        tabel: 'user_tables'
+                                    },
+                                    headers: {
+                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                            "content"
+                                        ),
+                                    },
+                                    success: function(msg) {
+                                        ShowTabel(jenis);
+                                    },
+                                },
+                                "json"
+                            );
+                        },
+
+                        onRowUpdating: function(e) {
+                            const deferred = $.Deferred();
+                            const promptPromise = DevExpress.ui.dialog.confirm(
+                                "Apa anda yakin?",
+                                "Konfirmasi"
+                            );
+                            promptPromise.done((dialogResult) => {
+                                console.log(e);
+                                if (dialogResult) {
+                                    $.ajax({
+                                        url: base_url + "/updateTabel",
+                                        dataType: "json",
+                                        method: "POST",
+                                        data: {
+                                            newData: e.newData,
+                                            id: e.oldData.id,
+                                            tabel: "user_tables",
+                                        },
+                                        headers: {
+                                            "X-CSRF-TOKEN": $(
+                                                'meta[name="csrf-token"]').attr(
+                                                "content"
+                                            ),
+                                        },
+                                        success: function(validationResult) {
+                                            if (validationResult.errorText) {
+                                                deferred.reject(
+                                                    validationResult
+                                                    .errorText
+                                                );
+                                            } else {
+                                                ShowTabel(jenis);
+                                                deferred.resolve(false);
+                                            }
+                                        },
+                                        error: function() {
+                                            deferred.reject(
+                                                "Data Loading Error");
+                                        },
+                                        timeout: 5000,
+                                    });
+                                } else {
+                                    deferred.resolve(true);
+                                }
+                            });
+                            e.cancel = deferred.promise();
+                        },
+
+                        // onContentReady: function(e) {
+                        //     if (!collapsed) {
+                        //         collapsed = true;
+                        //         e.component.expandRow(["EnviroCare"]);
+                        //     }
+                        // },
+
+                    });
+                }
+            });
+        };
+
+
+        function ShowTabelAll2(nmTabel, idhtml) {
+            $.ajax({
+                type: "get",
+                data: {
+                tabel: nmTabel,
+            },
+                url: base_url + "/ShowTabel/" + nmTabel,
+                success: function(msg) {
+                    $("#tblayer").dxDataGrid({
+                        dataSource: msg["data"],
+                        showRowLines: true,
+                        rowAlternationEnabled: true,
+                        filterRow: {
+                            visible: true,
+                        },
+                        allowColumnResizing: true,
+                        columnResizingMode: "widget",
+                        columnMinWidth: 50,
+                        columnAutoWidth: true,
+                        showBorders: true,
+                        //         selection: {
+                        //     mode: "multiple"
+                        // },
+                        scrolling: {
+                            columnRenderingMode: 'virtual',
+                            rowRenderingMode: 'virtual',
+                        },
+                        paging: {
+                            pageSize: 10
+                        },
+                        pager: {
+                            showInfo: true,
+                            showPageSizeSelector: true,
+                            infoText: "Page #{0}. Total: {1} ({2})",
+                            allowedPageSizes: [5, 10, 20]
+                        },
+                        export: {
+                    enabled: true,
+                    allowExportSelectedData: true,
+                    fileName: "Master Excel " + nmTabel,
+                },
+                        remoteOperations: false,
+                        searchPanel: {
+                            visible: true,
+                            highlightCaseSensitive: true
+                        },
+                        groupPanel: {
+                            visible: true
+                        },
+                        grouping: {
+                            autoExpandAll: false
+                        },
+                        allowColumnReordering: true,
+                        rowAlternationEnabled: true,
+                        editing: {
+                            mode: "form",
+                            // mode: 'batch',
+                            allowUpdating: false,
+                            allowAdding: false,
+                            allowDeleting: false,
                             selectTextOnEditStart: false,
                             // startEditAction: 'click',
                         },
