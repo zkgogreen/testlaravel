@@ -14,7 +14,7 @@ class UserTable extends Model
         'table_size',
         'status',
         'type',
-        'color_palette',
+        // 'color_palette',
         'created_at',
         'updated_at',
     ];
