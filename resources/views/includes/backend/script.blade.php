@@ -64,10 +64,10 @@
 {{-- Uncomment this line if needed --}}
 
 <script>
-    var base_url = window.location.origin + "/project/sigap-fbb/public";
+    // var base_url = window.location.origin + "/project/sigap-fbb/public";
     // var base_url = "http://10.0.0.227";
     // var base_url = "http://103.146.202.47/gis-demand";
-    // var base_url = "https://sigap-fbb.kominfo.go.id";
+    var base_url = "https://sigap-fbb.kominfo.go.id";
 
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
