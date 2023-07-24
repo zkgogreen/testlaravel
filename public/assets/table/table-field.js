@@ -1027,15 +1027,15 @@ var nmField_spd = [
       dataType: 'string',
       allowEditing: 0,
     },
-    {
-      dataField: 'color_palette',
-      caption: 'Color Palette',
-      lookup: {
-        dataSource: color_palette,
-        displayExpr: 'Name',
-        valueExpr: 'Name',
-      },
-    },
+    // {
+    //   dataField: 'color_palette',
+    //   caption: 'Color Palette',
+    //   lookup: {
+    //     dataSource: color_palette,
+    //     displayExpr: 'Name',
+    //     valueExpr: 'Name',
+    //   },
+    // },
     {
         dataField: 'roles',
         caption: 'Roles',
