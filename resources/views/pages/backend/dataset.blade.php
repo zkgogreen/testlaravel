@@ -1025,6 +1025,7 @@ function ShowFormImport(nmTabel) {
     //     distance.style.display = "block";
 
 
+
 function ShowFormTabel(nmTabel, idhtml) {
   $.ajax({
     url: base_url + '/TabelField/' + nmTabel,
@@ -1039,11 +1040,11 @@ function ShowFormTabel(nmTabel, idhtml) {
         $('#formtbSelect').append('<input type="hidden" class="form-control mb-2" name="tabel" id="tabel" value="' + nmTabel + '">');
         $('#formtbSelect').append('<div class="row formtb"></div>');
         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">provinsi :</label><select class="form-control mb-2" name="provinsi" id="provinsi"></select></div></div>');
-        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kabkot :</label><select class="form-control mb-2" name="kabkot" id="kabkot"></select></div></div>');
+        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kabkot :</label><input type="text" class="form-control mb-2" name="kabkot" id="kabkot"></input></div></div>');
         $('#kabkot').append('<option value="#" selected>Select Kabkot</option>');
-        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kecamatan :</label><select class="form-control mb-2" name="kecamatan" id="kecamatan"></select></div></div>');
+        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kecamatan :</label><input type="text" class="form-control mb-2" name="kecamatan" id="kecamatan"></input></div></div>');
         $('#kecamatan').append('<option value="#" selected>Select Kecamatan</option>');
-        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">keldes :</label><select class="form-control mb-2" name="keldes" id="keldes"></select></div></div>');     
+        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">keldes :</label><input type="text" class="form-control mb-2" name="keldes" id="keldes"></input></div></div>');     
         $('#keldes').append('<option value="#" selected>Select Keldes</option>');  
         $.each(data, function (key, value) {
           // Separate the conditions for data_type and form_type
@@ -1099,6 +1100,82 @@ function ShowFormTabel(nmTabel, idhtml) {
     }
   });
 }
+
+
+// function ShowFormTabel(nmTabel, idhtml) {
+//   $.ajax({
+//     url: base_url + '/TabelField/' + nmTabel,
+//     type: "get",
+//     data: {
+//       tabel: nmTabel,
+//     },
+//     success: function (data) {
+//       if (data) {
+//         $('#' + idhtml).empty(); // Clear the content before appending new elements
+//         $('#' + idhtml).append('<form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">@csrf</form>');
+//         $('#formtbSelect').append('<input type="hidden" class="form-control mb-2" name="tabel" id="tabel" value="' + nmTabel + '">');
+//         $('#formtbSelect').append('<div class="row formtb"></div>');
+//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">provinsi :</label><select class="form-control mb-2" name="provinsi" id="provinsi"></select></div></div>');
+//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kabkot :</label><select class="form-control mb-2" name="kabkot" id="kabkot"></select></div></div>');
+//         $('#kabkot').append('<option value="#" selected>Select Kabkot</option>');
+//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kecamatan :</label><select class="form-control mb-2" name="kecamatan" id="kecamatan"></select></div></div>');
+//         $('#kecamatan').append('<option value="#" selected>Select Kecamatan</option>');
+//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">keldes :</label><select class="form-control mb-2" name="keldes" id="keldes"></select></div></div>');     
+//         $('#keldes').append('<option value="#" selected>Select Keldes</option>');  
+//         $.each(data, function (key, value) {
+//           // Separate the conditions for data_type and form_type
+//           switch (value.data_type) {
+//             case "character varying":
+//               switch (value.form_type) {
+//                 case "select":
+//                   $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><select class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '"><option value="#" selected>Select ' + value.column_name +'</option></select></div></div>');
+//                   break;
+//                 case "file":
+//                   $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="file" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
+//                   break;
+//                   case "input":
+//                   $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="text" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
+//                   break;
+//                 default:
+//                 // $('.formtb').append('<div class="col-md-6"><input type="text" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable +'></div>');
+//                   break;
+//               }
+//               break;
+//             case "integer":
+//               if (value.form_type === "input") {
+//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="number" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
+//               }
+//               break;
+//             case "text":
+//               if (value.form_type === "input") {
+//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><textarea name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" rows="5" placeholder="' + value.column_name + '" ' + value.is_nullable + '></textarea></div></div>');
+//               } else if (value.form_type === "file") {
+//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="file" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
+//               }
+//               break;
+//             case "numeric":
+//               if (value.form_type === "input") {
+//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="text" name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
+//               }
+//               break;
+//             case "date":
+//               if (value.form_type === "select") {
+//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="date" name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
+//               }
+//               break;
+//             default:
+//               break;
+//           }
+//         });
+//             $('#formtbSelect').append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button>');
+//             updateRequiredAttribute();
+//             getProvinceList();
+//             } else {
+//                 $('#' + idhtml).empty(); // Clear the content if there is no data
+//             }
+//     }
+//   });
+// }
 
 
 
