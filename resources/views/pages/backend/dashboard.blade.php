@@ -105,6 +105,7 @@
         <div class="col-md-12">
             @include('includes.backend.tools')
             <div class="card">
+                <div id="btnmodalpeta"></div>
                 {{-- <div class="card-body"> --}}
                 <div id="map" class="map"></div>
                 <div class="overlay"></div>
@@ -123,19 +124,26 @@
 
     @section('addon-modal')
                                       {{-- start popup info peta --}}
-
+{{-- 
                                       <div id="draginfopeta" class="dialog" style="width: 350px;">
                                         <h3 id="drag_title_peta" class="p-2 mb-0"></h3>
                                           <div class="card-body" id="feature-info" style="height:150px; overflow:auto;">
                                       </div>
-                                        {{-- <hr> --}}
                                      <button type="button" id="drag_close6" class="btn btn-sm btn-outline-dark mx-2 float-right mb-2">Close</button>
-                                      </div>
+                                      </div> --}}
                                     
                                       {{-- end popup info peta  --}}
     @endsection
 
 @section('addon-script')
+<script src="{{ url('assets/vendor/draggable-dialog-modal/dist/jquery-simple-dialog.js') }}"></script>
+<script>
+      $('#draginfopeta').simpleDialog({
+    opener: '#btnmodalpeta',
+    closer: '#drag_close6',
+    dragger: '#drag_title_peta'
+  });
+</script>
 <script>
 
         // jQuery(document).ready(function() {

@@ -146,6 +146,20 @@ function showMapDensity() {
                         };
                     },
                     onEachFeature: function (feature, layer) {
+                        if (feature.properties) {
+            var content =
+                "<div class='table-responsive'><table class='table' style='margin-bottom:0; font-size:12px;'>" +
+                "<tr><th style='width:30%;'>Kabupaten / Kota</th><td>" + feature.properties.kabkot +
+                "</td></tr>" +
+                "<tr><th style='width:30%;'>Provinsi</th><td>" + feature.properties.provinsi +
+                "</td></tr>" +
+                "<tr><th style='width:30%;'>Jumlah</th><td>" + feature.properties.jumlah + "</td></tr></table></div>";
+            layer.on('click', function(e) {
+                $("#drag_title_peta").html("DENSITY MAP");
+                $("#feature-info").html(content);
+                $("#btnmodalpeta").trigger("click");
+            });
+        }
                         // ... (kode lainnya tetap sama)
                     }
                 });

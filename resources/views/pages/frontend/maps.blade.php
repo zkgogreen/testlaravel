@@ -56,23 +56,20 @@
 
 
 
-
 // Perbaikan pada script
 var layer_density = new L.LayerGroup([]).addTo(map);
 var densitymap; // Tambahkan deklarasi variabel densitymap di luar fungsi showMapDensity()
-var legend;
+// var legend;
 
 // Menambahkan kontrol warna menggunakan input range
-var colorInput = document.createElement('input');
-colorInput.type = 'range';
-colorInput.min = 0;
-colorInput.max = 100;
-colorInput.value = 50;
-colorInput.addEventListener('input', function(event) {
-    updateColors(event.target.value);
-});
-
-// Ambil data GeoJSON dari Laravel
+// var colorInput = document.createElement('input');
+// colorInput.type = 'range';
+// colorInput.min = 0;
+// colorInput.max = 100;
+// colorInput.value = 50;
+// colorInput.addEventListener('input', function(event) {
+//     updateColors(event.target.value);
+// });
 function showMapDensity() {
     var tabel = document.getElementById("density").value;
     $.ajax({
@@ -82,19 +79,17 @@ function showMapDensity() {
             layer: tabel,
         },
         dataType: "json",
-        success: function(data) {
+        success: function (data) {
             if (data) {
-                layer_density.eachLayer(function(layer) {
+                layer_density.eachLayer(function (layer) {
                     map.removeLayer(layer);
                 });
-                if (legend) {
-                    legend.remove(map);
-                }
+
                 // Tambahkan data GeoJSON sebagai layer vektor
                 densitymap = L.geoJSON(data, {
-                    style: function(feature) {
-                        var density = feature.properties.jumlah;
-                        var fillColor = getColor(density, colorInput.value);
+                    style: function (feature) {
+                        // var density = feature.properties.jumlah;
+                        var fillColor = getColor(feature.properties.jumlah);
                         return {
                             fillColor: fillColor,
                             weight: 1,
@@ -103,66 +98,63 @@ function showMapDensity() {
                             fillOpacity: 0.7
                         };
                     },
-                    onEachFeature: function(feature, layer) {
+                    onEachFeature: function (feature, layer) {
                         // ... (kode lainnya tetap sama)
+                        if (feature.properties) {
+            var content =
+                "<div class='table-responsive'><table class='table' style='margin-bottom:0; font-size:12px;'>" +
+                "<tr><th style='width:30%;'>Kabupaten / Kota</th><td>" + feature.properties.kabkot +
+                "</td></tr>" +
+                "<tr><th style='width:30%;'>Provinsi</th><td>" + feature.properties.provinsi +
+                "</td></tr>" +
+                "<tr><th style='width:30%;'>Jumlah</th><td>" + feature.properties.jumlah + "</td></tr></table></div>";
+            layer.on('click', function(e) {
+                $("#drag_title_peta").html("DENSITY MAP");
+                $("#feature-info").html(content);
+                $("#btnmodalpeta").trigger("click");
+            });
+        }
                     }
                 });
 
                 layer_density.addLayer(densitymap);
-
-                // Menambahkan kontrol warna ke peta
-                legend = L.control({ position: 'bottomright' });
-                legend.onAdd = function(map) {
-                    var div = L.DomUtil.create('div', 'info legend');
-                    div.innerHTML = '<strong>Density Scale:</strong> <br> Low <input type="range" min="0" max="100" value="70" id="density-scale"> High';
-                    L.DomEvent.disableClickPropagation(div);
-                    return div;
-                };
-                legend.addTo(map);
-
-                // Memperbarui warna setiap feature pada peta berdasarkan input pengguna
-                function updateColors(scale) {
-                    layer_density.eachLayer(function(layer) {
-                        var density = layer.feature.properties.jumlah;
-                        var fillColor = getColor(density, scale);
-                        layer.setStyle({ fillColor: fillColor });
-                    });
-                }
-
             } else {
-                layer_density.eachLayer(function(layer) {
+                layer_density.eachLayer(function (layer) {
                     map.removeLayer(layer);
                 });
-                if (legend) {
-                    legend.remove(map);
-                }
             }
         }
     });
 }
 
 function clearMapDensity() {
-    layer_density.eachLayer(function(layer) {
+    layer_density.eachLayer(function (layer) {
         map.removeLayer(layer);
     });
-    if (legend) {
-        legend.remove(map);
-    }
 }
 
-// Fungsi untuk menentukan warna fill berdasarkan nilai density dan skala warna pengguna
-function getColor(density, scale) {
-    // Menghitung persentase berdasarkan range jumlah penduduk tertinggi
-    var maxDensity = 5; // Ganti dengan jumlah penduduk tertinggi dalam data Anda
-    var percentage = (density / maxDensity) * 100;
-
-    // Mendapatkan nilai opacity berdasarkan skala pengguna
-    var opacity = scale / 100;
-
-    // Mendapatkan nilai warna fill berdasarkan persentase dan skala opacity
-    var color = 'rgba(255, 0, 0, ' + opacity + ')'; // Ganti dengan warna yang Anda inginkan
-
-    return percentage > scale ? color : 'transparent';
+function getColor(density) {
+    if (density > 1000) {
+        return '#800026';
+    } else if (density > 500) {
+        return '#BD0026';
+    } else if (density > 100) {
+        return '#E31A1C';
+    } else if (density > 50) {
+        return '#FC4E2A';
+    } else if (density > 20) {
+        return '#FD8D3C';
+    } else if (density > 10) {
+        return '#FEB24C';
+    } else if (density > 5) {
+        return '#FED976';
+    } else if (density > 1) {
+        return '#FFEDA0';
+    } else if (density = 1) {
+        return '#FEeeee';
+    } else {
+        return '#FFffff';
+    }
 }
 
 // var baseCarto1 = L.tileLayer.provider('Stadia.AlidadeSmooth').addTo(map);

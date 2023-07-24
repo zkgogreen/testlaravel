@@ -146,6 +146,20 @@ function showMapDensity() {
                     },
                     onEachFeature: function (feature, layer) {
                         // ... (kode lainnya tetap sama)
+                        if (feature.properties) {
+            var content =
+                "<div class='table-responsive'><table class='table' style='margin-bottom:0; font-size:12px;'>" +
+                "<tr><th style='width:30%;'>Kabupaten / Kota</th><td>" + feature.properties.kabkot +
+                "</td></tr>" +
+                "<tr><th style='width:30%;'>Provinsi</th><td>" + feature.properties.provinsi +
+                "</td></tr>" +
+                "<tr><th style='width:30%;'>Jumlah</th><td>" + feature.properties.jumlah + "</td></tr></table></div>";
+            layer.on('click', function(e) {
+                $("#drag_title_peta").html("DENSITY MAP");
+                $("#feature-info").html(content);
+                $("#btnmodalpeta").trigger("click");
+            });
+        }
                     }
                 });
 
@@ -321,7 +335,7 @@ function getColor(density) {
                   layer.on('click', function(e) {
                       $("#drag_title_peta").html("KAWASAN PRIORITAS");
                       $("#feature-info").html(content);
-                       $("#btnmodalpeta").trigger("click");
+                      $("#btnmodalpeta").trigger("click");
                   });
               }
               layer.on({
@@ -412,7 +426,7 @@ function getColor(density) {
                   layer.on('click', function(e) {
                       $("#drag_title_peta").html("PENERIMA BANTUAN");
                       $("#feature-info").html(content);
-                       $("#btnmodalpeta").trigger("click");
+                      $("#btnmodalpeta").trigger("click");
                   });
               }
           }
@@ -495,7 +509,7 @@ function getColor(density) {
                   layer.on('click', function(e) {
                       $("#drag_title_peta").html("POINT OF INTEREST");
                       $("#feature-info").html(content);
-                       $("#btnmodalpeta").trigger("click");
+                      $("#btnmodalpeta").trigger("click");
                   });
               }
           }
@@ -749,11 +763,3 @@ var baseGoogle1 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z
     });
 </script>
 @endforeach
-<script src="{{ url('assets/vendor/draggable-dialog-modal/dist/jquery-simple-dialog.js') }}"></script>
-<script>
-      $('#draginfopeta').simpleDialog({
-    opener: '#btnmodalpeta',
-    closer: '#drag_close6',
-    dragger: '#drag_title_peta'
-  });
-</script>

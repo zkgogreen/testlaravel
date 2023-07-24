@@ -27,7 +27,7 @@
 <script src="{{ url('assets/leaflet/leaflet.fullscreen/Control.FullScreen.js') }}"></script>
 <script src="{{ url('assets/leaflet/defaultextent/dist/leaflet.defaultextent.js') }}"></script>
 <script src="{{ url('assets/leaflet/leaflet-locatecontrol-gh-pages/src/L.Control.Locate.js') }}"></script>
-<script src="https://unpkg.com/leaflet-dvf/dist/leaflet-dvf.js"></script>
+{{-- <script src="https://unpkg.com/leaflet-dvf/dist/leaflet-dvf.js"></script> --}}
 <!-- Tambahkan chroma.js -->
 <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.0/chroma.min.js"></script>
 {{-- <script type="text/javascript" src="{{ url('assets/leaflet/humangeo-leaflet-dvf-79aba9f/examples/lib/jsts/javascript.util.js') }}"></script>

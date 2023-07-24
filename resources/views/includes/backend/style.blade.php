@@ -701,4 +701,9 @@
     body.loading .overlay{
         display: block;
     }
+
+    .btnmodalpeta,
+.btnmodalpeta2 {
+    display: none;
+}
 </style>
