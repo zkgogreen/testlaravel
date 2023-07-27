@@ -1484,13 +1484,13 @@ $(document).ready(function () {
                             caption: "Lampiran",
                             cellTemplate: function (container, options) {
                                 var content =
-                                    "<embed src='storage/lampiran/" +
+                                    "<embed src='{{url('storage/lampiran/" +
                                     options.value +
-                                    "' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
+                                    "')}}' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
                                 var footer =
-                                    "<a href='storage/lampiran/" +
+                                    "<a href='{{url('storage/lampiran/" +
                                     options.value +
-                                    "' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
+                                    "')}}' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
                                     "<button type='button' class='btn btn-sm btn-outline-dark mb-0 text-center' data-bs-dismiss='modal'>Batal</button>";
 
                                 container.on("click", function (e) {

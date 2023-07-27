@@ -45,7 +45,7 @@ color: #000;
         font-size: 12px !important;
     }
     .container-basemap label {
-    width: 230px !important;
+    /* width: 230px !important; */
     height: 42px !important;
     font-size: 12px !important;
     }
