@@ -25,10 +25,10 @@
 <!--  leafet css -->
 <!--     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
 <!-- <link rel="stylesheet" href="js/Classic-Animated-dTree/css/dtree.css"/> -->
-{{-- <link rel="stylesheet" href="{{ url('assets/leaflet/leaflet-1.3.1/leaflet.css') }}" /> --}}
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+<link rel="stylesheet" href="{{ url('assets/leaflet/leaflet-1.8.0/leaflet.css') }}" />
+{{-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin="" />
+    crossorigin="" /> --}}
 <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/> -->
 {{-- <link rel="stylesheet" href="{{ url('assets/leaflet/leaflet-google-places-autocomplete-master/src/css/leaflet-gplaces-autocomplete.css') }}"> --}}
 <link rel="stylesheet" href="{{ url('assets/leaflet/Leaflet.PolylineMeasure-master/Leaflet.PolylineMeasure.css') }}" />
@@ -515,7 +515,7 @@
 		font-size:14px;
 	}
 }
-
+/* 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 	
 	.mcd-menu { 
@@ -667,7 +667,7 @@
 		font-size:14px;
 	}
     
-}
+} */
 
 #peta {
             height: 500px;
