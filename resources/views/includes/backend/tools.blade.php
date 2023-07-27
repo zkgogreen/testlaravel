@@ -2,6 +2,7 @@
      <div id="draginfopeta" class="dialog" style="width: 350px; display: none;">
         <h3 id="drag_title_peta" class="p-2 mb-0"></h3>
         <div class="card-body" id="feature-info" style="height: 150px; overflow: auto;"></div>
+        <a href="{{ route('dataset')}}" class="btn btn-sm btn-secondary float-start mx-2">Detail</a>
         <button type="button" id="drag_close6" class="btn btn-sm btn-outline-dark mx-2 float-right mb-2">Close</button>
     </div>
 

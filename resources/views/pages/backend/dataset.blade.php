@@ -434,14 +434,24 @@
                         <option value="tb_penerima_bantuan">Penerima Bantuan</option>
                     </select> 
 
-                    <div class="row mb-2 mt-2">
+                    {{-- <div class="row mb-2 mt-2">
                         <div id="kolomList">
                             <div id="kList"></div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row mb-2 mt-2">
-                        <div id="tabelForm">
-                        </div>
+                <form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row showFm" id="admlist">
+                    <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">provinsi :</label><select class="form-control mb-2" name="provinsi" id="provinsi"><option value="#" selected>Select Provinsi</option></select></div></div>
+                    <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kabkot :</label><select class="form-control mb-2" name="kabkot" id="kabkot"><option value="#" selected>Select Kabkot</option></select></div></div>
+                    <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kecamatan :</label><select class="form-control mb-2" name="kecamatan" id="kecamatan"><option value="#" selected>Select Kecamatan</option></select></div></div>
+                    <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kelurahan / Desa :</label><select class="form-control mb-2" name="keldes" id="keldes"><option value="#" selected>Select Kelurahan / Desa</option></select></div></div>
+                </div>
+                    <div id="tabelForm">
+                    </div>
+                </form>
+
                      </div>  
                      <div class="row mb-2">
                         <div id="peta"></div>
@@ -602,6 +612,43 @@
 
 
     @section('addon-modal')
+    {{-- <div class="modal fade" id="ImageView" role="dialog" style="margin-top: 7%;
+    padding-right: 0;">
+        <div class="modal-dialog modal-centered">
+          <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Rules Create Master Data</h5>
+          </div>
+          <div class="modal-body" style='padding:15px; height: 400px;
+          overflow-y: auto;'>
+                    </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                  </div>
+                </div> --}}
+
+                <div id="ImageView" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 50%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title mb-0 text-white" id="feature-title">
+                                </h6>
+                            </div>
+                            <div class="modal-body text-center" id="feature-info">
+                            </div>
+                            <div class="modal-footer" id="feature-footer">
+                                {{-- <button type="button" class="btn btn-sm bg-gray-custom text-white mb-0 text-center" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-sm bg-danger text-white mb-0 text-center">Unduh</button> --}}
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
     <div class="modal fade" id="help" role="dialog" style="margin-top: 7%;
     padding-right: 0;">
         <div class="modal-dialog modal-centered">
@@ -804,27 +851,46 @@
         var menu_jdata = document.getElementById("jenis_data");
         var menu_tdata = document.getElementById("table_data");
         var menu_import = document.getElementById("table_import");
-        var menu_kList = document.getElementById("kList");
+        // var menu_kList = document.getElementById("kList");
         // var menu_ListProv = document.getElementById("provinsi");
         menu_import.addEventListener("change", generateData);
         menu_jdata.addEventListener("change", generateData);
         menu_tdata.addEventListener("change", generateData);
         // menu_ListProv.addEventListener("change", generateData);
+                // menu_kList.addEventListener("change", generateKolomlist);
 
         function generateData(event) {
             ShowTabelAll(menu_tdata.value, 'tblayer');
             ShowFormTabel(menu_jdata.value, 'tabelForm');
             ShowFormImport(menu_import.value);
-            showKolomList(menu_jdata.value);
-            showMap(menu_jdata.value);
+            // showKolomList(menu_jdata.value);
             // getKabkotList(menu_ListProv.value);
         }
 
-        menu_kList.addEventListener("change", generateKolomlist);
+        // function generateKolomlist(event) {
+        //     showListSelect(menu_jdata.value);
+        // }
 
-        function generateKolomlist(event) {
-            showListSelect(menu_jdata.value, menu_kList.value);
+
+
+$(document).ready(function () {
+    $('#jenis_data').on('change', function () {
+        var jData = $(this).val();
+        if (jData == 'noselect') {
+            $("#admlist").addClass("showFm");
+        } else {
+            $("#admlist").removeClass("showFm");
         }
+    });
+});
+
+
+//         $(document).ready(function () {
+//   $('#provinsi').on('change', function () {
+//     getKabkotList();
+//   });
+// });
+
 
 function updateRequiredAttribute() {
     // Get all input elements
@@ -876,110 +942,32 @@ function updateRequiredAttribute() {
     }
 }
 
-function showKolomList(nmTabel) {
-            $.ajax({
-                url: base_url + '/valueKolomList/' + nmTabel,
-                type: "get",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    tabel: nmTabel,
-                },
-                success: function(data) {
-                    if (data) {
 
-                        $('#kolomList').empty();
-                        $('#kolomList').append('<p class="mb-0 titleForm">Form tambah data baru :</p>');
-                        // $('#kolomList').append('<div class="row kList" id="kList"></div>');
-                        $('#kolomList').append('<div class="row"><label for="inputPassword" class="col-sm-2 col-form-label">Pilih Kolom Select : </label><div class="col-sm-10"><select class="form-control" name="kList" id="kList"></select><div id="formtitle" class="form-text">Untuk menampilkan pilihan value pada form type select</div></div></div>');
-                        $('#kList').append('<option value="#" selected>Select Kolom List</option>');
-                        $.each(data, function(key, value) {
-                            // $('#kList').append('<button type="button" onclick="showListSelect("' + nmTabel + '",' + '"' + value.column + '")">' + value.column + '</button>');
-                            $('#kList').append('<option value="' + value.column + '">' + value.column + '</option>');
-                        });
-                    } else {
-                        $('#kolomList').empty();
+function showListSelect(nmTabel, nmField) {
+    $.ajax({
+        url: base_url + '/valueList/' + nmTabel + '/' + nmField,
+        type: "get",
+        data: {
+            tabel: nmTabel,
+            kolom: nmField,
+        },
+        success: function(data) {
+            if (data) {
+                $('#' + nmField).empty();
+                $('#' + nmField).append('<option value="#" selected>Select</option>');
+                $.each(data, function(key, value) {
+                    list = value.value_list.split(",");
+                    for (var i = 0; i < list.length; i++) {
+                        $('select[name="'+ nmField +'"]').append('<option value="' + list[i] + '">' + list[i] + '</option>');
                     }
-                }
-            });
+                });
+            } else {
+                $('#' + nmField).empty();
+            }
         }
+    });
+}
 
-
-// function showListSelect() {
-    function showListSelect(nmTabel, nmField) {
-            $.ajax({
-                url: base_url + '/valueList/' + nmTabel + '/' + nmField,
-                // url: base_url + '/valueList/tc_table_spasial/jenis_kelamin',
-                type: "get",
-                data: {
-                    // tabel: 'tc_table_spasial',
-                    // kolom: 'jenis_kelamin',
-                    tabel: nmTabel,
-                    kolom: nmField,
-                },
-                success: function(data) {
-                    if (data) {
-                        $('#' + nmField).empty();
-                        $('#' + nmField).append('<option value="#" selected>Select</option>');
-                        $.each(data, function(key, value) {
-                            list = value.value_list.split(",");
-                            for (var i = 0; i < list.length; i++) {
-                                $('select[name="'+ nmField +'"]').append('<option value="' + list[i] + '">' + list[i] + '</option>');
-                            }
-                        });
-                    } else {
-                        $('#jenis_kelamin').empty();
-                    }
-                }
-            });
-        }
-
-
-//         function ShowFormTabel(nmTabel, idhtml) {
-//     $.ajax({
-//         url: base_url + '/TabelField/' + nmTabel,
-//         type: "get",
-//         data: {
-//             tabel: nmTabel,
-//         },
-//         success: function (data) {
-//             if (data) {
-//                 $('#' + idhtml).empty(); // Clear the content before appending new elements
-//                 $('#' + idhtml).append('<form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">@csrf</form>');
-//                 $('#formtbSelect').append('<input type="hidden" class="form-control mb-2" name="tabel" id="tabel" value="' + nmTabel + '">');
-//                 $('#formtbSelect').append('<div class="row formtb"></div>');
-
-//                 $.each(data, function (key, value) {
-//                     switch (value.data_type) {
-//                         case "character varying":
-//                             $('.formtb').append('<div class="col-md-6"><select class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '"></select></div>');
-//                             // $('.formtb').append('<div class="col-md-6"><input type="text" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable +'></div>');
-//                             break;
-//                         case "integer":
-//                             $('.formtb').append('<div class="col-md-6"><input type="number" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div>');
-//                             break;
-//                         case "text":
-//                             $('.formtb').append('<div class="col-md-6"><textarea name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" rows="5" placeholder="' + value.column_name + '" ' + value.is_nullable + '></textarea></div>');
-//                             break;
-//                         case "numeric":
-//                             $('.formtb').append('<div class="col-md-6"><input type="text" name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div>');
-//                             break;
-//                             case "date":
-//                             $('.formtb').append('<div class="col-md-6"><input type="date" name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div>');
-//                             break;
-//                         default:
-//                             break;
-//                     };
-//                 });
-
-//                 $('#formtbSelect').append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button>');
-//             updateRequiredAttribute();
-//             getProvinceList();
-//             } else {
-//                 $('#' + idhtml).empty(); // Clear the content if there is no data
-//             }
-//         },
-//     });
-// };
 
 function showMap(nmTabel) {
     var mapshow = document.getElementById("peta");
@@ -1036,16 +1024,10 @@ function ShowFormTabel(nmTabel, idhtml) {
     success: function (data) {
       if (data) {
         $('#' + idhtml).empty(); // Clear the content before appending new elements
-        $('#' + idhtml).append('<form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">@csrf</form>');
-        $('#formtbSelect').append('<input type="hidden" class="form-control mb-2" name="tabel" id="tabel" value="' + nmTabel + '">');
-        $('#formtbSelect').append('<div class="row formtb"></div>');
-        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">provinsi :</label><select class="form-control mb-2" name="provinsi" id="provinsi"></select></div></div>');
-        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kabkot :</label><input type="text" class="form-control mb-2" name="kabkot" id="kabkot"></input></div></div>');
-        $('#kabkot').append('<option value="#" selected>Select Kabkot</option>');
-        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kecamatan :</label><input type="text" class="form-control mb-2" name="kecamatan" id="kecamatan"></input></div></div>');
-        $('#kecamatan').append('<option value="#" selected>Select Kecamatan</option>');
-        $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">keldes :</label><input type="text" class="form-control mb-2" name="keldes" id="keldes"></input></div></div>');     
-        $('#keldes').append('<option value="#" selected>Select Keldes</option>');  
+        // $('#' + idhtml).append('<form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">@csrf</form>');
+        // $('#formtbSelect').append('<input type="hidden" class="form-control mb-2" name="tabel" id="tabel" value="' + nmTabel + '">');
+        $('#' + idhtml).append('<div class="row formtb"></div>');
+        $('.formtb').append('<input type="hidden" class="form-control mb-2" name="tabel" id="tabel" value="' + nmTabel + '">');
         $.each(data, function (key, value) {
           // Separate the conditions for data_type and form_type
           switch (value.data_type) {
@@ -1091,9 +1073,24 @@ function ShowFormTabel(nmTabel, idhtml) {
               break;
           }
         });
-            $('#formtbSelect').append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button>');
+            $('#' + idhtml).append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button>');
             updateRequiredAttribute();
-            getProvinceList();
+            getProvinsiList();
+            $.each(data, function (key, value) {
+                switch (value.data_type) {
+                    case "character varying":
+              switch (value.form_type) {
+                case "select":
+                showListSelect(nmTabel, value.column_name);
+                  break;
+                  default:
+                  break;
+              }
+            }
+            });
+            // showListSelect(nmTabel, value.column_name);
+            // getKabkotList();
+            showMap(nmTabel);
             } else {
                 $('#' + idhtml).empty(); // Clear the content if there is no data
             }
@@ -1101,112 +1098,70 @@ function ShowFormTabel(nmTabel, idhtml) {
   });
 }
 
+  function getProvinsiList() {
+  $.ajax({
+    url: base_url + '/getProvinsi',
+    type: "GET",
+    data: {
+      "_token": "{{ csrf_token() }}"
+    },
+    dataType: "json",
+    success: function (data) {
+      if (data) {
+        $('#provinsi').empty();
+        $('#provinsi').append('<option value="pilihprovinsi" selected>Select Provinsi</option>');
+        $.each(data, function (key, value) {
+          $('select[name="provinsi"]').append('<option value="' + value.provinsi + '">' + value.provinsi + '</option>');
+        });
+      } else {
+        $('#provinsi').empty();
+      }
+    }
+  });
+}
 
-// function ShowFormTabel(nmTabel, idhtml) {
-//   $.ajax({
-//     url: base_url + '/TabelField/' + nmTabel,
-//     type: "get",
-//     data: {
-//       tabel: nmTabel,
-//     },
-//     success: function (data) {
-//       if (data) {
-//         $('#' + idhtml).empty(); // Clear the content before appending new elements
-//         $('#' + idhtml).append('<form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">@csrf</form>');
-//         $('#formtbSelect').append('<input type="hidden" class="form-control mb-2" name="tabel" id="tabel" value="' + nmTabel + '">');
-//         $('#formtbSelect').append('<div class="row formtb"></div>');
-//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">provinsi :</label><select class="form-control mb-2" name="provinsi" id="provinsi"></select></div></div>');
-//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kabkot :</label><select class="form-control mb-2" name="kabkot" id="kabkot"></select></div></div>');
-//         $('#kabkot').append('<option value="#" selected>Select Kabkot</option>');
-//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kecamatan :</label><select class="form-control mb-2" name="kecamatan" id="kecamatan"></select></div></div>');
-//         $('#kecamatan').append('<option value="#" selected>Select Kecamatan</option>');
-//         $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">keldes :</label><select class="form-control mb-2" name="keldes" id="keldes"></select></div></div>');     
-//         $('#keldes').append('<option value="#" selected>Select Keldes</option>');  
-//         $.each(data, function (key, value) {
-//           // Separate the conditions for data_type and form_type
-//           switch (value.data_type) {
-//             case "character varying":
-//               switch (value.form_type) {
-//                 case "select":
-//                   $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><select class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '"><option value="#" selected>Select ' + value.column_name +'</option></select></div></div>');
-//                   break;
-//                 case "file":
-//                   $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="file" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
-//                   break;
-//                   case "input":
-//                   $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="text" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
-//                   break;
-//                 default:
-//                 // $('.formtb').append('<div class="col-md-6"><input type="text" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable +'></div>');
-//                   break;
-//               }
-//               break;
-//             case "integer":
-//               if (value.form_type === "input") {
-//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="number" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
-//               }
-//               break;
-//             case "text":
-//               if (value.form_type === "input") {
-//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><textarea name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" rows="5" placeholder="' + value.column_name + '" ' + value.is_nullable + '></textarea></div></div>');
-//               } else if (value.form_type === "file") {
-//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="file" class="form-control mb-2" name="' + value.column_name + '" id="' + value.column_name + '" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
-//               }
-//               break;
-//             case "numeric":
-//               if (value.form_type === "input") {
-//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="text" name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
-//               }
-//               break;
-//             case "date":
-//               if (value.form_type === "select") {
-//                 $('.formtb').append('<div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">' + value.column_name + ' :</label><input type="date" name="' + value.column_name + '" id="' + value.column_name + '" class="form-control mb-2" placeholder="' + value.column_name + '" ' + value.is_nullable + '></div></div>');
-//               }
-//               break;
-//             default:
-//               break;
-//           }
-//         });
-//             $('#formtbSelect').append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button>');
-//             updateRequiredAttribute();
-//             getProvinceList();
-//             } else {
-//                 $('#' + idhtml).empty(); // Clear the content if there is no data
-//             }
-//     }
-//   });
+
+
+//   function getKabkotList() {
+//   var provinsiID = $('#provinsi').val();
+//   if (provinsiID) {
+//     $.ajax({
+//       url: base_url + '/getKabkot/' + provinsiID,
+//       type: "GET",
+//       data: {
+//         "_token": "{{ csrf_token() }}"
+//       },
+//       dataType: "json",
+//       success: function (data) {
+//         if (data) {
+//           $('#kabkot').empty();
+//           $('#kecamatan').empty();
+//           $('#keldes').empty();
+//           $('#kabkot').append('<option hidden value="pilihkabkot" selected>Select Kabkot</option>');
+//           $.each(data, function (key, value) {
+//             $('#kabkot').append('<option value="' + value.kabkot + '">' + value.kabkot + '</option>');
+//           });
+//         } else {
+//           $('#kabkot').empty();
+//           $('#kecamatan').empty();
+//           $('#keldes').empty();
+//         }
+//       }
+//     });
+//   } else {
+//     $('#kabkot').empty();
+//     $('#kecamatan').empty();
+//     $('#keldes').empty();
+//   }
 // }
 
 
-
-  // dropdown chained regency
-  function getProvinceList() {
-    $.ajax({
-      url: base_url + '/getProvince',
-      type: "GET",
-      data: {
-        "_token": "{{ csrf_token() }}"
-      },
-      dataType: "json",
-      success: function (data) {
-        if (data) {
-          $('#provinsi').empty();
-          $('#provinsi').append('<option value="pilihprovinsi" selected>Select Provinsi</option>');
-          $.each(data, function (key, value) {
-            $('select[name="provinsi"]').append('<option value="' + value.wadmpr + '">' + value.wadmpr + '</option>');
-          });
-        } else {
-          $('#provinsi').empty();
-        }
-      }
-    });
-  };
-
-
-function getKabkotList(provinsi){
-
-    $.ajax({
-                url: base_url + '/getRegency/' + provinsi,
+$(document).ready(function () {
+    $('#provinsi').on('change', function () {
+        var provinsiID = $(this).val();
+        if (provinsiID) {
+            $.ajax({
+                url: base_url + '/getKabkot/' + provinsiID,
                 type: "GET",
                 data: {
                     "_token": "{{ csrf_token() }}"
@@ -1219,7 +1174,7 @@ function getKabkotList(provinsi){
                         $('#keldes').empty();
                         $('#kabkot').append('<option hidden value="pilihkabkot" selected>Select Kabkot</option>');
                         $.each(data, function (key, value) {
-                            $('#kabkot').append('<option value="' + value.wadmkk + '">' + value.wadmkk + '</option>');
+                            $('#kabkot').append('<option value="' + value.kabkot + '">' + value.kabkot + '</option>');
                         });
                     } else {
                         $('#kabkot').empty();
@@ -1228,44 +1183,13 @@ function getKabkotList(provinsi){
                     }
                 }
             });
-}
- 
-// document.getElementById("provinsi").addEventListener("change", function() {
-
-// $(document).ready(function () {
-//     $('#provinsi').on('change', function () {
-//         var provinsiID = $(this).val();
-//         if (provinsiID) {
-//             $.ajax({
-//                 url: base_url + '/getRegency/' + provinsiID,
-//                 type: "GET",
-//                 data: {
-//                     "_token": "{{ csrf_token() }}"
-//                 },
-//                 dataType: "json",
-//                 success: function (data) {
-//                     if (data) {
-//                         $('#kabkot').empty();
-//                         $('#kecamatan').empty();
-//                         $('#keldes').empty();
-//                         $('#kabkot').append('<option hidden value="pilihkabkot" selected>Select Kabkot</option>');
-//                         $.each(data, function (key, value) {
-//                             $('#kabkot').append('<option value="' + value.wadmkk + '">' + value.wadmkk + '</option>');
-//                         });
-//                     } else {
-//                         $('#kabkot').empty();
-//                         $('#kecamatan').empty();
-//                         $('#keldes').empty();
-//                     }
-//                 }
-//             });
-//         } else {
-//             $('#kabkot').empty();
-//             $('#kecamatan').empty();
-//             $('#keldes').empty();
-//         }
-//     });
-// });
+        } else {
+            $('#kabkot').empty();
+            $('#kecamatan').empty();
+            $('#keldes').empty();
+        }
+    });
+});
 
   // dropdown chained district
   $(document).ready(function () {
@@ -1273,7 +1197,7 @@ function getKabkotList(provinsi){
       var kabkotID = $(this).val();
       if (kabkotID) {
         $.ajax({
-          url: base_url + '/getDistrict/' + kabkotID,
+          url: base_url + '/getKecamatan/' + kabkotID,
           type: "GET",
           data: {
             "_token": "{{ csrf_token() }}"
@@ -1284,7 +1208,7 @@ function getKabkotList(provinsi){
               $('#kecamatan').empty();
               $('#kecamatan').append('<option hidden value="pilihkecamatan" selected>Select Kecamatan</option>');
               $.each(data, function (key, value) {
-                $('select[name="kecamatan"]').append('<option value="' + value.wadmkc + '">' + value.wadmkc + '</option>');
+                $('select[name="kecamatan"]').append('<option value="' + value.kecamatan + '">' + value.kecamatan + '</option>');
               });
             } else {
               $('#kecamatan').empty();
@@ -1303,7 +1227,7 @@ function getKabkotList(provinsi){
       var kecamatanID = $(this).val();
       if (kecamatanID) {
         $.ajax({
-          url: base_url + '/getSubdistrict/' + kecamatanID,
+          url: base_url + '/getKeldes/' + kecamatanID,
           type: "GET",
           data: {
             "_token": "{{ csrf_token() }}"
@@ -1312,9 +1236,9 @@ function getKabkotList(provinsi){
           success: function (data) {
             if (data) {
               $('#keldes').empty();
-              $('#keldes').append('<option hidden value="pilihkelurahan" selected>Select Village</option>');
+              $('#keldes').append('<option hidden value="pilihkelurahan" selected>Select Kelurahan / desa</option>');
               $.each(data, function (key, value) {
-                $('select[name="keldes"]').append('<option value="' + value.wadmkd + '">' + value.wadmkd + '</option>');
+                $('select[name="keldes"]').append('<option value="' + value.keldes + '">' + value.keldes + '</option>');
               });
             } else {
               $('#keldes').empty();
@@ -1552,7 +1476,44 @@ function getKabkotList(provinsi){
                             selectTextOnEditStart: false,
                             // startEditAction: 'click',
                         },
-                        columns: msg["]nmfield"],
+                        // columns: msg["nmfield"],
+                        columns: msg["nmfield"].map(function (field) {
+                    if (field.dataField === "lampiran") {
+                        return {
+                            dataField: "lampiran",
+                            caption: "Lampiran",
+                            cellTemplate: function (container, options) {
+                                var content =
+                                    "<embed src='storage/lampiran/" +
+                                    options.value +
+                                    "' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
+                                var footer =
+                                    "<a href='storage/lampiran/" +
+                                    options.value +
+                                    "' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
+                                    "<button type='button' class='btn btn-sm btn-outline-dark mb-0 text-center' data-bs-dismiss='modal'>Batal</button>";
+
+                                container.on("click", function (e) {
+                                    $("#feature-title").html("Dokumen Lampiran");
+                                    $("#feature-info").html(content);
+                                    $("#feature-footer").html(footer);
+                                });
+
+                                $("<a>")
+                                    .attr("data-bs-toggle", "modal")
+                                    .attr("data-bs-target", "#ImageView")
+                                    // .attr("data-bs-target", "#ImageView")
+                                    .append(
+                                        "<span class='iconify' data-icon='bi:eye-fill' style='color: #1ca8dd; text-align: center;'></span> <span style='color: #1ca8dd;'>view</span>"
+                                    )
+                                    .appendTo(container);
+                            },
+                        };
+                    } else {
+                        // Return other columns as-is
+                        return field;
+                    }
+                }),
 
                         onRowRemoving: function(info) {
                             $.ajax({

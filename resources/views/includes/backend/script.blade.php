@@ -83,7 +83,7 @@
         $("#layerdata-tab").on('click', function () {
             $("#masterdatatab").removeClass("active");
             $("#layerdatatab").addClass("active");
-            getProvinceList();
+            getProvinsiList();
         });
     });
 

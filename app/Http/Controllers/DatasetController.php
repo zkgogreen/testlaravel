@@ -94,46 +94,87 @@ $spatial_layer = DB::table('user_tables')
     return $showmap;
     }
 
-    public function addNewRow(Request $request)
-    {
-        // if ($request->file) {
-        // $kolom_file = DB::table('select_list')
-        // ->select('column')
-        // ->where([
-        // ['table', '=', $request->tabel],
-        // ['form_type', '=', 'file'],
-        // ])
-        // ->get();
+    // public function addNewRow(Request $request)
+    // {
+
+     
+    //     $kolom_file = DB::table('select_list')
+    //     ->select('column')
+    //     ->where([
+    //     ['table', '=', $request->tabel],
+    //     ['form_type', '=', 'file'],
+    //     ])
+    //     ->get();
 
         
-        // foreach ( $kolom_file as $file ) {
-        //     $lampiran = $file->column;
-        // }
+    //     foreach ( $kolom_file as $file ) {
+    //         $lampiran = $file->column;
+    //     }
 
-        $data = $request->except(['tabel', '_token']);
-        unset($data["__KEY__"]);
-        $tabel = $request->tabel;
-        // $hasil = DB::table($tabel)->insert($data);
-        // if($request->file($lampiran) == "") {  
-            $hasil = DB::table($tabel)->insert($data);
-        //   }else{
-        //     $file = $request->file($lampiran);
-        //   $nama_file = time()."_".$file->getClientOriginalName();
-        //   $tujuan_upload = storage_path('app/file/');
-        // //   $tujuan_upload = 'images/file';
-        //   $file->move($tujuan_upload,$nama_file);
-        //   $hasil = DB::table($tabel)->insert($data);
-        //   }
+    //     $data = $request->except(['tabel', '_token']);
+    //     unset($data["__KEY__"]);
+    //     $tabel = $request->tabel;
+    //     // $hasil = DB::table($tabel)->insert($data);
+    //     if($request->file($lampiran) == "") {  
+    //         $hasil = DB::table($tabel)->insert($data);
+    //       }else{
+    //         $file = $request->file($lampiran);
+    //       $nama_file = time()."_".$file->getClientOriginalName();
+    //       $tujuan_upload = storage_path('app/file/');
+    //     //   $tujuan_upload = 'images/file';
+    //       $file->move($tujuan_upload,$nama_file);
+    //       $hasil = DB::table($tabel)->insert(
+    //         $lampiran => $nama_file,
+    //         $data);
+    //       }
 
-        // return $hasil;
+    //     // return $hasil;
 
-        if ($hasil) {
-            return back()->withSuccess('New row added successfully.');
-        } else {
-            return back()->withErrors('Failed to add new row !');
-        }
+    //     if ($hasil) {
+    //         return back()->withSuccess('New row added successfully.');
+    //     } else {
+    //         return back()->withErrors('Failed to add new row !');
+    //     }
          
+    // }
+
+
+
+    public function addNewRow(Request $request)
+{
+    $kolom_file = DB::table('select_list')
+        ->select('column')
+        ->where([
+            ['table', '=', $request->tabel],
+            ['form_type', '=', 'file'],
+        ])
+        ->get();
+
+    foreach ($kolom_file as $file) {
+        $lampiran = $file->column;
     }
+
+    $data = $request->except(['tabel', '_token']);
+    unset($data["__KEY__"]);
+    $tabel = $request->tabel;
+    
+    if ($request->file($lampiran) == "") {
+        $hasil = DB::table($tabel)->insert($data);
+    } else {
+        $file = $request->file($lampiran);
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+        $tujuan_upload = storage_path('app/public/lampiran/');
+        $file->move($tujuan_upload, $nama_file);
+        $data[$lampiran] = $nama_file; // Corrected the data array for file insertion.
+        $hasil = DB::table($tabel)->insert($data);
+    }
+
+    if ($hasil) {
+        return back()->withSuccess('New row added successfully.');
+    } else {
+        return back()->withErrors('Failed to add a new row!');
+    }
+}
 
 
     

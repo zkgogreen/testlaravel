@@ -110,7 +110,7 @@
             </div>
             <!-- page-body-wrapper ends -->
         </div>
-        {{-- @include('includes.backend.script2') --}}
+        {{-- @include('includes.backend.modal') --}}
         @yield('addon-script')
     @endauth
 </body>

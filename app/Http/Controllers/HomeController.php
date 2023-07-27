@@ -23,43 +23,111 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+
     public function index()
-    {   
-        $content = DB::table('content')->get();
-        return view('pages.frontend.home',[
-            'content' => $content,
-        ]);
+{
+    $content = DB::table('content')->get();
+    
+    $content1 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Home Counter 1')
+        ->first();
+
+    $content2 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Home Counter 2')
+        ->first();
+
+    $content3 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Home Counter 3')
+        ->first();
+
+    $content_count1 = $this->getContentCount($content1);
+    $content_count2 = $this->getContentCount($content2);
+    $content_count3 = $this->getContentCount($content3);
+
+    return view('pages.frontend.home', [
+        'content' => $content,
+        'content_count1' => $content_count1,
+        'content_count2' => $content_count2,
+        'content_count3' => $content_count3,
+    ]);
+}
+
+
+public function index2()
+{
+    $content = DB::table('content')->get();
+    
+    $content1 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Home Counter 1')
+        ->first();
+
+    $content2 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Home Counter 2')
+        ->first();
+
+    $content3 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Home Counter 3')
+        ->first();
+
+    $content_count1 = $this->getContentCount($content1);
+    $content_count2 = $this->getContentCount($content2);
+    $content_count3 = $this->getContentCount($content3);
+
+    return view('pages.frontend.home', [
+        'content' => $content,
+        'content_count1' => $content_count1,
+        'content_count2' => $content_count2,
+        'content_count3' => $content_count3,
+    ]);
+}
+
+private function getContentCount($contentData)
+{
+    if ($contentData->type == 'distinct') {
+        return DB::table($contentData->layer)->distinct()->count($contentData->kolom);
+    } else {
+        return DB::table($contentData->layer)->count($contentData->kolom);
     }
+}
+
 
     public function about()
     {
-        $content = DB::table('content')->get();
-    
-        $content1 = DB::table('content')
-            ->select('layer', 'kolom')
-            ->where('section', '=', 'About Counter 1')
-            ->first();
-    
-        $content2 = DB::table('content')
-            ->select('layer', 'kolom')
-            ->where('section', '=', 'About Counter 2')
-            ->first();
-    
-        $content3 = DB::table('content')
-            ->select('layer', 'kolom')
-            ->where('section', '=', 'About Counter 3')
-            ->first();
-    
-        $content4 = DB::table('content')
-            ->select('layer', 'kolom')
-            ->where('section', '=', 'About Counter 4')
-            ->first();
-    
-        $content_count1 = DB::table($content1->layer)->count($content1->kolom);
-        $content_count2 = DB::table($content2->layer)->count($content2->kolom);
-        $content_count3 = DB::table($content3->layer)->count($content3->kolom);
-        $content_count4 = DB::table($content4->layer)->count($content4->kolom);
-    
+
+    $content = DB::table('content')->get();
+
+    $content1 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'About Counter 1')
+        ->first();
+
+    $content2 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'About Counter 2')
+        ->first();
+
+    $content3 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'About Counter 3')
+        ->first();
+
+    $content4 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'About Counter 4')
+        ->first();
+
+    $content_count1 = $this->getContentCount($content1);
+    $content_count2 = $this->getContentCount($content2);
+    $content_count3 = $this->getContentCount($content3);
+    $content_count4 = $this->getContentCount($content4);
+
         return view('pages.frontend.about', [
             'content' => $content,
             'content_count1' => $content_count1,

@@ -27,22 +27,35 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
-        $kp_total = TbKp::select('id')->count();
-        $pb_total = TbPb::select('id')->count();
-        $poi_total = PoiMap::select('id')->count();
-        $spd_total = TbSpd::select('id')->count();
-      
-        # Ambil semua isi tabel tujuan dari model
-        // $provinsi = DB::table('podes20_spd_kp_dukcapil')
-        //     ->select('r101n', 'r102n', 'r103n', 'r104n')
-        //     ->get();
+    $content = DB::table('content')->get();
+    
+    $content1 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Dashboard Counter 1')
+        ->first();
+
+    $content2 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Dashboard Counter 2')
+        ->first();
+
+    $content3 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Dashboard Counter 3')
+        ->first();
+
+    $content4 = DB::table('content')
+        ->select('layer', 'kolom', 'type')
+        ->where('section', '=', 'Dashboard Counter 4')
+        ->first();
+
+    $content_count1 = $this->getContentCount($content1);
+    $content_count2 = $this->getContentCount($content2);
+    $content_count3 = $this->getContentCount($content3);
+    $content_count4 = $this->getContentCount($content4);
+
         # Inisialisasi variabel daftar dengan array
         $daftar = ['' => ''];
-        # lakukan perulangan untuk provinsi
-        // foreach ($provinsi as $temp) {
-        //     # Isi daftar dengan nama (provinsi) berdasarkan id
-        //     $daftar[$temp->r101n] = $temp->r101n;
-        // }
         $density_layer = DB::table('user_tables')
         ->where('status', '=' , 'Active')
         ->get();
@@ -54,17 +67,27 @@ class DashboardController extends Controller
         return view(
             'pages.backend.dashboard',
             [
-                // 'provs' => $provs,
-                'kp_total' => $kp_total,
-                'pb_total' => $pb_total,
-                'poi_total' => $poi_total,
-                'spd_total' => $spd_total,
+                'content' => $content,
                 'density_layer' => $density_layer,
                 'spatial_layer' => $spatial_layer,
+                'content_count1' => $content_count1,
+                'content_count2' => $content_count2,
+                'content_count3' => $content_count3,
+                'content_count4' => $content_count4,
             ],
             compact('daftar')
         );
     }
+
+
+    private function getContentCount($contentData)
+{
+    if ($contentData->type == 'distinct') {
+        return DB::table($contentData->layer)->distinct()->count($contentData->kolom);
+    } else {
+        return DB::table($contentData->layer)->count($contentData->kolom);
+    }
+}
     
     public function getProv()
     {

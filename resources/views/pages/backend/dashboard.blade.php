@@ -11,9 +11,14 @@
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold" style="font-size: 13px;">
-                                            Kawasan Prioritas</p>
+                                            @foreach ($content as $item)
+                                            @if($item->section === 'Dashboard Counter 1')
+                                                {{$item->title}}
+                                            @endif
+                                        @endforeach
+                                        </p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{ number_format($kp_total) }}
+                                            {{number_format($content_count1)}}
                                         </h5>
                                     </div>
                                 </div>
@@ -35,9 +40,14 @@
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold" style="font-size: 13px;">
-                                            Survey Potensi Desa</p>
+                                            @foreach ($content as $item)
+                                            @if($item->section === 'Dashboard Counter 2')
+                                                {{$item->title}}
+                                            @endif
+                                        @endforeach
+                                        </p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{ number_format($spd_total) }}
+                                            {{number_format($content_count2)}}
                                         </h5>
                                     </div>
                                 </div>
@@ -57,9 +67,14 @@
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold" style="font-size: 13px;">
-                                            Penerima Bantuan</p>
+                                            @foreach ($content as $item)
+                                            @if($item->section === 'Dashboard Counter 3')
+                                                {{$item->title}}
+                                            @endif
+                                        @endforeach
+                                        </p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{ number_format($pb_total + 802) }}
+                                            {{number_format($content_count3)}}
                                         </h5>
                                     </div>
                                 </div>
@@ -79,9 +94,14 @@
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold" style="font-size: 13px;">
-                                            Point Of Interest</p>
+                                            @foreach ($content as $item)
+                                            @if($item->section === 'Dashboard Counter 4')
+                                                {{$item->title}}
+                                            @endif
+                                        @endforeach
+                                        </p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            0
+                                            {{number_format($content_count4)}}
                                         </h5>
                                     </div>
                                 </div>

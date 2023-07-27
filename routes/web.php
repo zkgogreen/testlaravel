@@ -11,6 +11,7 @@ use App\Http\Controllers\KonfigurasiController;
 use App\Http\Controllers\CentreController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\DatasetController;
+use App\Http\Controllers\ContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,10 @@ use App\Http\Controllers\DatasetController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('pages.frontend.home');
+// });
+Route::get('/', [HomeController::class, 'index2']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/about2', [HomeController::class, 'about2'])->name('about2');
@@ -86,6 +88,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('privacy',[AdminController::class,'privacy'])->name('privacy');
     Route::get('toc',[AdminController::class,'toc'])->name('toc');
+    Route::get('content',[ContentController::class,'index'])->name('content');
+    Route::get('/ShowTabelContent',[ContentController::class,'ShowTabelContent']);
+    Route::get('ContentField/{tabel}',[ContentController::class, 'NamaField']);
     Route::post('AddData',[DataController::class,'AddData']);
     // Route::get('NamaFieldTabel',[DataController::class, 'NamaFieldType']);
 
@@ -95,10 +100,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('TabelField/{tabel}',[DatasetController::class, 'TabelField']);
     Route::post('addNewRow',[DatasetController::class,'addNewRow'])->name('addNewRow');
 
-    Route::get('/getProvince', [DataController::class, 'province'])->name('province');
-    Route::get('/getRegency/{id}', [DataController::class, 'regency'])->name('regency');
-    Route::get('/getDistrict/{id}', [DataController::class, 'district'])->name('district');
-    Route::get('/getSubdistrict/{id}', [DataController::class, 'subdistrict'])->name('subdistrict');
+    Route::get('/getProvinsi', [DataController::class, 'provinsi'])->name('provinsi');
+    Route::get('/getKabkot/{id}', [DataController::class, 'kabkot'])->name('kabkot');
+    Route::get('/getKecamatan/{id}', [DataController::class, 'kecamatan'])->name('kecamatan');
+    Route::get('/getKeldes/{id}', [DataController::class, 'keldes'])->name('keldes');
 
     Route::get('TabelSpasial/{tabel}',[DatasetController::class, 'TabelSpasial']);
     Route::get('valueKolomList/{tabel}',[DatasetController::class, 'valueKolomList']);

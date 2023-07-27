@@ -84,11 +84,11 @@ class DataController extends Controller
 
     public function getGeoJSONData($layer)
     {
-        $kabkotData = DB::table('tb_kabkot')
-        ->join("$layer", 'tb_kabkot.wadmkk', '=', "$layer.kabkot")
-        ->select('tb_kabkot.id','tb_kabkot.wadmkk', 'tb_kabkot.wadmpr', DB::raw("ST_AsGeoJSON(ST_Transform((tb_kabkot.geom),4326),6) AS geom"), DB::raw("count($layer.kabkot) as count"))
-        ->groupBy('tb_kabkot.id')
-        ->orderBy('tb_kabkot.wadmkk')
+        $kabkotData = DB::table('kabkot')
+        ->join("$layer", 'kabkot.kabkot', '=', "$layer.kabkot")
+        ->select('kabkot.id','kabkot.kabkot', 'kabkot.provinsi', DB::raw("ST_AsGeoJSON(ST_Transform((kabkot.geom),4326),6) AS geom"), DB::raw("count($layer.kabkot) as count"))
+        ->groupBy('kabkot.id')
+        ->orderBy('kabkot.kabkot')
         ->get();
         // Bentuk struktur GeoJSON
         $geojson = [
@@ -101,8 +101,8 @@ class DataController extends Controller
             $feature = [
                 'type' => 'Feature',
                 'properties' => [
-                    'kabkot' => $kabkot->wadmkk,
-                    'provinsi' => $kabkot->wadmpr,
+                    'kabkot' => $kabkot->kabkot,
+                    'provinsi' => $kabkot->provinsi,
                     // Masukkan informasi atribut jumlah penerima bantuan dari relasi
                     'jumlah' => $kabkot->count,
                 ],
@@ -194,9 +194,9 @@ class DataController extends Controller
           
                 $data = DB::table('tb_kabkot')
                 // ->join('modules', 'subscribes.modules_id', '=', 'modules.id')
-                ->join('tc_pendampingan2', 'tb_kabkot.wadmkk', '=', 'tc_pendampingan2.kabkot')
+                ->join('tc_pendampingan2', 'tb_kabkot.kabkot', '=', 'tc_pendampingan2.kabkot')
                 // ->join('modules', 'modules.id', '=', 'module_freemiums.freemiums_id')
-                ->select('tb_kabkot.id','tb_kabkot.wadmkk', 'tb_kabkot.wadmpr', DB::raw("count(tc_pendampingan2.kabkot) as count"))
+                ->select('tb_kabkot.id','tb_kabkot.kabkot', 'tb_kabkot.provinsi', DB::raw("count(tc_pendampingan2.kabkot) as count"))
                 // ->where([
                 // ['tc_adminowners_id', '=', Auth::user()->owners_id],
                 // ['status', '=', 'Paid'],
@@ -215,31 +215,33 @@ class DataController extends Controller
 
                 }
 
-                public function province(){
-                    $provinces = DB::table('tb_desa_big2021_podes2020')
-                    ->distinct()->get(['wadmpr']);
-                    return response()->json($provinces);
+                public function provinsi(){
+                    $provinsi = DB::table('tb_desa')
+                    ->distinct()
+                    ->whereNotNull('provinsi')
+                    ->get(['provinsi']);
+                    return response()->json($provinsi);
                 }
                 
-                public function regency($id){
-                    $cities = DB::table('tb_desa_big2021_podes2020')
-                    ->where('wadmpr',$id)
-                    ->distinct()->get(['wadmkk']);
-                    return response()->json($cities);
+                public function kabkot($id){
+                    $kabkot = DB::table('tb_desa')
+                    ->where('provinsi',$id)
+                    ->distinct()->get(['kabkot']);
+                    return response()->json($kabkot);
                 }
             
-                public function district($id){
-                    $district = DB::table('tb_desa_big2021_podes2020')
-                    ->where('wadmkk',$id)
-                    ->distinct()->get(['wadmkc']);
-                    return response()->json($district);
+                public function kecamatan($id){
+                    $kecamatan = DB::table('tb_desa')
+                    ->where('kabkot',$id)
+                    ->distinct()->get(['kecamatan']);
+                    return response()->json($kecamatan);
                 }
             
-                public function subdistrict($id){
-                    $subdistrict = DB::table('tb_desa_big2021_podes2020')
-                    ->where('wadmkc',$id)
-                    ->distinct()->get(['wadmkd']);
-                    return response()->json($subdistrict);
+                public function keldes($id){
+                    $keldes = DB::table('tb_desa')
+                    ->where('kecamatan',$id)
+                    ->distinct()->get(['keldes']);
+                    return response()->json($keldes);
                 }
              
 }

@@ -706,4 +706,8 @@
 .btnmodalpeta2 {
     display: none;
 }
+
+.showFm {
+  display: none;
+}
 </style>

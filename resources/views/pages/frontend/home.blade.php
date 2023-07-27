@@ -76,7 +76,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                        </span><br>38</h4>
+                        </span><br>
+                        {{number_format($content_count1)}}
+                      </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
@@ -86,7 +88,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>514</h4>
+                          </span><br>
+                          {{number_format($content_count2)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
@@ -96,7 +100,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>83,467</h4>
+                          </span><br>
+                          {{number_format($content_count3)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
@@ -145,7 +151,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                        </span><br>38</h4>
+                        </span><br>
+                        {{number_format($content_count1)}}
+                      </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
@@ -155,7 +163,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>514</h4>
+                          </span><br>
+                          {{number_format($content_count2)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
@@ -165,7 +175,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>83,467</h4>
+                          </span><br>
+                          {{number_format($content_count3)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
@@ -214,7 +226,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                        </span><br>38</h4>
+                        </span><br>
+                        {{number_format($content_count1)}}
+                      </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
@@ -224,7 +238,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>514</h4>
+                          </span><br>
+                          {{number_format($content_count2)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
@@ -234,7 +250,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>83,467</h4>
+                          </span><br>
+                          {{number_format($content_count3)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">
@@ -283,7 +301,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                        </span><br>38</h4>
+                        </span><br>
+                        {{number_format($content_count1)}}
+                      </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-2"></i>
@@ -293,7 +313,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>514</h4>
+                          </span><br>
+                          {{number_format($content_count2)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <i class="fa fa-3"></i>
@@ -303,7 +325,9 @@
                       {{$item->title}}
                           @endif
                           @endforeach
-                          </span><br>83,467</h4>
+                          </span><br>
+                          {{number_format($content_count3)}}
+                        </h4>
                       </div>
                       <div class="col-lg-3 col-sm-6 col-6">
                         <div class="main-button">

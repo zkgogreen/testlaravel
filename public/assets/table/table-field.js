@@ -25,6 +25,21 @@ var level_user = [
     },
   ];
 
+  var type_count = [
+    {
+      ID: 1,
+      Name: '-',
+    },
+    {
+      ID: 2,
+      Name: 'distinct',
+    },
+    {
+      ID: 3,
+      Name: 'all',
+    },
+  ];
+
   var status_table = [
     {
       ID: 1,
@@ -144,6 +159,49 @@ var level_user = [
     },
   ];
 
+
+  var nmField_content = [
+    {
+      type: 'buttons',
+      buttons: ['edit'],
+    },
+    // {
+    //   dataField: 'id',
+    //   dataType: 'number',
+    //   allowEditing: 0,
+    // },
+    {
+      dataField: 'section',
+      dataType: 'string',
+            allowEditing: 0,
+    },
+    {
+      dataField: 'title',
+      dataType: 'string',
+    },
+    {
+      dataField: 'description',
+      dataType: 'string',
+    },
+    {
+      dataField: 'type',
+      caption: 'Type Count',
+      dataType: 'string',
+      lookup: {
+        dataSource: type_count,
+        displayExpr: 'Name',
+        valueExpr: 'Name',
+      },
+    },
+    {
+      dataField: 'layer',
+      dataType: 'string',
+    },
+    {
+      dataField: 'kolom',
+      dataType: 'string',
+    },
+  ];
 
 
 var nmField_spd = [

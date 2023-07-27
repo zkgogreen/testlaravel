@@ -62,7 +62,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="info-item">
-                            <h4>{{$content_count1}}</h4>
+                            <h4>{{number_format($content_count1)}}</h4>
                             <span>
                               @foreach ($content as $item)
                               @if($item->section === 'About Counter 1')
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="info-item">
-                            <h4>{{$content_count2}}</h4>
+                            <h4>{{number_format($content_count2)}}</h4>
                             <span>
                               @foreach ($content as $item)
                               @if($item->section === 'About Counter 2')
@@ -88,7 +88,7 @@
                         <div class="info-item">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <h4> {{$content_count3}}</h4>
+                                    <h4> {{number_format($content_count3)}}</h4>
                                     <span>
                                         @foreach ($content as $item)
                                         @if($item->section === 'About Counter 3')
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <h4>
-                                        {{$content_count4}}
+                                        {{number_format($content_count4)}}
                                     </h4>
                                     <span>
                                         @foreach ($content as $item)

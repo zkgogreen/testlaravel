@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Content extends Model
 {
     use HasFactory;
+    protected $table = 'content';
 
     protected $fillable = [ 
         'id',
@@ -17,7 +18,8 @@ class Content extends Model
         'type',
         'layer',
         'icon',
-        'created_at',
-        'updated_at',
+        'kolom',
+        // 'created_at',
+        // 'updated_at',
     ];
 }
