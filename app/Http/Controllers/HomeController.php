@@ -163,11 +163,11 @@ private function getContentCount($contentData)
 
     public function getGeoJSONData2($layer)
     {
-        $kabkotData = DB::table('tb_kabkot')
-        ->join("$layer", 'tb_kabkot.wadmkk', '=', "$layer.kabkot")
-        ->select('tb_kabkot.id','tb_kabkot.wadmkk', 'tb_kabkot.wadmpr', DB::raw("ST_AsGeoJSON(ST_Transform((tb_kabkot.geom),4326),6) AS geom"), DB::raw("count($layer.kabkot) as count"))
-        ->groupBy('tb_kabkot.id')
-        ->orderBy('tb_kabkot.wadmkk')
+        $kabkotData = DB::table('kabkot')
+        ->join("$layer", 'kabkot.kabkot', '=', "$layer.kabkot")
+        ->select('kabkot.id','kabkot.kabkot', 'tb_kabkot.provinsi', DB::raw("ST_AsGeoJSON(ST_Transform((kabkot.geom),4326),6) AS geom"), DB::raw("count($layer.kabkot) as count"))
+        ->groupBy('kabkot.id')
+        ->orderBy('kabkot.wadmkk')
         ->get();
         // Bentuk struktur GeoJSON
         $geojson = [
