@@ -1478,42 +1478,75 @@ $(document).ready(function () {
                         },
                         // columns: msg["nmfield"],
                         columns: msg["nmfield"].map(function (field) {
-                    if (field.dataField === "lampiran") {
-                        return {
-                            dataField: "lampiran",
-                            caption: "Lampiran",
-                            cellTemplate: function (container, options) {
-                                var content =
-                                    "<embed src='{{url('storage/lampiran/" +
-                                    options.value +
-                                    "')}}' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
-                                var footer =
-                                    "<a href='{{url('storage/lampiran/" +
-                                    options.value +
-                                    "')}}' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
-                                    "<button type='button' class='btn btn-sm btn-outline-dark mb-0 text-center' data-bs-dismiss='modal'>Batal</button>";
+    if (field.dataField === "lampiran") {
+        return {
+            dataField: "lampiran",
+            caption: "Lampiran",
+            cellTemplate: function (container, options) {
+                var content =
+                    "<embed src='" + "{{url('storage/lampiran/" + options.value + "')}}' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
+                var footer =
+                    "<a href='" + "{{url('storage/lampiran/" + options.value + "')}}' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
+                    "<button type='button' class='btn btn-sm btn-outline-dark mb-0 text-center' data-bs-dismiss='modal'>Batal</button>";
 
-                                container.on("click", function (e) {
-                                    $("#feature-title").html("Dokumen Lampiran");
-                                    $("#feature-info").html(content);
-                                    $("#feature-footer").html(footer);
-                                });
+                container.on("click", function (e) {
+                    $("#feature-title").html("Dokumen Lampiran");
+                    $("#feature-info").html(content);
+                    $("#feature-footer").html(footer);
+                });
 
-                                $("<a>")
-                                    .attr("data-bs-toggle", "modal")
-                                    .attr("data-bs-target", "#ImageView")
-                                    // .attr("data-bs-target", "#ImageView")
-                                    .append(
-                                        "<span class='iconify' data-icon='bi:eye-fill' style='color: #1ca8dd; text-align: center;'></span> <span style='color: #1ca8dd;'>view</span>"
-                                    )
-                                    .appendTo(container);
-                            },
-                        };
-                    } else {
-                        // Return other columns as-is
-                        return field;
-                    }
-                }),
+                $("<a>")
+                    .attr("data-bs-toggle", "modal")
+                    .attr("data-bs-target", "#ImageView")
+                    .append(
+                        "<span class='iconify' data-icon='bi:eye-fill' style='color: #1ca8dd; text-align: center;'></span> <span style='color: #1ca8dd;'>view</span>"
+                    )
+                    .appendTo(container);
+            },
+        };
+    } else {
+        // Return other columns as-is
+        return field;
+    }
+}),
+
+                //         columns: msg["nmfield"].map(function (field) {
+                //     if (field.dataField === "lampiran") {
+                //         return {
+                //             dataField: "lampiran",
+                //             caption: "Lampiran",
+                //             cellTemplate: function (container, options) {
+                //                 var content =
+                //                     "<embed src='{{url('storage/lampiran/" +
+                //                     options.value +
+                //                     "')}}' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
+                //                 var footer =
+                //                     "<a href='{{url('storage/lampiran/" +
+                //                     options.value +
+                //                     "')}}' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
+                //                     "<button type='button' class='btn btn-sm btn-outline-dark mb-0 text-center' data-bs-dismiss='modal'>Batal</button>";
+
+                //                 container.on("click", function (e) {
+                //                     $("#feature-title").html("Dokumen Lampiran");
+                //                     $("#feature-info").html(content);
+                //                     $("#feature-footer").html(footer);
+                //                 });
+
+                //                 $("<a>")
+                //                     .attr("data-bs-toggle", "modal")
+                //                     .attr("data-bs-target", "#ImageView")
+                //                     // .attr("data-bs-target", "#ImageView")
+                //                     .append(
+                //                         "<span class='iconify' data-icon='bi:eye-fill' style='color: #1ca8dd; text-align: center;'></span> <span style='color: #1ca8dd;'>view</span>"
+                //                     )
+                //                     .appendTo(container);
+                //             },
+                //         };
+                //     } else {
+                //         // Return other columns as-is
+                //         return field;
+                //     }
+                // }),
 
                         onRowRemoving: function(info) {
                             $.ajax({
