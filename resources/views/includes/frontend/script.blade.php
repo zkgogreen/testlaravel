@@ -19,6 +19,8 @@
 </script>
   <script src="{{ url('assets/vendor/leaflet/leaflet-coord-projection-master/coord-projection.js') }}"></script>
   {{-- <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script> --}}
+  <script src="{{ url('assets/js/map-js.js') }}"></script>
+  <script src="{{ url('assets/vendor/draggable-dialog-modal/dist/jquery-simple-dialog.js') }}"></script>
 
   <script>
         // var base_url = window.location.origin + "/project/sigap-fbb/public";

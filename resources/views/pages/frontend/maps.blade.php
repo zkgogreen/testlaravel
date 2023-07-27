@@ -37,6 +37,7 @@
 
 @section('content')
 <section id="section-1">
+    <div id="btnmodalpeta"></div>
 <div id="map"></div>
 </section>
 @endsection
@@ -103,11 +104,11 @@ function showMapDensity() {
                         if (feature.properties) {
             var content =
                 "<div class='table-responsive'><table class='table' style='margin-bottom:0; font-size:12px;'>" +
-                "<tr><th style='width:30%;'>Kabupaten / Kota</th><td>" + feature.properties.kabkot +
+                "<tr><th style='width:40%;'>Kabupaten / Kota</th><td>" + feature.properties.kabkot +
                 "</td></tr>" +
-                "<tr><th style='width:30%;'>Provinsi</th><td>" + feature.properties.provinsi +
+                "<tr><th style='width:40%;'>Provinsi</th><td>" + feature.properties.provinsi +
                 "</td></tr>" +
-                "<tr><th style='width:30%;'>Jumlah</th><td>" + feature.properties.jumlah + "</td></tr></table></div>";
+                "<tr><th style='width:40%;'>Jumlah</th><td>" + feature.properties.jumlah + "</td></tr></table></div>";
             layer.on('click', function(e) {
                 $("#drag_title_peta").html("DENSITY MAP");
                 $("#feature-info").html(content);
@@ -265,6 +266,13 @@ var datasettools = L.easyButton(
         //         }
         //     }, "Map Legend", 'bottomleft', 'legendtools').addTo(map);
 
+
+
+      $('#draginfopeta').simpleDialog({
+    opener: '#btnmodalpeta',
+    closer: '#drag_close6',
+    dragger: '#drag_title_peta'
+  });
 
 </script>
 @endsection

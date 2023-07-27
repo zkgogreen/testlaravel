@@ -136,7 +136,6 @@
     @endsection
 
 @section('addon-script')
-<script src="{{ url('assets/vendor/draggable-dialog-modal/dist/jquery-simple-dialog.js') }}"></script>
 <script>
       $('#draginfopeta').simpleDialog({
     opener: '#btnmodalpeta',

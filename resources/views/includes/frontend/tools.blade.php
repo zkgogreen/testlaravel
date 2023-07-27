@@ -1,16 +1,23 @@
+     <!-- Dialog popup container -->
+     <div id="draginfopeta" class="dialog" style="display: none;">
+        <h3 id="drag_title_peta" class="p-2 mb-2"></h3>
+        <div class="card-body" id="feature-info" style="height: 120px; overflow: auto;"></div>
+        <button type="button" id="drag_close6" class="btn btn-sm btn-outline-dark mx-2 float-end mb-2">Close</button>
+    </div>
+
  {{-- start basemap --}}
  <div id="menu-dataset" style="width:26%;">
     <div class="card radius-5">
         <div class="card-body card-body-map-popup-menu">
             <p class="card-title mb-1 d-flex justify-content-between fw-bold">Layer Dataset
                 <button type="button" class="btn-close-map p-2" data-bs-dismiss="modal" aria-label="Close"
-                    onclick="closeBasemap()"></button>
+                    onclick="closeDataset()"></button>
             </p>
             <div class="row mb-2">
-                <div class="col-md-5">
-                    <p class="fw-lighter mb-0 mt-2 mx-1">Choose Option :</p>
-                </div>
-                <div class="col-md-7">
+                {{-- <div class="col-md-5">
+                    <p class="fw-lighter mb-0 mt-2 mx-1">Option :</p>
+                </div> --}}
+                <div class="col-md-12">
                     <ul class="nav nav-tabs float-end" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="layer-tab" data-bs-toggle="tab" data-bs-target="#layertab"
@@ -38,7 +45,7 @@
                         @endforeach
                     </select>
                     <button class="btn btn-outline-dark btn-sm float-end mt-2" onclick="clearMapDensity();">Clear</button>
-                    <button class="btn btn-primary float-end btn-sm mt-2 mx-2" onclick="showMapDensity();">Show Map</button>
+                    <button class="btn btn-primary float-end btn-sm mt-2 mx-2" onclick="showMapDensity();">Show</button>
                     <div id="legend" class="leaflet-control"></div>
                 </div>
                 </div>

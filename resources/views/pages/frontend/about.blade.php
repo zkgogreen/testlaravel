@@ -33,56 +33,95 @@
 @endsection
 
 @section('content')
-
-<div class="more-about" style="background:url('{{ url('assets/images/kominfo.jpg') }}') no-repeat center center;">
+<div class="more-about" style="background:url('{{ url('assets/images/kominfo.jpg') }}') no-repeat center center; background-size: cover;">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6 align-self-center">
-          <div class="left-image">
-            {{-- <img src="{{ url('assets/images/south-east-asia-density-map-full.jpg') }}" alt=""> --}}
-            {{-- style="background:url('{{ url('assets/images/south-east-asia-density-map-full.jpg') }}') no-repeat center center;" --}}
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <h2>SIGAP-FBB Kemenkominfo</h2>
-            <p>APIKASI GEOSPATIAL INFORMATION SYSTEM (GIS) POTENSI EKOSISTEM BROADBAND</p>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="info-item">
-                <h4>0</h4>
-                <span>Total data 1</span>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="info-item">
-                <h4>0</h4>
-                <span>Total data 2</span>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="info-item">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <h4>0</h4>
-                    <span>Total data 3</span>
-                  </div>
-                  <div class="col-lg-6">
-                    <h4>0</h4>
-                    <span>Total data 4</span>
-                  </div>
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="left-image">
+                    {{-- <img src="{{ url('assets/images/south-east-asia-density-map-full.jpg') }}" alt=""> --}}
+                    {{-- style="background:url('{{ url('assets/images/south-east-asia-density-map-full.jpg') }}') no-repeat center center;" --}}
                 </div>
-              </div>
             </div>
-          </div>
-          <p class="text-justify p-3 page-text-bg">
-            Aplikasi ini dipergunakan untuk mendokumentasikan kegiatan-kegiatan pengembangan ekosistem broadband yang telah dilakukan serta data-data spasial maupun non-spasial. 
-            Melalui data-data tersebut dapat menjadi basis perencanaan bagi Direktorat Pengembangan Pitalebar untuk dapat mensinergikan program-program yang berkaitan dengan pembentukan hingga pengembangan ekosistem broadband 
-            dan untuk mendukung proses bisnis yang berjalan dalam Direktorat Pengembangan Pitalebar.
-        </p>
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>
+                        @foreach ($content as $item)
+                            @if($item->section === 'About Title')
+                                {{$item->title}}
+                            @endif
+                        @endforeach
+                    </h2>
+                    <p>
+                        @foreach ($content as $item)
+                            @if($item->section === 'About Title')
+                                {{$item->description}}
+                            @endif
+                        @endforeach
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="info-item">
+                            <h4>{{$content_count1}}</h4>
+                            <span>
+                              @foreach ($content as $item)
+                              @if($item->section === 'About Counter 1')
+                                  {{$item->title}}
+                              @endif
+                          @endforeach
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-item">
+                            <h4>{{$content_count2}}</h4>
+                            <span>
+                              @foreach ($content as $item)
+                              @if($item->section === 'About Counter 2')
+                                  {{$item->title}}
+                              @endif
+                          @endforeach
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="info-item">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h4> {{$content_count3}}</h4>
+                                    <span>
+                                        @foreach ($content as $item)
+                                        @if($item->section === 'About Counter 3')
+                                            {{$item->title}}
+                                        @endif
+                                    @endforeach
+                                    </span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4>
+                                        {{$content_count4}}
+                                    </h4>
+                                    <span>
+                                        @foreach ($content as $item)
+                                            @if($item->section === 'About Counter 4')
+                                                {{$item->title}}
+                                            @endif
+                                        @endforeach
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-justify p-3 page-text-bg">
+                    @foreach ($content as $item)
+                        @if($item->section === 'About Desc')
+                            {{$item->description}}
+                        @endif
+                    @endforeach
+                </p>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 @endsection

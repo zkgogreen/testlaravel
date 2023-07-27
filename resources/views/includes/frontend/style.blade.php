@@ -62,7 +62,7 @@ border-radius: 5px;
     display: none;
     position: absolute;
     z-index: 800;
-    top: 50px !important;
+    top: 50px;
     left: 70%;
 }
 
@@ -337,6 +337,22 @@ overflow: auto;
 
 .container-basemap .option:not(:last-child) {
     margin-bottom: 4px;
+}
+
+
+#drag_title_peta {
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+#drag_title_peta2 {
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+.btnmodalpeta,
+.btnmodalpeta2 {
+    display: none;
 }
 
 </style>

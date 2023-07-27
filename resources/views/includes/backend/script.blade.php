@@ -15,8 +15,9 @@
 {{-- <script src="{{ url('assets/vendor/bootstrap-table-master/dist/extensions/filter-control/bootstrap-table-filter-control.min.js') }}"></script> --}}
 {{-- <script src="{{ url('assets/vendor/bootstrap-table-master/dist/extensions/mobile/bootstrap-table-mobile.js') }}"></script> --}}
 
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+{{-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script> --}}
 {{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script> --}}
+<script rel="stylesheet" src="{{ url('assets/leaflet/leaflet-1.8.0/leaflet-src.js') }}"></script>
 <script src="{{ url('assets/leaflet/leaflet-ajax-master/dist/leaflet.ajax.js') }}"></script>
 {{-- <script src="{{ url('assets/leaflet/leaflet-google-places-autocomplete-master/src/js/leaflet-gplaces-autocomplete.js') }}"></script> --}}
 <script src="{{ url('assets/leaflet/Leaflet.PolylineMeasure-master/Leaflet.PolylineMeasure.js') }}"></script>
@@ -51,6 +52,7 @@
 <script src="{{ url('assets/js/backend/create.js') }}"></script>
 <script src="{{ url('assets/js/map-js.js') }}"></script>
 <script src="{{ url('assets/js/backend/shared/off-canvas.js') }}"></script>
+<script src="{{ url('assets/vendor/draggable-dialog-modal/dist/jquery-simple-dialog.js') }}"></script>
 {{-- <script src="{{ url('assets/css/demo_1/dashboard.js') }}"></script> --}}
 {{-- <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script> --}}
 {{-- devexpress --}}

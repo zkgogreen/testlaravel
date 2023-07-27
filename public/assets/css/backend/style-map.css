@@ -8,11 +8,11 @@
     display: none;
     position: absolute;
     z-index: 800;
-    top: 12px !important;
+    top: 12px;
     /* left: 45%;
     width: 46% !important; */
-    left: 60%;
-width: 34% !important;
+    left: 68%;
+width: 34%;
     }
     
     #menu-legend {
@@ -355,4 +355,203 @@ hr.hr-style1 {
 .btn_modal_peta,
 .btn_modal_peta-2 {
     display: none;
+}
+
+
+
+@media (min-width: 1920px) and (max-width: 2559px)  {
+   
+}
+
+
+@media (min-width: 1680px) and (max-width: 1919px)  {
+
+}
+
+@media (min-width: 1440px) and (max-width: 1679px) {
+ 
+}
+
+@media (min-width: 1366px) and (max-width: 1439px) {
+
+}
+
+@media (min-width: 1280px) and (max-width: 1365px) {
+
+}
+
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+
+}
+
+
+@media (min-width: 768px) {
+
+    #menu-dataset {
+        font-size: 12px !important;
+    }
+    .container-basemap label {
+    width: 230px !important;
+    height: 42px !important;
+    font-size: 12px !important;
+    }
+
+}
+@media (max-width: 1024px) {
+
+#datasettools {
+    margin-top: 50px !important;
+    }
+
+    #menu-dataset {
+        top: 60px !important;
+left: 69% !important;
+    }
+
+    #draginfopeta {
+        width: 34%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-basemap label {
+    width: 160px !important;
+    }
+    .card--white {
+        display: none;
+    }
+
+    #datasettools {
+        margin-top: 70px !important;
+        }
+
+    #menu-dataset {
+        top: 80px !important;
+left: 67% !important;
+    }
+    .container-basemap {
+        height: 200px !important;
+    }
+
+}
+
+
+
+
+@media (min-height: 900px) {
+
+}
+
+@media (min-height: 800px) {
+
+}
+
+
+@media (min-height: 768px) {
+ 
+}
+
+@media (min-height: 721px) {
+
+}
+
+@media (min-height: 601px) and (max-height: 720px) {
+
+}
+
+@media (min-height: 551px) and (max-height: 600px) {
+
+}
+
+@media (max-width: 600px) {
+    #draginfopeta {
+        width: 50%;
+        }
+}
+
+
+@media (max-width: 480px) {
+    #menu-dataset {
+        /* left: 37% !important; */
+        left: 33% !important;
+        top:12px !important;
+        width: 51% !important;
+        font-size: 11px !important;
+        }
+        .container-basemap label {
+            width: 160px !important;
+            height: 42px !important;
+            }
+
+            #menu-dataset li {
+                width: 50% !important;
+            }
+            #menu-dataset li button {
+                width: 100% !important;
+            }
+
+            #menu-dataset ul {
+                float:none !important;
+            }
+
+            #mobilenav {
+                display: block !important;
+            }
+
+            #mobilenav .mcd-menu {
+               display: flex !important;
+               margin-bottom: 5px;
+            }
+            .container-sidebar {
+                display: none !important;
+            }
+
+            .mcd-menu li a.active:before {
+                display: none;
+            }
+
+            .mcd-menu li a.active:after {
+                display: none;
+            }
+
+            #mobilenav .mcd-menu li a.active {
+                border-left:none !important;
+                border-right: none !important;
+                box-shadow: none !important;
+                -webkit-box-shadow: none !important;
+            }
+
+           #mobilenav .mcd-menu li a {
+            padding: 7px 20px !important;
+           }
+           #mobilenav .userlogin {
+            display: none;
+           }
+
+           #mobilenav .mcd-menu li a .icon-menu {
+margin: 13px 0 0;
+           }
+
+           #mobilenav .navbar-brand {
+            margin-right: 0 !important;
+        }
+
+        #datasettools {
+            margin-top: 0px !important;
+            }
+
+}
+
+@media (max-width: 376px) {
+
+}
+
+@media (max-width: 360px) {
+
+}
+
+
+@media (min-height: 360px) and (max-height: 550px) {
+
 }

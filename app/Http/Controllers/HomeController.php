@@ -34,10 +34,46 @@ class HomeController extends Controller
     public function about()
     {
         $content = DB::table('content')->get();
-        return view('pages.frontend.about',[
+    
+        $content1 = DB::table('content')
+            ->select('layer', 'kolom')
+            ->where('section', '=', 'About Counter 1')
+            ->first();
+    
+        $content2 = DB::table('content')
+            ->select('layer', 'kolom')
+            ->where('section', '=', 'About Counter 2')
+            ->first();
+    
+        $content3 = DB::table('content')
+            ->select('layer', 'kolom')
+            ->where('section', '=', 'About Counter 3')
+            ->first();
+    
+        $content4 = DB::table('content')
+            ->select('layer', 'kolom')
+            ->where('section', '=', 'About Counter 4')
+            ->first();
+    
+        $content_count1 = DB::table($content1->layer)->count($content1->kolom);
+        $content_count2 = DB::table($content2->layer)->count($content2->kolom);
+        $content_count3 = DB::table($content3->layer)->count($content3->kolom);
+        $content_count4 = DB::table($content4->layer)->count($content4->kolom);
+    
+        return view('pages.frontend.about', [
             'content' => $content,
+            'content_count1' => $content_count1,
+            'content_count2' => $content_count2,
+            'content_count3' => $content_count3,
+            'content_count4' => $content_count4,
         ]);
     }
+
+    public function about2()
+    {
+        return view('layouts.app2');
+    }
+    
 
     public function maps()
     {

@@ -28,6 +28,7 @@ Route::get('/', function () {
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/about2', [HomeController::class, 'about2'])->name('about2');
 Route::get('/maps', [HomeController::class, 'maps'])->name('maps');
 Route::get('/content', [ContentController::class, 'content'])->name('content');
 Route::get('/getGeoJSONData2/{layer}',[HomeController::class,'getGeoJSONData2']);

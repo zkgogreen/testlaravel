@@ -15,10 +15,7 @@
                     onclick="closeDataset()"></button>
             </p>
             <div class="row mb-2">
-                <div class="col-md-5">
-                    <p class="fw-lighter mb-0 mt-2 mx-1">Choose Option :</p>
-                </div>
-                <div class="col-md-7">
+                <div class="col-md-12">
                     <ul class="nav nav-tabs float-end" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="layer-tab" data-bs-toggle="tab" data-bs-target="#layertab"
@@ -46,7 +43,7 @@
                         @endforeach
                     </select>
                     <button class="btn btn-outline-dark btn-sm float-end mt-2" onclick="clearMapDensity();">Clear</button>
-                    <button class="btn btn-primary float-end btn-sm mt-2 mx-2" onclick="showMapDensity();">Show Map</button>
+                    <button class="btn btn-primary float-end btn-sm mt-2 mx-2" onclick="showMapDensity();">Map</button>
                     <div id="legend" class="leaflet-control"></div>
                     <div class="row mt-3">
                         <div class="col-md-4 p-0">

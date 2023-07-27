@@ -166,15 +166,15 @@ body {
 }
 
 .border-button a:hover {
-  background-color: #22b3c1;
+  background-color: rgb(58, 134, 212);
   color: #fff;
 }
 
 .main-button a {
   font-size: 14px;
   color: #fff;
-  background-color: #6a8789;
-  border: 1px solid #6a8789;
+  background-color: rgb(58, 134, 212);
+  border: 1px solid rgb(58, 134, 212);
   padding: 12px 30px;
   display: inline-block;
   border-radius: 25px;
@@ -287,7 +287,7 @@ Pre-loader Style
   height: 16px;
   top: 12px;
   left: 15px;
-  background: #22b3c1;
+  background: rgb(58, 134, 212);
   border-radius: 50%;
   -webkit-transform: translateX(0);
   transform: translateX(0);
@@ -310,7 +310,7 @@ Pre-loader Style
   width: 16px;
   height: 16px;
   margin-left: 16px;
-  background: #22b3c1;
+  background: #rgb(58, 134, 212);
   border-radius: 50%;
 }
 
@@ -607,14 +607,14 @@ Header Style
   }
   .header-area.header-sticky .nav li a:hover,
   .header-area.header-sticky .nav li a.active {
-    color: #22b3c1!important;
+    color: #000000!important;
     opacity: 1;
   }
   .header-area.header-sticky .nav li.search-icon a {
     width: 100%;
   }
   .header-area {
-    background-color: #22b3c1;
+    /* background-color: #22b3c1; */
     padding: 0px 15px;
     height: 100px;
     box-shadow: none;
@@ -668,7 +668,7 @@ Header Style
   }
   .header-area .main-nav .nav li a:hover {
     background: #f7f7f7 !important;
-    color: #22b3c1!important;
+    color: #000000!important;
   }
   .header-area .main-nav .nav li.has-sub ul.sub-menu {
     position: relative;
@@ -886,7 +886,7 @@ Banner Style
   width: inherit;
   height: inherit;
   margin-left: -100%;
-  background: #22b3c1;
+  background: rgb(58, 134, 212);
 }
 #section-1 .content-slider nav .controls label span.text {
   font-size: 20px;
@@ -896,7 +896,7 @@ Banner Style
   width: 100%;
 }
 #section-1 .content-slider nav .controls label:hover {
-  color: #22b3c1;
+  color: rgb(58, 134, 212);
 }
 #section-1 .content-slider #banner1:checked ~ .slider #top-banner-1,
 #section-1 .content-slider #banner2:checked ~ .slider #top-banner-2,
