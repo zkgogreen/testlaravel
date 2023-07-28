@@ -165,7 +165,7 @@ private function getContentCount($contentData)
     {
         $kabkotData = DB::table('kabkot')
         ->join("$layer", 'kabkot.kabkot', '=', "$layer.kabkot")
-        ->select('kabkot.id','kabkot.kabkot', 'tb_kabkot.provinsi', DB::raw("ST_AsGeoJSON(ST_Transform((kabkot.geom),4326),6) AS geom"), DB::raw("count($layer.kabkot) as count"))
+        ->select('kabkot.id','kabkot.kabkot', 'kabkot.provinsi', DB::raw("ST_AsGeoJSON(ST_Transform((kabkot.geom),4326),6) AS geom"), DB::raw("count($layer.kabkot) as count"))
         ->groupBy('kabkot.id')
         ->orderBy('kabkot.wadmkk')
         ->get();
