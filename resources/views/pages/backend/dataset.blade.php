@@ -1501,7 +1501,7 @@ $(document).ready(function () {
 
                                 $("<a>")
                                     .attr("data-bs-toggle", "modal")
-                                    .attr("data-bs-target", "#ImageView")]
+                                    .attr("data-bs-target", "#ImageView")
                                     .append(
                                         "<span class='iconify' data-icon='bi:eye-fill' style='color: #1ca8dd; text-align: center;'></span> <span style='color: #1ca8dd;'>view</span>"
                                     )
