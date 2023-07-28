@@ -571,40 +571,40 @@ var baseGoogle1 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z
       map.on('polylinemeasure:move', debugevent);
       map.on('polylinemeasure:remove', debugevent);
 
-      var filtertools = L.easyButton(
-            '<span class="iconify" data-icon="ri:filter-fill" data-width="18" data-height="18"></span>',
-            function OpenFilter() {
-                var x = document.getElementById("menu-filter");
-                var y = document.getElementById("filtertools");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                    y.style.background = "#538f91";
-                    y.style.color = "#ffffff";
-                } else {
-                    x.style.display = "none";
-                    y.style.background = "#ffffff";
-                    y.style.color = "#000000";
-                }
-            }, "Filter Tools", 'topleft', 'filtertools').addTo(map);
+    //   var filtertools = L.easyButton(
+    //         '<span class="iconify" data-icon="ri:filter-fill" data-width="18" data-height="18"></span>',
+    //         function OpenFilter() {
+    //             var x = document.getElementById("menu-filter");
+    //             var y = document.getElementById("filtertools");
+    //             if (x.style.display === "none") {
+    //                 x.style.display = "block";
+    //                 y.style.background = "#538f91";
+    //                 y.style.color = "#ffffff";
+    //             } else {
+    //                 x.style.display = "none";
+    //                 y.style.background = "#ffffff";
+    //                 y.style.color = "#000000";
+    //             }
+    //         }, "Filter Tools", 'topleft', 'filtertools').addTo(map);
 
                                  // coortinate tools
         // var coordinate = L.control.coordProjection().addTo(map);
 
-            var legendtools = L.easyButton(
-            '<span class="iconify" data-icon="mdi:map-legend" data-width="18" data-height="18"></span>',
-            function OpenLegend() {
-                var x = document.getElementById("menu-legend");
-                var y = document.getElementById("legendtools");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                    y.style.background = "#538f91";
-                    y.style.color = "#ffffff";
-                } else {
-                    x.style.display = "none";
-                    y.style.background = "#ffffff";
-                    y.style.color = "#000000";
-                }
-            }, "Legend Tools", 'bottomleft', 'legendtools').addTo(map);
+            // var legendtools = L.easyButton(
+            // '<span class="iconify" data-icon="mdi:map-legend" data-width="18" data-height="18"></span>',
+            // function OpenLegend() {
+            //     var x = document.getElementById("menu-legend");
+            //     var y = document.getElementById("legendtools");
+            //     if (x.style.display === "none") {
+            //         x.style.display = "block";
+            //         y.style.background = "#538f91";
+            //         y.style.color = "#ffffff";
+            //     } else {
+            //         x.style.display = "none";
+            //         y.style.background = "#ffffff";
+            //         y.style.color = "#000000";
+            //     }
+            // }, "Legend Tools", 'bottomleft', 'legendtools').addTo(map);
 
 
       // DEFAULT EXTENT
