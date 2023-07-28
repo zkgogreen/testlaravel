@@ -18,11 +18,16 @@ use App\Models\User;
 use App\Models\UserTable;
 use App\Models\SelectList;
 use DB;
+use Auth;
 use Storage;
 use File;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Response;
+use Session;
+Use Exception;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
 
 class DataController extends Controller
 {
@@ -242,6 +247,69 @@ class DataController extends Controller
                     ->where('kecamatan',$id)
                     ->distinct()->get(['keldes']);
                     return response()->json($keldes);
+                }
+
+
+
+                public function userupdate(Request $request, $id)
+                {
+            
+                    $data = $request->all();
+                    if (!$data['password']) {
+                        $validator = $this->validate($request, [
+                            'name' => ['required', 'string', 'max:255'],
+                            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                            ]);
+                    $items = User::FindOrFail($id);
+                         $items->update([
+                        'name' => $data['name'],
+                        // 'email' => $data['email'],
+                    ]);
+                    return redirect()
+                    ->route('dashboard')
+                    ->with([
+                        'success' => 'BERHASIL! Profil anda berhasil di update !',
+                    ]);
+                    } else {
+                        $validator = $this->validate($request, [
+                        'name' => ['required', 'string', 'max:255'],
+                        // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                        // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+                        'current_password' => ['required', 'string', 'min:8'],
+                        'password' => ['required', 'string', 'min:8', 'confirmed'],
+                        ]);
+            
+                        $hashedPassword = Auth::user()->password;
+                        if (\Hash::check($request->current_password , $hashedPassword)) {
+            
+                    $items = User::FindOrFail($id);
+                    $items->update([
+                        'name' => $data['name'],
+                        // 'email' => $data['email'],
+                        'password' => Hash::make($data['password']),
+                    ]);
+                    return redirect()
+                    ->route('dashboard')
+                    ->with([
+                        'success' => 'BERHASIL! Profil anda berhasil di update !',
+                    ]);
+                    // }
+                    //  else{
+                    //     session()->flash('error','Password baru tidak boleh sama dengan password lama !');
+                    //     return redirect()->back();
+                    // } 
+                } else {
+                    session()->flash('error','Password lama tidak sesuai !');
+                    return redirect()->back();
+                }
+                } 
+                //  else {
+                //         return redirect()
+                //             ->route('dashboard')
+                //             ->with([
+                //                 'error' => 'GAGAL! Periksa kembali data anda !',
+                //             ]);
+                //     }
                 }
              
 }

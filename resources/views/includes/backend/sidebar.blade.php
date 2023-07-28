@@ -7,7 +7,7 @@
 <div class="userlogin p-2 mb-2" style="background-color:#ffffff; border-radius:4px;">
     <div class="row">
         <div class="col-md-9">
-           <p class="font-weight-normal text-muted mb-0">Hallo, <span class="font-weight-bold">{{ Auth::user()->name }}</span></p>
+           <p class="font-weight-normal text-muted mb-0">Hallo, <a href="#" data-bs-toggle="modal" data-bs-target="#userProfile"><span class="font-weight-bold">{{ Auth::user()->name }}</span></a></p>
             <small class="fst-italic">{{ Auth::user()->email }} |  {{ Auth::user()->roles }} </small>
         </div>
         <div class="col-md-3">

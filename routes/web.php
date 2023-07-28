@@ -122,6 +122,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('deleteDataDataset',[DataController::class,'deleteDataDataset']);
     Route::get('dataset', [DatasetController::class, 'index'])->name('dataset');
     Route::post('createTB', [DatasetController::class, 'createTB'])->name('createTB');
+    Route::put('user-update/{id}', [DataController::class, 'userupdate'])->name('user-update');
 
     // Route::get('/listdata/pbtable2', [
     //     DashboardController::class,
