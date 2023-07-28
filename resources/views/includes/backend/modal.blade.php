@@ -10,7 +10,7 @@
                 <h6 class="modal-title mb-1 mt-1" id="profiluser" style="margin-left: 3%;">User Profil
                 </h6>
             </div>
-            <div class="modal-body text-center">
+            <div class="modal-body">
                           <div class="row">
                             <div class="col mb-3">
                               <label for="name" class="form-label">Name</label>
@@ -80,15 +80,19 @@
                             </div>
                           </div>
                           <div class="row mt-3 mx-1">
-                            <span class="iconify" data-icon="carbon:warning-filled" data-width="15" data-height="15" style="margin-top: 1px;
-                            margin-right: 5px;"></span> <span><small> Form Password* bisa di kosongkan jiga tidak akan mengganti password.</small></span>
+                            <p class="mb-0">
+                                <span class="iconify float-start" data-icon="carbon:warning-filled" data-width="15" data-height="15" style="margin-top: 1px;
+                                margin-right: 5px;"></span> <span><small> Form Password* bisa di kosongkan jiga tidak akan mengganti password.</small></span>
+                            </p>
+                            
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+
+                          <button type="submit" class="btn btn-primary btn-sm float-end mx-2">Save</button>
+                          <button type="button" class="btn btn-outline-dark btn-sm float-end" data-bs-dismiss="modal">
                             Close
                           </button>
-                          <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                       </div>
                                                   </form>

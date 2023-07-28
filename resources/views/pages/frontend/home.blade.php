@@ -18,7 +18,23 @@
                         <li><a href="{{route('home')}}" class="active"><i class="fa fa-home"></i> Home</a></li>
                         <li><a href="{{route('about')}}"><i class="fa fa-info-circle"></i> About</a></li>
                         <li><a href="{{route('maps')}}"><i class="fa fa-map"></i> Maps</a></li>
+                        @auth
+                        <li><a href="{{route('dashboard')}}"><i class="fa fa-users"></i> Dashboard</a></li>
+                        <li>
+                      <form action="{{ url('logout') }}" method="post" class="mt-1">
+                        @csrf
+                        <button class="btn btn-sm" type="submit">
+                            <span
+                            class="iconify" data-icon="fa:sign-out" data-width="20"
+                            data-height="20" style="vertical-align: bottom; color:#fff;
+                            "></span>
+                        </button>
+                    </form>
+                        </li>
+                      @endauth
+                      @guest
                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fa fa-sign-in-alt"></i> Sign In</a></li>
+                        @endguest
                     </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -29,6 +45,8 @@
         </div>
     </div>
   </header>
+
+
   <!-- ***** Header Area End ***** -->
 @endsection
 
