@@ -455,7 +455,7 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
                  // $nmF = array_diff($nmF, ['geom']);
                  $data = DB::table($nmTabel)
                  ->select($nmF)
-                 ->orderBy('id', 'asc')
+                 ->orderBy('id', 'desc')
                  ->get();
          
                  $hasil = ['nmfield' => $nmField, 'data' => $data];
