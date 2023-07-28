@@ -180,8 +180,8 @@ private function getContentCount($contentData)
             $feature = [
                 'type' => 'Feature',
                 'properties' => [
-                    'kabkot' => $kabkot->wadmkk,
-                    'provinsi' => $kabkot->wadmpr,
+                    'kabkot' => $kabkot->kabkot,
+                    'provinsi' => $kabkot->provinsi,
                     // Masukkan informasi atribut jumlah penerima bantuan dari relasi
                     'jumlah' => $kabkot->count,
                 ],
