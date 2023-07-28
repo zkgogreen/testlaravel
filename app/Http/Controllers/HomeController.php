@@ -167,7 +167,7 @@ private function getContentCount($contentData)
         ->join("$layer", 'kabkot.kabkot', '=', "$layer.kabkot")
         ->select('kabkot.id','kabkot.kabkot', 'kabkot.provinsi', DB::raw("ST_AsGeoJSON(ST_Transform((kabkot.geom),4326),6) AS geom"), DB::raw("count($layer.kabkot) as count"))
         ->groupBy('kabkot.id')
-        ->orderBy('kabkot.wadmkk')
+        ->orderBy('kabkot.kakbot')
         ->get();
         // Bentuk struktur GeoJSON
         $geojson = [
