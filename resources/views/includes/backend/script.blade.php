@@ -67,8 +67,6 @@
 
 <script>
     // var base_url = window.location.origin + "/project/sigap-fbb/public";
-    // var base_url = "http://10.0.0.227";
-    // var base_url = "http://103.146.202.47/gis-demand";
     var base_url = "https://sigap-fbb.kominfo.go.id";
 
     $(function() {
@@ -95,4 +93,14 @@
         $("body").removeClass("loading"); 
     }    
 });
+
+        // show alert
+        $(document).ready(function() {
+            window.setTimeout(function() {
+                $(".alert").fadeTo(1000, 0).slideUp(1500, function() {
+                    $(this).remove();
+                });
+            }, 5000);
+        });
+
 </script>

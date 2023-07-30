@@ -41,7 +41,7 @@ class PenggunaController extends Controller
         // $lmaps = Layermap::select('filename', 'layername', 'table_link')
         //     ->where('status', '=', 'Active')
         //     ->get();
-        return view('pages.backend.pengguna.index', [
+        return view('pages.backend.user-management', [
             'items' => $items,
             // 'lmaps' => $lmaps,
         ]);
@@ -179,7 +179,7 @@ class PenggunaController extends Controller
         $item->update($data);
         // Session::flash('success','Paket Berhasil Diedit');
         return redirect()
-            ->route('pengguna')
+            ->route('user-management')
             ->with(['success' => 'BERHASIL! Data Pengguna Telah di Update.']);
     }
 
@@ -194,7 +194,7 @@ class PenggunaController extends Controller
         $item = User::find($id);
         $item->delete();
         return redirect()
-            ->route('pengguna')
+            ->route('user-management')
             ->with([
                 'deleted' => 'BERHASIL! Pengguna telah dihapus dari database.',
             ]);

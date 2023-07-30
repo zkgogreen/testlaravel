@@ -224,6 +224,7 @@ class DataController extends Controller
                     $provinsi = DB::table('tb_desa')
                     ->distinct()
                     ->whereNotNull('provinsi')
+                    ->orderBy('provinsi', 'asc')
                     ->get(['provinsi']);
                     return response()->json($provinsi);
                 }
@@ -231,6 +232,7 @@ class DataController extends Controller
                 public function kabkot($id){
                     $kabkot = DB::table('tb_desa')
                     ->where('provinsi',$id)
+                    ->orderBy('kabkot', 'asc')
                     ->distinct()->get(['kabkot']);
                     return response()->json($kabkot);
                 }
@@ -238,6 +240,7 @@ class DataController extends Controller
                 public function kecamatan($id){
                     $kecamatan = DB::table('tb_desa')
                     ->where('kabkot',$id)
+                    ->orderBy('kecamatan', 'asc')
                     ->distinct()->get(['kecamatan']);
                     return response()->json($kecamatan);
                 }
@@ -245,6 +248,7 @@ class DataController extends Controller
                 public function keldes($id){
                     $keldes = DB::table('tb_desa')
                     ->where('kecamatan',$id)
+                    ->orderBy('keldes', 'asc')
                     ->distinct()->get(['keldes']);
                     return response()->json($keldes);
                 }

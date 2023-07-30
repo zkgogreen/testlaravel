@@ -47,13 +47,6 @@
                         aria-selected="true">Table
                     </button>
                 </li>
-                @elseif (Auth::user()->roles == 'SUPER USER')
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="layerdata-tab" data-bs-toggle="tab"
-                        data-bs-target="#layerdatatab" type="button" role="tab" aria-controls="layerdata"
-                        aria-selected="true">Table
-                    </button>
-                </li>
                 @else
                 @endif
             </ul>
@@ -434,11 +427,6 @@
                         <option value="tb_penerima_bantuan">Penerima Bantuan</option>
                     </select> 
 
-                    {{-- <div class="row mb-2 mt-2">
-                        <div id="kolomList">
-                            <div id="kList"></div>
-                        </div>
-                    </div> --}}
                     <div class="row mb-2 mt-2">
                 <form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">
                     @csrf
@@ -492,7 +480,8 @@
                     <div class="tab-pane fade" id="layerdatatab" role="tabpanel" aria-labelledby="layerdata-tab">
                         <div class="row p-3">
                             <h4>Table</h4>
-                            <p>Pilih layer untuk menampilkan tabel :</p>
+                            <p>Struktur Tabel yang muncul di halaman ini terintegrasi untuk di pergunakan sebagai format Import Excel sesuai dengan nama tabel yang di pilih. Pilih list tabel untuk memunculkan tabel, dan klik menu export untuk mengunduh file excel.
+                                <strong>(pastikan hapus kolom "id" di file excel hasil export bilamana format excel akan dipergunakan sebagai import)</strong></p>
                             <select class="form-control form-control-sm w-100 mt-2" name="table_data" id="table_data">
                                 <option value="noselect" selected>Select Table</option>
                                 @foreach ($spatial_layer as $item)
@@ -570,7 +559,8 @@
                     <div class="tab-pane fade" id="layerdatatab" role="tabpanel" aria-labelledby="layerdata-tab">
                 <div class="row p-3">
                     <h4>Table</h4>
-                    <p>Pilih layer untuk menampilkan tabel :</p>
+                    <p>Struktur Tabel yang muncul di halaman ini terintegrasi untuk di pergunakan sebagai format Import Excel sesuai dengan nama tabel yang di pilih. Pilih list tabel untuk memunculkan tabel, dan klik menu export untuk mengunduh file excel.
+                        <strong>(pastikan hapus kolom "id" di file excel hasil export bilamana format excel akan dipergunakan sebagai import)</strong></p>
                     <select class="form-control form-control-sm w-100 mt-2" name="table_data" id="table_data">
                         <option value="noselect" selected>Select Table</option>
                         @foreach ($spatial_layer as $item)
@@ -584,25 +574,6 @@
                     <div id="tblayer"></div>
                  </div>
                 </div>
-
-                @elseif (Auth::user()->roles == 'SUPER USER')
-                <div class="tab-pane fade show active" id="layerdatatab" role="tabpanel" aria-labelledby="layerdata-tab">
-                    <div class="row p-3">
-                        <h4>Table</h4>
-                        <p>Pilih layer untuk menampilkan tabel :</p>
-                        <select class="form-control form-control-sm w-100 mt-2" name="table_data" id="table_data">
-                            <option value="noselect" selected>Select Table</option>
-                            @foreach ($spatial_layer as $item)
-                            <option value="{{$item->title}}">{{$item->name}}</option>  
-                            @endforeach
-                            <option value="tb_poi">Point Of Interest</option>  
-                            <option value="tb_spd">Survey Potensi Desa</option>
-                            <option value="tb_kp">Kawasan prioritas</option>
-                            <option value="tb_penerima_bantuan">Penerima Bantuan</option>
-                        </select> 
-                        <div id="tblayer"></div>
-                     </div>
-                    </div>
                     @else
                     @endif
                 </div>
@@ -612,22 +583,6 @@
 
 
     @section('addon-modal')
-    {{-- <div class="modal fade" id="ImageView" role="dialog" style="margin-top: 7%;
-    padding-right: 0;">
-        <div class="modal-dialog modal-centered">
-          <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Rules Create Master Data</h5>
-          </div>
-          <div class="modal-body" style='padding:15px; height: 400px;
-          overflow-y: auto;'>
-                    </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                  </div>
-                </div> --}}
 
                 <div id="ImageView" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-dialog-centered" role="document" style="width: 50%;">
@@ -651,15 +606,15 @@
 
     <div class="modal fade" id="help" role="dialog" style="margin-top: 7%;
     padding-right: 0;">
-        <div class="modal-dialog modal-centered">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Rules Create Master Data</h5>
           </div>
           <div class="modal-body" style='padding:15px; height: 400px;
           overflow-y: auto;'>
-            <div class="table-responsive">
-            <table class="table">
+            {{-- <div class="table-responsive"> --}}
+            <table class="table table-bordered">
                 <tr>
                     <th>Form</th>
                     <th>Notes</th>
@@ -668,41 +623,22 @@
                 <tr>
                     <th>Table Name</th>
                     <td>Nama tabel master</td>
-                    <td>Penulisan harus kecil semua dan tidak boleh ada spasial, untuk memisahkan kata gunakan tanda underscore "_", contoh : <strong>data_contoh</strong></td>
+                    <td style="word-wrap: break-word;">Penulisan harus kecil semua dan tidak boleh ada spasial, untuk memisahkan kata gunakan tanda underscore "_", contoh : <strong>data_contoh</strong></td>
                 </tr>
                 <tr>
                     <th>Roles Access</th>
                     <td>Hak akses data</td>
-                    <td>Pilihan "private" hanya jika akses informasi tersedia untuk internal kominfo saja dalam bentuk map density dan map marker, pilihan "public" untuk data dapat di akses di halaman depan sistem, dengan tampilan berupa map density. </td>
+                    <td style="word-wrap: break-word;">Pilihan "private" hanya jika akses informasi tersedia untuk internal kominfo saja dalam bentuk map density dan map marker, pilihan "public" untuk data dapat di akses di halaman depan sistem, dengan tampilan berupa map density. </td>
                 </tr>
                 <tr>
                     <th>Status</th>
                     <td>Status Tabel</td>
-                    <td>Terdapat 3 active, active in admin, inactive</td>
+                    <td style="word-wrap: break-word;">Terdapat 3 active, active in admin, inactive</td>
                 </tr>
-                {{-- <tr>
-                    <th>Color Palette</th>
-                    <td>Pilihan warna map density</td>
-                    <td>
-                       <table class="table table-striped">
-                        @foreach ($color_palette as $item)
-                        <tr style="width: 50%">  
-                          <th>{{$item->title}}</th>
-                            @foreach ($item->color as $items)
-                            <td class="p-0">
-                                <div style="height: 20px; width:20px; background-color:{{$items->color}};" class="p-0"></div>
-                            </td>
-                                @endforeach
-                        </tr>
-                        @endforeach
-                        </table> 
-
-                    </td>
-                </tr> --}}
                 <tr>
                     <th>Column Name</th>
                     <td>Nama kolom tabel</td>
-                    <td>Penulisan harus kecil semua dan tidak boleh ada spasial, untuk memisahkan kata gunakan tanda underscore "_", contoh : <strong>data_contoh</strong></td>
+                    <td style="word-wrap: break-word;">Penulisan harus kecil semua dan tidak boleh ada spasial, untuk memisahkan kata gunakan tanda underscore "_", contoh : <strong>data_contoh</strong></td>
                 </tr>
                 <tr>
                     <th>Data Type</th>
@@ -711,27 +647,27 @@
 <table class="table  table-striped">
     <tr>
         <th>Date</th>
-        <td>Untuk kolom dengan tipe data berisikan tanggal, format penulisan YYYY-MM-DD </td>
+        <td style="word-wrap: break-word;">Untuk kolom dengan tipe data berisikan tanggal, format penulisan YYYY-MM-DD </td>
     </tr>
     <tr>
         <th>DateTime</th>
-        <td>Untuk kolom dengan tipe data berupa tanggal dan waktu, format penulisan YYYY-MM-DD HH:MM:SS</td>
+        <td style="word-wrap: break-word;">Untuk kolom dengan tipe data berupa tanggal dan waktu, format penulisan YYYY-MM-DD HH:MM:SS</td>
     </tr>
     <tr>
         <th>Decimal</th>
-        <td>Untuk kolom dengan tipe data berupa angka desimal</td>
+        <td style="word-wrap: break-word;">Untuk kolom dengan tipe data berupa angka desimal</td>
     </tr>
     <tr>
         <th>Integer</th>
-        <td>Untuk kolom dengan tipe data berupa bilangan bulat negatif ataupun positif</td>
+        <td style="word-wrap: break-word;">Untuk kolom dengan tipe data berupa bilangan bulat negatif ataupun positif</td>
     </tr>
     <tr>
         <th>String</th>
-        <td>Untuk kolom berisikan karakter, spesial karakter, number dan spasi dengan maksimal panjang karakter 255</td>
+        <td style="word-wrap: break-word;">Untuk kolom berisikan karakter, spesial karakter, number dan spasi dengan maksimal panjang karakter 255</td>
     </tr>
     <tr>
         <th>Text</th>
-        <td>Untuk kolom berisikan karakter, spesial karakter, number dan spasi dengan panjang karakter tidak terbatas</td>
+        <td style="word-wrap: break-word;">Untuk kolom berisikan karakter, spesial karakter, number dan spasi dengan panjang karakter tidak terbatas</td>
     </tr>
 </table>
     </td>
@@ -743,15 +679,15 @@
             <table class="table table-striped">
                 <tr>
                     <th>Mandatory</th>
-                    <td>Mewajibkan kolom harus di isi saat input data</td>
+                    <td style="word-wrap: break-word;">Mewajibkan kolom harus di isi saat input data</td>
                 </tr> 
                 <tr>
                     <th>Unique</th>
-                    <td>Mewajibkan kolom berisikan data unik berbeda dari data lainnya, umumnya berupa id</td>
+                    <td style="word-wrap: break-word;">Mewajibkan kolom berisikan data unik berbeda dari data lainnya, umumnya berupa id</td>
                 </tr> 
                 <tr>
                     <th>Null</th>
-                    <td>Mengijinkan kolom untuk di biarkan kosong saat input data</td>
+                    <td style="word-wrap: break-word;">Mengijinkan kolom untuk di biarkan kosong saat input data</td>
                 </tr> 
             </table>
         </td>
@@ -763,15 +699,15 @@
             <table class="table table-striped">
                 <tr>
                     <th>Select</th>
-                    <td>Form Berisikan pilihan data yang sudah ditentukan sebelumnya (saat memilih ini, wajib mengisi pada form <strong>Value List</strong>)</td>
+                    <td style="word-wrap: break-word;">Form Berisikan pilihan data yang sudah ditentukan sebelumnya (saat memilih ini, wajib mengisi pada form <strong>Value List</strong>, kecuali untuk Data Type 'date' dengan Form Type 'Select', bagian ini bisa di kosongkan)</td>
                 </tr> 
                 <tr>
                     <th>Input</th>
-                    <td>Form kosong yang bisa di isi sesuai dengan <strong>Data Type</strong></td>
+                    <td style="word-wrap: break-word;">Form kosong yang bisa di isi sesuai dengan <strong>Data Type</strong></td>
                 </tr> 
                 <tr>
                     <th>File</th>
-                    <td>Form input untuk data berupa file (pdf, doc, png, jpg), <i>Untuk Form Type ini pastikan kolom di beri nama <strong>lampiran</strong> dan menggunakan <strong>Text</strong> pada pilihan Data Type</i></td>
+                    <td style="word-wrap: break-word;">Form input untuk data berupa file (pdf, doc, png, jpg), <i>Untuk Form Type ini pastikan kolom di beri nama <strong>lampiran</strong> dan menggunakan <strong>Text</strong> pada pilihan Data Type</i></td>
                 </tr> 
             </table>
         </td>
@@ -779,15 +715,69 @@
     <tr>
         <th>Value List</th>
         <td>Pilihan Isian Default</td>
-        <td>Form ini hanya di isi jika pilihan Form Type adalah <strong>Select</strong>, dengan format penulisan dipisah dengan tanda koma "," antar pilihan. Contoh penulisan pilihan Jenis Kelamin : <strong>Laki-laki, Perempuan, Lainnya</strong></td>
+        <td style="word-wrap: break-word;">Form ini hanya di isi jika pilihan Form Type adalah <strong>Select</strong>, dengan format penulisan dipisah dengan tanda koma "," antar pilihan. Contoh penulisan pilihan Jenis Kelamin : <strong>Laki-laki, Perempuan, Lainnya</strong></td>
     </tr>
     <tr>
         <th>Action / Notes</th>
         <td>Tombol add atau delete</td>
-        <td>Jika akan menambahkan kolom baru tekan tombol <strong>ADD</strong>, dan jika ingin menghapus kolom tekan tombol <strong>DELETE</strong></td>
+        <td style="word-wrap: break-word;">Jika akan menambahkan kolom baru tekan tombol <strong>ADD</strong>, dan jika ingin menghapus kolom tekan tombol <strong>DELETE</strong></td>
     </tr>
             </table>
+            {{-- </div> --}}
+        </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
             </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="help2" role="dialog" style="margin-top: 7%;
+    padding-right: 0;">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Rules Input Data</h5>
+          </div>
+          <div class="modal-body" style='padding:15px; height: 300px;
+          overflow-y: auto;'>
+            {{-- <div class="table-responsive"> --}}
+            <table class="table table-bordered">
+                <tr>
+                    <th>Form</th>
+                    <th>Form Type</th>
+                    <th style="word-wrap: break-word;">Description</th>
+                </tr>
+                <tr>
+                    <th>Provinsi</th>
+                    <td>Select</td>
+                    <td style="word-wrap: break-word;">Pilih nama Provinsi sesuai dengan list yang muncul.</td>
+                </tr>
+                <tr>
+                    <th>Kabkot</th>
+                    <td>Select</td>
+                    <td style="word-wrap: break-word;">Pilih nama Kabupaten / Kota sesuai dengan list yang muncul berdasarkan pilihan Provinsi</td>
+                </tr>
+                <tr>
+                    <th>Kecamatan</th>
+                    <td>Select</td>
+                    <td style="word-wrap: break-word;">Pilih nama Kecamatan sesuai dengan list yang muncul berdarkan pilihan Kabupaten / Kota</td>
+                </tr>
+                <tr>
+                    <th>Keldes</th>
+                    <td>Select</td>
+                    <td style="word-wrap: break-word;">Pilih nama Kelurahan / Desa sesuai dengan list yang muncul berdasarkan pilihan Kecamatan</td>
+                </tr>
+    <tr>
+        <th>Longitude / Latitude</th>
+        <td>Input / Set Map</td>
+        <td style="word-wrap: break-word;">Jika value di isi manual maka harus di isi dengan derajat desimal, gunakan tanda strip '-' pada nilai derajat minus /
+        berada pada posisi lintang selatan,dan gunakan tanah titik '.' di antara pemisah nilai derajat ke desimal (contoh : <strong>-6.951807, 107.657874</strong>), atau untuk mengisi secara otomatis gunakan cara dengan menempakan marker pada jendela peta ke lokasi yang di maksud.</td>
+    </tr>
+            </table>
+            {{-- </div> --}}
         </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
@@ -851,26 +841,16 @@
         var menu_jdata = document.getElementById("jenis_data");
         var menu_tdata = document.getElementById("table_data");
         var menu_import = document.getElementById("table_import");
-        // var menu_kList = document.getElementById("kList");
-        // var menu_ListProv = document.getElementById("provinsi");
+
         menu_import.addEventListener("change", generateData);
         menu_jdata.addEventListener("change", generateData);
         menu_tdata.addEventListener("change", generateData);
-        // menu_ListProv.addEventListener("change", generateData);
-                // menu_kList.addEventListener("change", generateKolomlist);
 
         function generateData(event) {
             ShowTabelAll(menu_tdata.value, 'tblayer');
             ShowFormTabel(menu_jdata.value, 'tabelForm');
             ShowFormImport(menu_import.value);
-            // showKolomList(menu_jdata.value);
-            // getKabkotList(menu_ListProv.value);
         }
-
-        // function generateKolomlist(event) {
-        //     showListSelect(menu_jdata.value);
-        // }
-
 
 
 $(document).ready(function () {
@@ -885,11 +865,6 @@ $(document).ready(function () {
 });
 
 
-//         $(document).ready(function () {
-//   $('#provinsi').on('change', function () {
-//     getKabkotList();
-//   });
-// });
 
 
 function updateRequiredAttribute() {
@@ -1008,12 +983,6 @@ function ShowFormImport(nmTabel) {
 }
 
 
-    // var time = document.getElementById("time");
-    // if (distance.style.display === "none") {
-    //     distance.style.display = "block";
-
-
-
 function ShowFormTabel(nmTabel, idhtml) {
   $.ajax({
     url: base_url + '/TabelField/' + nmTabel,
@@ -1073,7 +1042,7 @@ function ShowFormTabel(nmTabel, idhtml) {
               break;
           }
         });
-            $('#' + idhtml).append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button>');
+            $('#' + idhtml).append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button><button type="button" class="btn btn-secondary btn-sm float-start mt-2"  data-bs-toggle="modal" data-bs-target="#help2">Help</button>');
             updateRequiredAttribute();
             getProvinsiList();
             $.each(data, function (key, value) {
@@ -1120,40 +1089,6 @@ function ShowFormTabel(nmTabel, idhtml) {
   });
 }
 
-
-
-//   function getKabkotList() {
-//   var provinsiID = $('#provinsi').val();
-//   if (provinsiID) {
-//     $.ajax({
-//       url: base_url + '/getKabkot/' + provinsiID,
-//       type: "GET",
-//       data: {
-//         "_token": "{{ csrf_token() }}"
-//       },
-//       dataType: "json",
-//       success: function (data) {
-//         if (data) {
-//           $('#kabkot').empty();
-//           $('#kecamatan').empty();
-//           $('#keldes').empty();
-//           $('#kabkot').append('<option hidden value="pilihkabkot" selected>Select Kabkot</option>');
-//           $.each(data, function (key, value) {
-//             $('#kabkot').append('<option value="' + value.kabkot + '">' + value.kabkot + '</option>');
-//           });
-//         } else {
-//           $('#kabkot').empty();
-//           $('#kecamatan').empty();
-//           $('#keldes').empty();
-//         }
-//       }
-//     });
-//   } else {
-//     $('#kabkot').empty();
-//     $('#kecamatan').empty();
-//     $('#keldes').empty();
-//   }
-// }
 
 
 $(document).ready(function () {
@@ -1413,130 +1348,132 @@ $(document).ready(function () {
     </script>
 
     <script>
-          function ShowTabelAll(nmTabel, idhtml) {
-            $.ajax({
-                type: "get",
-                data: {
-                tabel: nmTabel,
-            },
-                url: base_url + "/ShowTabel/" + nmTabel,
-                success: function(msg) {
-                    $("#tblayer").dxDataGrid({
-                        dataSource: msg["data"],
-                        showRowLines: true,
-                        rowAlternationEnabled: true,
-                        filterRow: {
-                            visible: true,
-                        },
-                        allowColumnResizing: true,
-                        columnResizingMode: "widget",
-                        columnMinWidth: 50,
-                        columnAutoWidth: true,
-                        showBorders: true,
-                                selection: {
-                            mode: "multiple"
-                        },
-                        scrolling: {
-                            columnRenderingMode: 'virtual',
-                            rowRenderingMode: 'virtual',
-                        },
-                        paging: {
-                            pageSize: 10
-                        },
-                        pager: {
-                            showInfo: true,
-                            showPageSizeSelector: true,
-                            infoText: "Page #{0}. Total: {1} ({2})",
-                            allowedPageSizes: [5, 10, 20]
-                        },
-                        export: {
+        function ShowTabelAll(nmTabel, idhtml) {
+    $.ajax({
+        type: "get",
+        data: {
+            tabel: nmTabel,
+        },
+        url: base_url + "/ShowTabel/" + nmTabel,
+        success: function (msg) {
+            $("#tblayer").dxDataGrid({
+                dataSource: msg["data"],
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                filterRow: {
+                    visible: true,
+                },
+                allowColumnResizing: true,
+                columnResizingMode: "widget",
+                columnMinWidth: 50,
+                columnAutoWidth: true,
+                showBorders: true,
+                selection: {
+                    mode: "multiple",
+                },
+                scrolling: {
+                    rowRenderingMode: "virtual",
+                },
+                paging: {
+                    pageSize: 10,
+                },
+                pager: {
+                    showInfo: true,
+                    showPageSizeSelector: true,
+                    infoText: "Page #{0}. Total: {1} ({2})",
+                    allowedPageSizes: [5, 10, 20],
+                },
+                export: {
                     enabled: true,
                     allowExportSelectedData: true,
                     fileName: "Master Excel " + nmTabel,
                 },
-                        remoteOperations: false,
-                        searchPanel: {
-                            visible: true,
-                            highlightCaseSensitive: true
-                        },
-                        groupPanel: {
-                            visible: true
-                        },
-                        grouping: {
-                            autoExpandAll: false
-                        },
-                        allowColumnReordering: true,
-                        rowAlternationEnabled: true,
-                        editing: {
-                            mode: "form",
-                            // mode: 'batch',
-                            allowUpdating: true,
-                            allowAdding: false,
-                            allowDeleting: true,
-                            selectTextOnEditStart: false,
-                            // startEditAction: 'click',
-                        },
-                        // columns: msg["nmfield"],
-                        columns: msg["nmfield"].map(function (field) {
-                    if (field.dataField === "lampiran") {
-                        return {
-                            dataField: "lampiran",
-                            caption: "Lampiran",
-                            cellTemplate: function (container, options) {
-                                var content =
-                                    "<embed src='https://sigap-fbb.kominfo.go.id/storage/lampiran/" +
-                                    options.value +
-                                    "' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
-                                var footer =
-                                    "<a href='https://sigap-fbb.kominfo.go.id/storage/lampiran/" +
-                                    options.value +
-                                    "' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
-                                    "<button type='button' class='btn btn-sm btn-outline-dark mb-0 text-center' data-bs-dismiss='modal'>Batal</button>";
+                remoteOperations: false,
+                searchPanel: {
+                    visible: true,
+                    highlightSearchText: true,
+                },
+                groupPanel: {
+                    visible: true,
+                },
+                grouping: {
+                    autoExpandAll: false,
+                },
+                allowColumnReordering: true,
+                editing: {
+                    mode: "form",
+                    allowUpdating: true,
+                    allowAdding: false,
+                    allowDeleting: true,
+                    selectTextOnEditStart: false,
+                },
+                  // Column-specific cell template for columns with the word "lampiran"
+                     // columns: msg["nmfield"],
+                     columns: msg["nmfield"].map(function (field) {
+    if (field.dataField.includes("lampiran")) { // Menggunakan includes() untuk mencari kata 'lampiran'
+        return {
+            dataField: field.dataField, // Gunakan nama kolom yang sesuai dengan dataField
+            caption: "Lampiran",
+            cellTemplate: function (container, options) {
+                // var content =
+                //     "<object data='https://sigap-fbb.kominfo.go.id/storage/lampiran/" +
+                //     options.value +
+                //     "' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
+                var content =
+                    "<embed src='https://sigap-fbb.kominfo.go.id/storage/lampiran/" +
+                    options.value +
+                    "' frameborder='0' style='width:100%; height:400px; overflow-y:auto;'>";
+                var footer =
+                    "<a href='https://sigap-fbb.kominfo.go.id/storage/lampiran/" +
+                    options.value +
+                    "' download='Dokumen Lampiran' class='btn btn-sm btn-primary mb-0 text-center'>Unduh</a>" +
+                    "<button type='button' class='btn btn-sm btn-outline-dark mb-0 text-center' data-bs-dismiss='modal'>Batal</button>";
 
-                                container.on("click", function (e) {
-                                    $("#feature-title").html("Dokumen Lampiran");
-                                    $("#feature-info").html(content);
-                                    $("#feature-footer").html(footer);
-                                });
+                container.on("click", function (e) {
+                    $("#feature-title").html("Dokumen Lampiran");
+                    $("#feature-info").html(content);
+                    $("#feature-footer").html(footer);
+                });
 
-                                $("<a>")
-                                    .attr("data-bs-toggle", "modal")
-                                    .attr("data-bs-target", "#ImageView")
-                                    .append(
-                                        "<span class='iconify' data-icon='bi:eye-fill' style='color: #1ca8dd; text-align: center;'></span> <span style='color: #1ca8dd;'>view</span>"
-                                    )
-                                    .appendTo(container);
+                $("<a>")
+                    .attr("data-bs-toggle", "modal")
+                    .attr("data-bs-target", "#ImageView")
+                    .append(
+                        "<span class='iconify' data-icon='bi:eye-fill' style='color: #1ca8dd; text-align: center;'></span> <span style='color: #1ca8dd;'>view</span>"
+                    )
+                    .appendTo(container);
+            },
+        };
+    } else {
+        // Return other columns as-is
+        return field;
+    }
+}),
+
+                
+                onRowRemoving: function(info) {
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + "/deleteDataDataset",
+                            data: {
+                                id: info.data.id,
+                                title: info.data.title,
+                                tabel: nmTabel,
                             },
-                        };
-                    } else {
-                        // Return other columns as-is
-                        return field;
-                    }
-                }),
-
-                        onRowRemoving: function(info) {
-                            $.ajax({
-                                    type: "POST",
-                                    url: base_url + "/deleteDataDataset",
-                                    data: {
-                                        id: info.data.id,
-                                        title: info.data.title,
-                                        tabel: 'user_tables'
-                                    },
-                                    headers: {
-                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                            "content"
-                                        ),
-                                    },
-                                    success: function(msg) {
-                                        ShowTabel(jenis);
-                                    },
-                                },
-                                "json"
-                            );
+                            headers: {
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                    "content"
+                                ),
+                            },
+                            success: function(msg) {
+                                ShowTabel(jenis);
+                            },
                         },
+                        "json"
+                    );
+                },
 
-                        onRowUpdating: function(e) {
+                onRowUpdating: function(e) {
                             const deferred = $.Deferred();
                             const promptPromise = DevExpress.ui.dialog.confirm(
                                 "Apa anda yakin?",
@@ -1552,7 +1489,7 @@ $(document).ready(function () {
                                         data: {
                                             newData: e.newData,
                                             id: e.oldData.id,
-                                            tabel: "user_tables",
+                                            tabel: nmTabel,
                                         },
                                         headers: {
                                             "X-CSRF-TOKEN": $(
@@ -1567,8 +1504,8 @@ $(document).ready(function () {
                                                     .errorText
                                                 );
                                             } else {
-                                                ShowTabel(jenis);
-                                                deferred.resolve(false);
+                                                ShowTabelAll(nmTabel);
+                                                deferred.resolve(true);
                                             }
                                         },
                                         error: function() {
@@ -1584,17 +1521,16 @@ $(document).ready(function () {
                             e.cancel = deferred.promise();
                         },
 
-                        // onContentReady: function(e) {
-                        //     if (!collapsed) {
-                        //         collapsed = true;
-                        //         e.component.expandRow(["EnviroCare"]);
-                        //     }
-                        // },
-
-                    });
-                }
+                // onContentReady: function(e) {
+                //     if (!collapsed) {
+                //         collapsed = true;
+                //         e.component.expandRow(["EnviroCare"]);
+                //     }
+                // },
             });
-        };
+        },
+    });
+}
 </script>
     <script>
 

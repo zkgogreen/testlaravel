@@ -39,11 +39,19 @@ $spatial_layer = DB::table('user_tables')
 ->where('status', '=' , 'Active')
 ->get();
         // return $data;
+        if (Auth::user()->roles == 'SUPER USER') {
+        return view('pages.backend.dataset-su', [
+            'data' => $data,
+            'spatial_layer' => $spatial_layer,
+            'color_palette' => $color_palette,
+        ]);
+    } else {
         return view('pages.backend.dataset', [
             'data' => $data,
             'spatial_layer' => $spatial_layer,
             'color_palette' => $color_palette,
         ]);
+    }
     }
 
     public function TabelField($tabel){
@@ -94,55 +102,10 @@ $spatial_layer = DB::table('user_tables')
     return $showmap;
     }
 
-    // public function addNewRow(Request $request)
-    // {
 
-     
-    //     $kolom_file = DB::table('select_list')
-    //     ->select('column')
-    //     ->where([
-    //     ['table', '=', $request->tabel],
-    //     ['form_type', '=', 'file'],
-    //     ])
-    //     ->get();
-
-        
-    //     foreach ( $kolom_file as $file ) {
-    //         $lampiran = $file->column;
-    //     }
-
-    //     $data = $request->except(['tabel', '_token']);
-    //     unset($data["__KEY__"]);
-    //     $tabel = $request->tabel;
-    //     // $hasil = DB::table($tabel)->insert($data);
-    //     if($request->file($lampiran) == "") {  
-    //         $hasil = DB::table($tabel)->insert($data);
-    //       }else{
-    //         $file = $request->file($lampiran);
-    //       $nama_file = time()."_".$file->getClientOriginalName();
-    //       $tujuan_upload = storage_path('app/file/');
-    //     //   $tujuan_upload = 'images/file';
-    //       $file->move($tujuan_upload,$nama_file);
-    //       $hasil = DB::table($tabel)->insert(
-    //         $lampiran => $nama_file,
-    //         $data);
-    //       }
-
-    //     // return $hasil;
-
-    //     if ($hasil) {
-    //         return back()->withSuccess('New row added successfully.');
-    //     } else {
-    //         return back()->withErrors('Failed to add new row !');
-    //     }
-         
-    // }
-
-
-
-    public function addNewRow(Request $request)
+public function addNewRow(Request $request)
 {
-    $kolom_file = DB::table('select_list')
+    $kolom_files = DB::table('select_list')
         ->select('column')
         ->where([
             ['table', '=', $request->tabel],
@@ -150,24 +113,22 @@ $spatial_layer = DB::table('user_tables')
         ])
         ->get();
 
-    foreach ($kolom_file as $file) {
-        $lampiran = $file->column;
+    $data = $request->except(['tabel', '_token']);
+
+    foreach ($kolom_files as $file) {
+        $lampiran_column = $file->column;
+
+        if ($request->hasFile($lampiran_column)) {
+            $file = $request->file($lampiran_column);
+            $nama_file = time() . "_" . $file->getClientOriginalName();
+            $tujuan_upload = storage_path('app/public/lampiran/');
+            $file->move($tujuan_upload, $nama_file);
+            $data[$lampiran_column] = $nama_file;
+        }
     }
 
-    $data = $request->except(['tabel', '_token']);
-    unset($data["__KEY__"]);
     $tabel = $request->tabel;
-    
-    if ($request->file($lampiran) == "") {
-        $hasil = DB::table($tabel)->insert($data);
-    } else {
-        $file = $request->file($lampiran);
-        $nama_file = time() . "_" . $file->getClientOriginalName();
-        $tujuan_upload = storage_path('app/public/lampiran/');
-        $file->move($tujuan_upload, $nama_file);
-        $data[$lampiran] = $nama_file; // Corrected the data array for file insertion.
-        $hasil = DB::table($tabel)->insert($data);
-    }
+    $hasil = DB::table($tabel)->insert($data);
 
     if ($hasil) {
         return back()->withSuccess('New row added successfully.');
@@ -335,7 +296,7 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
             // ->where('table_name', $tabel)
             ->where([
                 ['table_name', '=', $tabel],
-                ['column_name', '!=', 'id'],
+                // ['column_name', '!=', 'id'],
                 ['column_name', '!=', 'geom'],
                 ['column_name', '!=', 'created_at'],
                 ['column_name', '!=', 'deleted_at'],
@@ -359,7 +320,16 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
 
         $data1 = DB::table('information_schema.columns')
             ->select('column_name', 'data_type')
-            ->where('table_name', $tabel)
+            // ->where('table_name', $tabel)
+            ->where([
+                ['table_name', '=', $tabel],
+                // ['column_name', '!=', 'id'],
+                ['column_name', '!=', 'geom'],
+                ['column_name', '!=', 'created_at'],
+                ['column_name', '!=', 'deleted_at'],
+                ['column_name', '!=', 'updated_at'],
+                ])
+                ->orderBy('ordinal_position', 'asc')
             ->get();
 
         // dd($data1);
@@ -401,7 +371,7 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
                         $fieldTabel = [
                             'dataField' => "$column_name",
                             'dataType' => 'date',
-                            'format' => 'yyyy/MM/dd HH:mm:ss',
+                            'format' => 'yyyy-MM-dd',
                         ];
                         break;
                     default:
@@ -455,7 +425,9 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
                  // $nmF = array_diff($nmF, ['geom']);
                  $data = DB::table($nmTabel)
                  ->select($nmF)
-                 ->orderBy('id', 'desc')
+                //  ->where
+
+                 ->orderBy('id', 'asc')
                  ->get();
          
                  $hasil = ['nmfield' => $nmField, 'data' => $data];
@@ -464,15 +436,146 @@ if($value['kolom'] == 'provinsi' || $value['kolom'] == 'kabkot' || $value['kolom
              }
 
 
+
+
+              //Mengambil Field dari tabel
+    public function NamaFieldImport($tabel)
+    {
+        $data1 = DB::table('information_schema.columns')
+            ->select('column_name')
+            // ->where('table_name', $tabel)
+            ->where([
+                ['table_name', '=', $tabel],
+                ['column_name', '!=', 'id'],
+                ['column_name', '!=', 'geom'],
+                ['column_name', '!=', 'created_at'],
+                ['column_name', '!=', 'deleted_at'],
+                ['column_name', '!=', 'updated_at'],
+                ])
+            ->orderBy('ordinal_position', 'asc')
+            ->get();
+
+        $nmField = [];
+        foreach ($data1 as $record) {
+            array_push($nmField, $record->column_name);
+        }
+        // dd($nmField);
+        return $nmField;
+    }
+
+    // Mengambil type Field
+    public function NamaFieldTypeImport($tabel)
+    {
+        $data = [];
+
+        $data1 = DB::table('information_schema.columns')
+            ->select('column_name', 'data_type')
+            // ->where('table_name', $tabel)
+            ->where([
+                ['table_name', '=', $tabel],
+                ['column_name', '!=', 'id'],
+                ['column_name', '!=', 'geom'],
+                ['column_name', '!=', 'created_at'],
+                ['column_name', '!=', 'deleted_at'],
+                ['column_name', '!=', 'updated_at'],
+                ])
+                ->orderBy('ordinal_position', 'asc')
+            ->get();
+
+        // dd($data1);
+
+        $columnTabel = [];
+        foreach ($data1 as $record) {
+            $column_name = $record->column_name;
+            if ($column_name != 'geom') {
+                $data_type = $record->data_type;
+                switch ($data_type) {
+                    case 'integer':
+                    case 'bigint':
+                    case 'smallint':
+                        $fieldTabel = [
+                            'dataField' => "$column_name",
+                            'dataType' => 'number',
+                            'format' => ['precision' => 0],
+                        ];
+                        break;
+                    case 'double precision':
+                    case 'real':
+                    case 'numeric':
+                        $fieldTabel = [
+                            'dataField' => "$column_name",
+                            'dataType' => 'number',
+                            'format' => ['precision' => 3],
+                        ];
+                        break;
+                    case 'character':
+                    case 'character varying':
+                        $fieldTabel = [
+                            'dataField' => "$column_name",
+                            'dataType' => 'string',
+                        ];
+                        break;
+                    case 'timestamp without time zone':
+                    case 'date':
+                        $data_type = 'date';
+                        $fieldTabel = [
+                            'dataField' => "$column_name",
+                            'dataType' => 'date',
+                            'format' => 'yyyy-MM-dd',
+                        ];
+                        break;
+                    default:
+                        $data_type = $data_type;
+                        $fieldTabel = [
+                            'dataField' => "$column_name",
+                            'dataType' => "$data_type",
+                        ];
+                        break;
+                }
+                if ($column_name === 'gid') {
+                    $fieldTabel = [
+                        'dataField' => "$column_name",
+                        'dataType' => 'number',
+                        'allowEditing' => 0,
+                    ];
+                }
+                if ($column_name === 'TypeData') {
+                    $fieldTabel = [
+                        'dataField' => "$column_name",
+                        'dataType' => "$data_type",
+                        'allowEditing' => 0,
+                    ];
+                }
+                if (
+                    $column_name === 'x_awal' ||
+                    $column_name === 'y_awal' ||
+                    $column_name === 'x_akhir' ||
+                    $column_name === 'y_akhir'
+                ) {
+                    $fieldTabel = [
+                        'dataField' => "$column_name",
+                        'dataType' => 'number',
+                        'format' => ['precision' => 8],
+                        'validationRules' => [['type' => 'required']],
+                    ];
+                }
+
+                array_push($columnTabel, $fieldTabel);
+            }
+        }
+        // dd($columnTabel);
+        return $columnTabel;
+    }
+
 function ImportData(Request $request)
 {
     $tabel = $request->table;
 
     // Assuming you have a function to get field types for the given table
-    $nmField = $this->NamaFieldType($tabel);
+    $nmField = $this->NamaFieldTypeImport($tabel);
 
     // Assuming you have a function to get field names for the given table
-    $nmF = $this->NamaField($tabel);
+    $nmF = $this->NamaFieldImport($tabel);
 
     $this->validate($request, [
         'file' => 'required|file|mimes:xls,xlsx'
@@ -491,7 +594,7 @@ function ImportData(Request $request)
         $column_limit_index = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($column_limit);
 
         $data = array();
-        for ($row = 3; $row <= $row_limit; $row++) { // Start from row 3
+        for ($row = 2; $row <= $row_limit; $row++) { // Start from row 3
 
             // Initialize an empty row data array for each iteration
             $row_data = array();

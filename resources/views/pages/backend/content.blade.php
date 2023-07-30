@@ -13,12 +13,12 @@
     <option value="noselect">Pilih Tabel</option>
     @foreach ($table_layer as $item)
         <option value="{{$item->title}}">{{$item->title}}</option>
-        <option value="tb_poi">Point Of Interest</option>  
-        <option value="tb_spd">Survey Potensi Desa</option>
-        <option value="tb_kp">Kawasan prioritas</option>
-        <option value="tb_penerima_bantuan">Penerima Bantuan</option>
-        <option value="tb_desa">Administrasi Desa</option>
     @endforeach
+    <option value="tb_poi">Point Of Interest</option>  
+    <option value="tb_spd">Survey Potensi Desa</option>
+    <option value="tb_kp">Kawasan prioritas</option>
+    <option value="tb_penerima_bantuan">Penerima Bantuan</option>
+    <option value="tb_desa">Administrasi Desa</option>
 </select>
 <div id="formtitle" class="form-text">Untuk mengisi value pada kolom 'layer', gunakan nama yang tertampilan pada menu ini.
     </div>

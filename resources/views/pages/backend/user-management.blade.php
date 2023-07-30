@@ -167,6 +167,7 @@
                         },
                         success: function(msg) {
                             ShowTabel('user-data', 'tabel-user');
+                            refreshLayer(jenis);
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log(textStatus, errorThrown);

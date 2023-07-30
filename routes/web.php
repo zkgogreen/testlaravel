@@ -97,6 +97,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('ShowTabel/{nmtabel}',[DatasetController::class,'ShowTabel']);
     Route::get('NamaField/{tabel}',[DatasetController::class, 'NamaField']);
     Route::get('NamaFieldTabel/{tabel}',[DatasetController::class, 'NamaFieldType']);
+    Route::get('NamaFieldImport/{tabel}',[DatasetController::class, 'NamaFieldImport']);
+    Route::get('NamaFieldTabelImport/{tabel}',[DatasetController::class, 'NamaFieldTypeImport']);
     Route::get('TabelField/{tabel}',[DatasetController::class, 'TabelField']);
     Route::post('addNewRow',[DatasetController::class,'addNewRow'])->name('addNewRow');
 
