@@ -9,7 +9,8 @@
                 {{-- <h4 class="mb-0">Daftar Pengguna & Hak Akses</h4> --}}
                 {{-- <a href="#"><small>Show All</small></a> --}}
                 <h4>User & Roles Access</h4>
-                <p>Management daftar user yang dapat mengakases sistem SIGAP-FBB:</p>
+                <p>Management daftar user yang dapat mengakases sistem SIGAP-FBB: <br>
+                Password default untuk seluruh user baru : <strong>login1243_abc</strong></p>
             </div>
 
             <div id="tabel-user"></div>

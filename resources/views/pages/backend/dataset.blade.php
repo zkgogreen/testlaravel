@@ -532,6 +532,7 @@
                             <li>Pastikan format data yang akan di Import sudah sesuai dengan aturan import data :</li>
                             <ul>
                                 <li style="list-style-type: circle;">Gunakan format kolom excel yang bisa di unduh di dalam menu Table, dengan cara tampilkan tabel kemudia klik tombol Export pada tabel yang muncul</li>
+                                <li style="list-style-type: circle;">Pastikan hapus kolom "id" di file excel hasil export dari menu Table</li>
                                 <li style="list-style-type: circle;">Kolom dasar seperti <i>ID Desa, Desa/Kelurahan, Kecamatan,
                                         Kabupaten/kota, Provinsi, Longitude, Latitude</i> <strong>harus diisi</strong>.</li>
                                         <li style="list-style-type: circle;">Khusus Kolom <i>koordinat Longitude & Latitude</i>
@@ -659,7 +660,7 @@
     </tr>
     <tr>
         <th>Integer</th>
-        <td style="word-wrap: break-word;">Untuk kolom dengan tipe data berupa bilangan bulat negatif ataupun positif</td>
+        <td style="word-wrap: break-word;">Untuk kolom dengan tipe data berupa bilangan bulat negatif ataupun positif dengan range -2147483648 hingga +2147483647</td>
     </tr>
     <tr>
         <th>String</th>

@@ -23,3 +23,18 @@
 @endforeach
 </div>
 @endif
+
+@if ($errors->has('import_error'))
+    <div class="alert alert-danger">
+        {{ $errors->first('import_error') }}
+    </div>
+@endif
+
+
+
+{{-- @if ($errors->has('error'))
+    <div class="alert alert-danger text-center alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+      {{ $errors->first('error') }}
+    </div>
+@endif --}}

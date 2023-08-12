@@ -112,7 +112,7 @@
                                 <input type="radio" name="card" id="osm" value="baseOsm">
                                 <label for="osm" aria-label="Silver">
                                     <span></span>
-                                    Open Street Maps
+                                    OSM
                                     <div class="card card--dark card--sm p-1">
                                         <img src="{{ url('assets/images/basemap-icon/osm-base.png') }}" alt="osm-base">
                                     </div>

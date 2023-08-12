@@ -62,18 +62,7 @@
                       "<tr><th style='width:30%;'>Pendapatan Penduduk</th><td>" + feature.properties
                       .pendapatan + "</td></tr>" +
                       "<tr><th style='width:30%;'>Potensi Desa</th><td>" + feature.properties.potensi +
-                      "</td></tr></table></div>" +
-                      "<div class='wrapper center-block'> <div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'> <div class='panel panel-default'> <div class='panel-heading active' role='tab' id='headingOne'> <h4 class='panel-title'> <a role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseOne' aria-expanded='false' aria-controls='collapseOne'> DOKUMENTASI </a> </h4> </div> <div id='collapseOne' class='panel-collapse collapse in' role='tabpanel' aria-labelledby='headingOne'> <div class='panel-body'> <div class='slideshow nowslide'> <div class='sliderdok'> <input type='radio' name='radio' id='radio1' checked> <input type='radio' name='radio' id='radio2'> <input type='radio' name='radio' id='radio3'> <input type='radio' name='radio' id='radio4'> <input type='radio' name='radio' id='radio5'> <div class='slidedok sh1'> <iframe src='" +
-                      feature.properties.foto1 +
-                      "preview' width='100%'></iframe> </div> <div class='slidedok'> <iframe src='" + feature
-                      .properties.foto2 +
-                      "preview' width='100%'></iframe> </div> <div class='slidedok'> <iframe src='" + feature
-                      .properties.foto3 +
-                      "preview' width='100%'></iframe> </div> <div class='slidedok'> <iframe src='" + feature
-                      .properties.foto4 +
-                      "preview' width='100%'></iframe> </div> <div class='slidedok'> <iframe src='" + feature
-                      .properties.foto5 +
-                      "preview' width='100%'></iframe> </div> </div> <div class='navslider'> <label for='radio1' class='barslider'></label> <label for='radio2' class='barslider'></label> <label for='radio3' class='barslider'></label> <label for='radio4' class='barslider'></label> <label for='radio5' class='barslider'></label> </div> </div> </div> </div> </div></div></div>";
+                      "</td></tr></table></div>";
                   layer.on('click', function(e) {
                       $("#drag_title_peta").html("SURVEY POTENSI DESA");
                       $("#feature-info").html(content);

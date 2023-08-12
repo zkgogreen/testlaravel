@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TbDesa extends Model
 {
     use HasFactory;
-    protected $table = 'tb_desa_big2021_podes2020';
+    protected $table = 'tb_desa';
 }

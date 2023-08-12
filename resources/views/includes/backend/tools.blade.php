@@ -47,10 +47,10 @@
                     <button class="btn btn-primary float-end btn-sm mt-2 mx-2" onclick="showMapDensity();">Map</button>
                     <div id="legend" class="leaflet-control"></div>
                     <div class="row mt-3">
-                        <div class="col-md-4 p-0">
+                        <div class="col-md-5 p-0">
                             <p class="font-weight-bold text-dark mx-2 mb-0">Select Layer</p>
                         </div>
-                        <div class="col-md-7 p-0">
+                        <div class="col-md-6 p-0">
                             <hr class="hr-style1">
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                                 <input type="radio" name="card" id="osm" value="baseOsm">
                                 <label for="osm" aria-label="Silver">
                                     <span></span>
-                                    Open Street Maps
+                                    OSM
                                     <div class="card card--dark card--sm p-1">
                                         <img src="{{ url('assets/images/basemap-icon/osm-base.png') }}" alt="osm-base">
                                     </div>

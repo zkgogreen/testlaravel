@@ -298,7 +298,7 @@
                 <div class="col-12">
               <h2 class="mx-3">
                 @foreach ($content as $item)
-                @if($item->section === 'Home Slide 3')
+                @if($item->section === 'Home Slide 4')
             {{$item->description}}
                 @endif
                 @endforeach

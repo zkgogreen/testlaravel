@@ -114,7 +114,7 @@ public function addNewRow(Request $request)
         ->get();
 
     $data = $request->except(['tabel', '_token']);
-
+    try {
     foreach ($kolom_files as $file) {
         $lampiran_column = $file->column;
 
@@ -129,12 +129,11 @@ public function addNewRow(Request $request)
 
     $tabel = $request->tabel;
     $hasil = DB::table($tabel)->insert($data);
-
-    if ($hasil) {
-        return back()->withSuccess('New row added successfully.');
-    } else {
-        return back()->withErrors('Failed to add a new row!');
-    }
+    return back()->withSuccess('New row added successfully.');
+} catch (\Illuminate\Database\QueryException $e) {
+    $errorCode = $e->errorInfo[1];
+    return back()->with('error', $e->getMessage());
+}
 }
 
 
@@ -582,7 +581,7 @@ function ImportData(Request $request)
     ]);
 
     $the_file = $request->file('file');
-    try {
+     try {
         $spreadsheet = IOFactory::load($the_file->getRealPath());
         $sheet = $spreadsheet->getActiveSheet();
 
@@ -615,14 +614,18 @@ function ImportData(Request $request)
         }
 
         // Insert data into the database
-        DB::table($tabel)->insert($data);
+       $import = DB::table($tabel)->insert($data);
 
-    } catch (\Illuminate\Database\QueryException $e) {
-        $errorCode = $e->errorInfo[1];
-        return back()->with('error', $e->getMessage());
-    }
-
-    return back()->withSuccess('Great! Data has been successfully uploaded.');
+    // return back()->withSuccess('Great! Data has been successfully uploaded.');
+// } catch (\Illuminate\Database\QueryException $e) {
+//     $errorCode = $e->errorInfo[1];
+//     return back()->withErrors(['error' => $e->getMessage()]);
+// }
+    return redirect()->route('dataset')->with(['success' => 'IMPORT BERHASIL! Data telah ditambahkan ke database.']);
+} catch (\Illuminate\Database\QueryException $e) {
+    $errorCode = $e->errorInfo[1];
+    return redirect()->route('dataset')->withErrors(['import_error' => $e->getMessage()]);
+}
 }
 
 }
