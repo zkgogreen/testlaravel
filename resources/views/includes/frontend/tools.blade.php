@@ -11,7 +11,10 @@
         <div class="card-body card-body-map-popup-menu">
             <p class="card-title mb-1 d-flex justify-content-between fw-bold">Layer Dataset
                 <button type="button" class="btn-close-map p-2" data-bs-dismiss="modal" aria-label="Close"
-                    onclick="closeDataset()"></button>
+                    onclick="closeDataset()">
+                    <span class="iconify" data-icon="pajamas:close" data-width="16" data-height="16" style="margin-top: -22px;
+                    margin-left: -4.2px;"></span>
+                </button>
             </p>
             <div class="row mb-2">
                 {{-- <div class="col-md-5">
