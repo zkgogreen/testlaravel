@@ -453,6 +453,7 @@
                             <li>Pastikan format data yang akan di Import sudah sesuai dengan aturan import data :</li>
                             <ul>
                                 <li style="list-style-type: circle;">Gunakan format kolom excel yang bisa di unduh di dalam menu Table, dengan cara tampilkan tabel kemudia klik tombol Export pada tabel yang muncul</li>
+                                <li style="list-style-type: circle;">Pastikan hapus kolom "id" di file excel hasil export dari menu Table</li>
                                 <li style="list-style-type: circle;">Kolom dasar seperti <i>ID Desa, Desa/Kelurahan, Kecamatan,
                                         Kabupaten/kota, Provinsi, Longitude, Latitude</i> <strong>harus diisi</strong>.</li>
                                         <li style="list-style-type: circle;">Khusus Kolom <i>koordinat Longitude & Latitude</i>
@@ -460,6 +461,8 @@
                                             berada pada posisi lintang selatan,</li>
                                         <li style="list-style-type: circle;">Gunakan tanah titik '.' di antara pemisah nilai derajat
                                             ke desimal (contoh : <strong>-6.951807, 107.657874</strong>).</li>
+                                            <li style="list-style-type: circle;">Jika terdapat kolom berisikan date (tanggal) pada file excel, buat 2 kolom baru di samping kolom asal. Kemudian tulisakan rumus <strong>=text(kolom_asal;"yyyy-mm-dd")</strong> pada kolom baru, lalu copy value dari kolom baru ke dalam kolom hasil (hapus kolom asal dan kolom baru jika sudah selesai)</li>
+                                            <li style="list-style-type: circle;"><strong>Untuk lebih jelas, ikuti panduan detail pada User Guide masing-masing hak akses.</strong></li>
                             </ul>
                             <li>File Excel harus berektensi <strong>.xlsx</strong> (excel 2007), jika ektensi <strong>.xls</strong> lakukan save as menjadi format <strong>.xlsx</strong></li>
                         </ol>
@@ -510,7 +513,7 @@
                         <option value="tb_penerima_bantuan">Penerima Bantuan</option>
                     </select> 
 
-                    <div class="row mb-2 mt-2">
+                    {{-- <div class="row mb-2 mt-2">
                         <div id="kolomList">
                             <div id="kList"></div>
                         </div>
@@ -521,7 +524,25 @@
                      </div>  
                      <div class="row mb-2">
                         <div id="peta"></div>
-                     </div>
+                     </div> --}}
+
+                     <div class="row mb-2 mt-2">
+                        <form action="{{route('addNewRow')}}" method="post" id="formtbSelect" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row showFm" id="admlist">
+                            <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">provinsi :</label><select class="form-control mb-2" name="provinsi" id="provinsi"><option value="#" selected>Select Provinsi</option></select></div></div>
+                            <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kabkot :</label><select class="form-control mb-2" name="kabkot" id="kabkot"><option value="#" selected>Select Kabkot</option></select></div></div>
+                            <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kecamatan :</label><select class="form-control mb-2" name="kecamatan" id="kecamatan"><option value="#" selected>Select Kecamatan</option></select></div></div>
+                            <div class="col-md-6"><div><label for="exampleFormControlInput1" class="form-label">kelurahan / Desa :</label><select class="form-control mb-2" name="keldes" id="keldes"><option value="#" selected>Select Kelurahan / Desa</option></select></div></div>
+                        </div>
+                            <div id="tabelForm">
+                            </div>
+                        </form>
+        
+                             </div>  
+                             <div class="row mb-2">
+                                <div id="peta"></div>
+                             </div>
                 </div>
 
                 <div class="tab-pane fade" id="importdatatab" role="tabpanel" aria-labelledby="importdata-tab">
@@ -540,6 +561,8 @@
                                             berada pada posisi lintang selatan,</li>
                                         <li style="list-style-type: circle;">Gunakan tanah titik '.' di antara pemisah nilai derajat
                                             ke desimal (contoh : <strong>-6.951807, 107.657874</strong>).</li>
+                                            <li style="list-style-type: circle;">Jika terdapat kolom berisikan date (tanggal) pada file excel, buat 2 kolom baru di samping kolom asal. Kemudian tulisakan rumus <strong>=text(kolom_asal;"yyyy-mm-dd")</strong> pada kolom baru, lalu copy value dari kolom baru ke dalam kolom hasil (hapus kolom asal dan kolom baru jika sudah selesai)</li>
+                                            <li style="list-style-type: circle;"><strong>Untuk lebih jelas, ikuti panduan detail pada User Guide masing-masing hak akses.</strong></li>
                             </ul>
                             <li>File Excel harus berektensi <strong>.xlsx</strong> (excel 2007), jika ektensi <strong>.xls</strong> lakukan save as menjadi format <strong>.xlsx</strong></li>
                         </ol>
