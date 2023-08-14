@@ -611,7 +611,7 @@
     @section('addon-modal')
 
                 <div id="ImageView" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 50%;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h6 class="modal-title mb-0 text-white" id="feature-title">
