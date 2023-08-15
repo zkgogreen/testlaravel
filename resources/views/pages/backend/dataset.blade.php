@@ -267,6 +267,7 @@
                 <div class="row tbnonspatial box2 mt-2 mb-2">
                     <form action="{{ route('createTB') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="table-responsive">
                                   <table class="table table-bordered" id="dynamicAddRemove2">
                                     <input type="hidden" name="type_table" class="form-control" value="Non Spatial" required>
                                     <tr class="table-secondary">
@@ -408,6 +409,7 @@
                                 </td>
                             </tr>
                         </table>
+                        </div>
                         <button type="reset" class="btn btn-outline-dark btn-sm float-end mt-2">Reset</button><button type="submit" class="btn btn-primary btn-sm float-end mt-2 mx-2">Save</button><button type="button" class="btn btn-secondary btn-sm float-start mt-2"  data-bs-toggle="modal" data-bs-target="#help">Help</button>
                                   </form>
                 </div>
