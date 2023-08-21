@@ -94,6 +94,24 @@
     }    
 });
 
+
+$(document).ready(function () {
+        $("#btnaddnew").on('click', function () {
+            $("body").addClass("loading"); 
+        });
+        $("#btnimportnew").on('click', function () {
+            $("body").addClass("loading"); 
+        });
+    });
+
+
+    // function(){
+    //     $("form").submit(function(){
+    //         $("body").addClass("loading"); 
+    //     }); 
+    // };
+
+
         // show alert
         $(document).ready(function() {
             window.setTimeout(function() {
