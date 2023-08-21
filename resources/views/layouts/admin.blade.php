@@ -58,14 +58,6 @@
                                     <span class="iconify icon-menu" data-icon="carbon:data-volume" data-width="20" data-height="20"></span>
                                 </a>
                             </li>
-                            {{-- @if (Auth::user()->roles == 'ADMIN')
-                            <li>
-                                <a href="#" class="{{ request()->is('content*') ? 'active' : '' }}">
-                                    <span class="iconify icon-menu" data-icon="fluent:content-settings-24-regular" data-width="20" data-height="20"></span>
-                                    <strong>Content Management</strong>
-                                    <small>Configuration 6extual content</small>
-                                </a>
-                            </li> --}}
                             @if (Auth::user()->roles == 'SUPER USER')
                             <li>
                                 <a href="{{ route('user-management') }}" class="{{ request()->is('user*') ? 'active' : '' }}">
@@ -74,11 +66,25 @@
                             </li>                 
                             @else
                             @endif
+                            @if (Auth::user()->roles == 'SUPER USER')
                             <li>
-                                <a href="">
+                                <a href="{{ url('guide/User Guide SIGAP (Super User).pdf') }}" target="_blank">
                                     <span class="iconify icon-menu" data-icon="bx:file" data-width="20" data-height="20"></span>
                                 </a>
                             </li>
+                            @elseif (Auth::user()->roles == 'ADMIN')
+                            <li>
+                                <a href="{{ url('guide/User Guide SIGAP (Admin).pdf') }}" target="_blank">
+                                    <span class="iconify icon-menu" data-icon="bx:file" data-width="20" data-height="20"></span>
+                                </a>
+                            </li>
+                            @else
+                            <li>
+                                <a href="{{ url('guide/User Guide SIGAP (User).pdf') }}" target="_blank">
+                                    <span class="iconify icon-menu" data-icon="bx:file" data-width="20" data-height="20"></span>
+                                </a>
+                            </li>
+                            @endif
                             <li>
                                 <a href="{{ route('privacy') }}" class="{{ request()->is('privacy') ? 'active' : '' }}">
                                     <span class="iconify icon-menu" data-icon="ic:baseline-privacy-tip" data-width="20" data-height="20"></span>

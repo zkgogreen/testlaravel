@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="overlay"></div>
     <div class="card col-md-12">
         <div class="card-block" style="padding: 1%; padding-top: 1.5%;">
             <ul class="nav nav-tabs float-end" id="myTab" role="tablist">
@@ -1006,7 +1007,7 @@ function ShowFormImport(nmTabel) {
         $('.importForm').append('<input type="hidden" name="table" value="'+ nmTabel +'"class="form-control">');
         $('.importForm').append('<div class="input-group grup-form"></div>');
         $('.grup-form').append('<input type="file" name="file" class="form-control up3" aria-label="Upload">');
-        $('.grup-form').append('<button type="submit" class="btn btn-primary mx-2 imp3">Import</button><button type="reset" class="btn btn-outline-dark imp3">Reset</button>');
+        $('.grup-form').append('<button type="submit" class="btn btn-primary mx-2 imp3" id="btnimportnew">Import</button><button type="reset" class="btn btn-outline-dark imp3">Reset</button>');
     }
 }
 
@@ -1070,7 +1071,7 @@ function ShowFormTabel(nmTabel, idhtml) {
               break;
           }
         });
-            $('#' + idhtml).append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit">Save</button><button type="button" class="btn btn-secondary btn-sm float-start mt-2"  data-bs-toggle="modal" data-bs-target="#help2">Help</button>');
+            $('#' + idhtml).append('<button class="btn btn-outline-dark mt-2 mb-2 float-end mx-2" type="reset">Reset</button><button class="btn btn-primary mt-2 mb-2 float-end" type="submit" id="btnaddnew">Save</button><button type="button" class="btn btn-secondary btn-sm float-start mt-2"  data-bs-toggle="modal" data-bs-target="#help2">Help</button>');
             updateRequiredAttribute();
             getProvinsiList();
             $.each(data, function (key, value) {
