@@ -910,7 +910,7 @@ function updateRequiredAttribute() {
         // Check if the input element has the 'YES' attribute
         if (input.getAttribute("YES") !== null) {
             // If 'YES' attribute is present, set 'required' attribute to 'false'
-            input.setAttribute("non");
+            input.setAttribute("validation", "no");
         } else if (input.getAttribute("NO") !== null) {
             // If 'NO' attribute is present, set 'required' attribute to 'true'
             input.setAttribute("required", "yes");
@@ -924,7 +924,7 @@ function updateRequiredAttribute() {
         // Check if the input element has the 'YES' attribute
         if (textarea.getAttribute("YES") !== null) {
             // If 'YES' attribute is present, set 'required' attribute to 'false'
-            textarea.setAttribute("non");
+            textarea.setAttribute("validation", "no");
         } else if (textarea.getAttribute("NO") !== null) {
             // If 'NO' attribute is present, set 'required' attribute to 'true'
             textarea.setAttribute("required", "yes");
@@ -938,7 +938,7 @@ function updateRequiredAttribute() {
         // Check if the input element has the 'YES' attribute
         if (select.getAttribute("YES") !== null) {
             // If 'YES' attribute is present, set 'required' attribute to 'false'
-            select.setAttribute("non");
+            select.setAttribute("validation", "no");
         } else if (select.getAttribute("NO") !== null) {
             // If 'NO' attribute is present, set 'required' attribute to 'true'
             select.setAttribute("required" , "yes");
