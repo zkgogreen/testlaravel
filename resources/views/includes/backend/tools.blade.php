@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="layer-list p-1 d-flex flex-wrap">
+                    <div class="layer-list p-1 d-flex flex-wrap" style="max-height: 180px; overflow-y: auto;">
                         @foreach ($spatial_layer as $item)
                         <div class="cat action">
                            <label>
