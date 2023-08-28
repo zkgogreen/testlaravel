@@ -910,10 +910,10 @@ function updateRequiredAttribute() {
         // Check if the input element has the 'YES' attribute
         if (input.getAttribute("YES") !== null) {
             // If 'YES' attribute is present, set 'required' attribute to 'false'
-            input.setAttribute("required", "false");
+            input.setAttribute("non");
         } else if (input.getAttribute("NO") !== null) {
             // If 'NO' attribute is present, set 'required' attribute to 'true'
-            input.setAttribute("required", "true");
+            input.setAttribute("required", "yes");
         }
     }
 
@@ -924,10 +924,10 @@ function updateRequiredAttribute() {
         // Check if the input element has the 'YES' attribute
         if (textarea.getAttribute("YES") !== null) {
             // If 'YES' attribute is present, set 'required' attribute to 'false'
-            textarea.setAttribute("required", "false");
+            textarea.setAttribute("non");
         } else if (textarea.getAttribute("NO") !== null) {
             // If 'NO' attribute is present, set 'required' attribute to 'true'
-            textarea.setAttribute("required", "true");
+            textarea.setAttribute("required", "yes");
         }
     }
 
@@ -938,10 +938,10 @@ function updateRequiredAttribute() {
         // Check if the input element has the 'YES' attribute
         if (select.getAttribute("YES") !== null) {
             // If 'YES' attribute is present, set 'required' attribute to 'false'
-            select.setAttribute("required", "false");
+            select.setAttribute("non");
         } else if (select.getAttribute("NO") !== null) {
             // If 'NO' attribute is present, set 'required' attribute to 'true'
-            select.setAttribute("required", "true");
+            select.setAttribute("required" , "yes");
         }
     }
 }
