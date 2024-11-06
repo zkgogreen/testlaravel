@@ -3,7 +3,9 @@
 {{-- <script src="{{ url('assets/js/jquery-3.6.0.js') }}" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
 
 {{-- <script src="{{ url('assets/vendor/bootstrap/dist/js/bootstrap.js') }}"></script> --}}
 <script src="{{ url('assets/vendor/bootstrap-2/js/bootstrap.min.js') }}"></script>
@@ -66,19 +68,19 @@
 {{-- Uncomment this line if needed --}}
 
 <script>
-    // var base_url = window.location.origin + "/project/sigap-fbb/public";
-    var base_url = "https://sigap-fbb.kominfo.go.id";
+    var base_url = window.location.origin + "/project/sigap-fbb/public";
+    // var base_url = "https://sigap-fbb.kominfo.go.id";÷
 
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
 
-    $(document).ready(function () {
-        $("#masterdata-tab").on('click', function () {
+    $(document).ready(function() {
+        $("#masterdata-tab").on('click', function() {
             $("#masterdatatab").addClass("active");
             $("#layerdatatab").removeClass("active");
         });
-        $("#layerdata-tab").on('click', function () {
+        $("#layerdata-tab").on('click', function() {
             $("#masterdatatab").removeClass("active");
             $("#layerdatatab").addClass("active");
             getProvinsiList();
@@ -86,21 +88,21 @@
     });
 
     $(document).on({
-    ajaxStart: function(){
-        $("body").addClass("loading"); 
-    },
-    ajaxStop: function(){ 
-        $("body").removeClass("loading"); 
-    }    
-});
+        ajaxStart: function() {
+            $("body").addClass("loading");
+        },
+        ajaxStop: function() {
+            $("body").removeClass("loading");
+        }
+    });
 
 
-$(document).ready(function () {
-        $("#btnaddnew").on('click', function () {
-            $("body").addClass("loading"); 
+    $(document).ready(function() {
+        $("#btnaddnew").on('click', function() {
+            $("body").addClass("loading");
         });
-        $("#btnimportnew").on('click', function () {
-            $("body").addClass("loading"); 
+        $("#btnimportnew").on('click', function() {
+            $("body").addClass("loading");
         });
     });
 
@@ -112,13 +114,12 @@ $(document).ready(function () {
     // };
 
 
-        // show alert
-        $(document).ready(function() {
-            window.setTimeout(function() {
-                $(".alert").fadeTo(1000, 0).slideUp(1500, function() {
-                    $(this).remove();
-                });
-            }, 5000);
-        });
-
+    // show alert
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(1000, 0).slideUp(1500, function() {
+                $(this).remove();
+            });
+        }, 5000);
+    });
 </script>
